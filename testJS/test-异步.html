@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	function *fib(n){
+    		//n表示需要几位
+    		[pre,current]=[0,1];
+    		let i=0;
+    		while(i<n){
+    			[pre,current]=[current,pre+current];
+    			yield pre;
+    			i++;
+    		}
+    	}
+    	let res=[];
+    	for(let v of fib(10)){
+    		res.push(v);
+    	}
+    	console.log(res);
+    	async function fib1(n){
+    		[pre,current]=[0,1];
+    		let i=0;
+    		let res=[];
+    		while(i<n){
+    			[pre,current]=[current,pre+current];
+    			await res.push(pre);
+    			i++;
+    		}
+    		return res;
+    	}
+    	fib1(10).then((res)=>{
+    		console.log(res);
+    	}).catch((err)=>{
+    		console.log(err);
+    	})
+    </script>
+</body>
+</html>

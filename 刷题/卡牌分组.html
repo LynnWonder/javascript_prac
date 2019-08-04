@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>卡牌分组</title>
+</head>
+<body>
+    <script>
+
+      // 这种思路并不对
+      // var hasGroupsSizeX = function(deck) {
+      //   //每一轮把相同的数字剔除
+      //   var res=[];
+      //   var len=deck.length;
+      //   for (var i=0;i<deck.length-1;i++){
+      //     var res0=[];
+      //     res0.push(deck[i]);
+      //     res.push(res0);
+      //     for (var j=i+1;j<deck.length;j++)
+      //     {
+      //       if (deck[j]===deck[i]){
+      //         res0.push(deck[j]);
+      //         deck.splice(j,1);
+      //       }
+      //       console.info('deck===>',deck);
+      //     }
+      //     console.info(res);
+      //   }
+      //   if (res.length>0&&res.length*res[0].length===len){
+      //     return true;
+      //   }
+      //   return false;
+      // };
+      // 这种思路仍然不对，因为没有处理两位数的情况，所以下次遇到这种数组处理的问题
+      // 尽量不要转化成字符串来处理
+      // var hasGroupsSizeX=function(deck){
+      //   var GCD=function (a,b){
+      //     if (b==0){
+      //       return a;
+      //     }else{
+      //       return GCD(b,a%b);
+      //     }
+      //   }
+      //   deck.sort((a,b)=>a-b);
+      //   console.info(deck);
+      //   var strGroup=deck.join('').match(/(\d)\1+|(\d)/g);
+      //   console.info(strGroup);
+      //   var groupLen=[];
+      //   strGroup.forEach((item)=>{
+      //     groupLen.push(item.length);
+      //   })
+      //   if(groupLen.length===1){
+      //     if(groupLen[0]>=2)
+      //       return true;
+      //     return false;
+      //   }
+      //   groupLen.sort();
+      //   console.info(groupLen);
+      //   for (var i=0;i<groupLen.length-1;i++){
+      //     if (GCD(groupLen[i+1],groupLen[i])==1||groupLen[i]==1){
+      //       return false
+      //     }
+      //   }
+      //   return true;
+      // }
+      var test=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,5,5,5,6,6,6,7,7,7,8,8,8,8,8,8,9,9,9];
+      var hasGroupsSizeX=function (deck){
+        var temp={};
+        // 采用这种收集数组中重复数字的方式
+        deck.forEach((item)=>{
+          temp[item]=temp[item]?temp[item]+1:1;
+        })
+        console.info(temp,Object.values(temp));
+        var GCD=(a,b)=>{
+          if(b===0){
+            return a;
+          }else {
+            return GCD(b,a%b);
+          }
+        }
+        var group=Object.values(temp);
+        if (group.length===1){
+          if (group[0]>1) return true;
+          return false;
+        }
+        for (var i=0;i<group.length-1;i++){
+          if(GCD(group[i],group[i+1])===1)
+            return false;
+        }
+        return true;
+      }
+      console.info(hasGroupsSizeX(test));
+      // var d=GCD(3,4);
+      // console.info(d);
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	let p=new Promise((res)=>{
+    		console.log(1);
+    		resolve();
+    	})
+    	let p1=new Promise((res)=>{
+    		p.then((res)=>{console.log(2)
+    		 resolve()})
+    		console.log(4)
+    	})
+    	console.log(3);
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>4.28</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	//手写promise特点：只有三种状态 pending运行中 fulfilled 运行成功 rejected 失败且只有异步操作结果决定是哪一种状态
+    	// 状态一经确定不能修改只有从pending到 resolved 和 pending到 rejected两种 
+    	// promise实现ajax
+    	// $.ajax({
+    	// 	url:"",
+    	// 	type:get,
+    	// 	dataType:'json',
+    	// 	success:function(data){
+    	// 		console.log(data);
+    	// 	}
+    	// 	error:function(err){
+    	// 		console.log(err);
+    	// 	}
+    	// })
+
+
+    	// var pro=new Promise(function(resolve,reject){
+	    // 	$.ajax({
+	    // 		url:"",
+	    // 		type:get,
+	    // 		dataType:'json',
+	    // 		success:function(data){
+	    // 			resolve(data);
+	    // 		}
+	    // 		error:function(err){
+	    // 			reject(err);
+	    // 		}
+	    // 	})
+    	// })
+    	// pro.then(function(data){
+    	// 	console.log(data);
+    	// },function(err){
+    	// 	console.log(err)
+    	// });
+
+
+
+    	//两个大整数相加  即两个字符串相加
+    	function bigSum(a,b){
+    		var aa=a.split("");
+    		var bb=b.split("");
+    		var c=0;//存放进位
+    		var res='';
+    		var x="",y="";
+    		while(aa.length||bb.length||c)
+    		{
+    			//注意点：加括号括起来
+    			c+=((typeof(x=aa.pop())==="undefined")?0:parseInt(x))+((typeof(y=bb.pop())==="undefined")?0:parseInt(y));
+    			res=c%10+res;
+    			c=c>9?1:0;
+    		}
+    		return res;
+
+    	}
+    	console.log(bigSum('45486646468484544661134868968','544545867466464646'));
+    	//实现一个冒泡排序
+    	function bubbleSort(param){
+    		for (var i = 0; i < param.length-1; i++) {
+    			for (var j = i+1; j< param.length; j++) {
+    				if (param[i]>param[j]) {
+    					var temp=param[i];
+    					param[i]=param[j];
+    					param[j]=temp;
+    				}
+    			}
+    		}
+    		return param;
+    	}
+    	var arr=[7,4,6,5,1,3,6]
+    	console.log(bubbleSort(arr));
+    	//实现一个快速排序
+    	function quickSort(a){
+    		if (a.length<=1) {return a}//关键点
+    		var index=Math.floor(a.length/2)
+    		var mid=a[index];
+    		var left=[];
+    		var right=[];
+    		a.splice(index,1);
+    		for (var i = 0; i < a.length; i++) {
+    			if(a[i]<=mid){
+    				left.push(a[i]);
+    			}else{
+    				right.push(a[i]);
+    			}
+    		}
+    		return quickSort(left).concat([mid],quickSort(right)) //关键点
+
+    	}
+    	var arr0=[7,4,6,5,1,3,6]
+    	console.log(quickSort(arr0));
+    </script>
+</body>
+</html>

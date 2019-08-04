@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+   <canvas id="first"></canvas>
+   <script>
+   	var canvas=document.getElementById('first');
+//	参数 contextID 指定了您想要在画布上绘制的类型。
+//	当前唯一的合法值是 "2d"，它指定了二维绘图，
+//	并且导致这个方法返回一个环境对象，该对象导出一个二维绘图 API。
+	var ctx=canvas.getContext('2d');
+//beginPath() 方法开始一条路径，或重置当前的路径。
+	ctx.beginPath();
+	//lineCap 属性设置或返回线条末端线帽的样式。
+	ctx.lineCap="round";
+	ctx.moveTo(0,0);
+	ctx.lineTo(100,100);
+//	请使用 stroke() 方法在画布上绘制确切的路径。
+	ctx.stroke();
+
+   </script>
+ </body>
+</html>

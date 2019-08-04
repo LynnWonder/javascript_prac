@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	//链表是一种数据结构不同于数组的是它里面的元素可以不连续排布，每个元素组成是：一个存储当前元素的节点和指向下一个元素的指针。因为插入和删除不会影响其他元素。进行查找操作时一般是从表头进行迭代进行查找且一般会有一个头节点，里面没数据，第一个节点才是元节点，里面存放数据.
+    	function Node(ele){
+    		//首先需要一个Node类来表示节点
+    		this.element=ele;
+    		this.next=null;
+    	}
+    	function LinkedList(){
+    		this.head=new Node("head");
+    		this.size=0;
+    		this.find=function(element){
+    			//寻找某个元素，返回当前节点
+    			var current=this.head;
+    			while(current&&current.element!==element){
+    				current=current.next;
+    			}
+    			if (current.element==element) {
+    				return current;
+    			}else{
+    				return undefined;
+    			}
+    		}
+    		this.findPrevious=function(element){
+    			var current=this.head;
+    			while(current.next&&current.next.element!==element){
+    				current=current.next;
+    			}
+    			if (current.next&&current.next.element===element) {
+    				return current;
+    			}else{
+    				return undefined;
+    			}
+    		}
+    		this.insert=function(item,element){
+    			var current=this.find(element);
+    			var item0=new Node(item);
+    			item0.next=current.next;
+    			current.next=item0;
+    			this.size++;
+    		}
+    		this.remove=function(item){
+    			var item0=this.findPrevious(item);
+    			var current=this.find(item);
+    			item0.next=current.next;
+    			this.size--;
+    		}
+    	}
+
+    	var mylink=new LinkedList();
+    	// console.log(mylink);
+    	mylink.insert("aaa","head");
+    	mylink.insert("aaa0","head");
+    	mylink.insert("aaa1","aaa0");
+    	mylink.insert("aaa2","aaa1");
+    	mylink.insert("aaa3","aaa2");
+    	// mylink.remove("aaa");
+    	console.log(mylink);
+ 
+    </script>
+</body>
+</html>

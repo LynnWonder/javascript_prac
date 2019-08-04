@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>两个栈实现一个队列</title>
+</head>
+<body>
+    <script>
+        var stack1=[1,2,3];
+        var stack2=[];
+      function push(node)
+      {
+        stack1.push(node);
+        // write code here
+      }
+      function pop()
+      {
+        // write code here
+        //栈的特点是后进先出所以每次pop最后一个元素
+        // 但是队列的特点是先进先出，所以每次应该pop第一个元素
+        var temp=stack1.pop();
+        while(temp){
+          stack2.push(temp);
+          temp=stack1.pop();
+        }
+        var result=stack2.pop();
+        temp=stack2.pop();
+        while(temp){
+          stack1.push(temp);
+          temp = stack2.pop();
+        }
+        console.info(stack1,stack2);
+        return result;
+      }
+      console.info(pop());
+      console.info(pop());
+      console.info(pop());
+
+    </script>
+</body>
+</html>

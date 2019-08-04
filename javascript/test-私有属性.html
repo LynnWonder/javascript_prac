@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	var ab={
+    		name:'jack'
+    	}
+    	delete ab["name"];
+    	console.log(ab)
+    	var test=new Object();
+    	console.log(test);
+
+
+    	class Logger{
+    		printName(name="there"){
+    			this.print(`hello${name}`);
+    		}
+    		print(text){
+    			console.log(text);
+    		}
+    	}
+    	const logger=new Logger();
+    	const{printname}=logger;
+    	logger.printName();
+
+
+
+
+    	function User(name,age){
+
+        var name = name;//私有属性
+
+        var age = age;
+
+        this.alertAge=function(){//公有方法/特权方法
+
+             console.log(age);
+
+       }
+    }
+
+    var user = new User('fire子海',26);
+    // 使用公有方法获得私有属性
+    // 私有属性就是方法外无法读取的值，而公有属性就是定义为this.name
+    user.alertAge();
+
+    </script>
+</body>
+</html>

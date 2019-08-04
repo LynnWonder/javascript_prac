@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script type="text/javascript"src="js/jquery.js"></script>
+ </head>
+ <style>
+ 	.test{
+	width:0px;
+	height:0px;
+	border-top:50px solid red;
+	/*border-left:50px solid transparent;*/
+	border-right: 50px solid transparent;
+	/*border-right:50px solid transparent;*/
+	
+	
+	}
+	.test0{
+		width:100px;
+		height:100px;
+		border:2px solid blue;
+		background-color:red;
+		border-radius:50%;
+	}
+ </style>
+ <body>
+ <div class="test"></div>
+ <div class="test0" ></div>
+	<script>
+		var test=document.querySelector(".test0");
+		test.style.cssText="width:20px;height:20px;";
+		$(".test0").css({
+			"width":120,
+			"height":120
+		});
+		 // var obj = {
+		//   foo() {
+		// 	console.log(this);
+		//   },
+		//   bar: () => {
+		// 	console.log(this);
+		//   }
+		// }
+
+		// obj.foo() // {foo: ƒ, bar: ƒ}
+		// obj.bar() // window
+
+
+	</script>
+ </body>
+</html>

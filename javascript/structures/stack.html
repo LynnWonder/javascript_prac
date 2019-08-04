@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	//栈类似于数组，但是在插入和删除方面更加可控，后进先出，
+    	//也就是说是在栈顶表尾部进行添加和删除
+    	function stack(){
+    		var items=[];
+    		this.push=function(ele){//添加，注意不返回新数组的长度；
+    			 items.push(ele);
+    		};
+    		this.pop=function(ele){//移除栈顶元素并且返回被移除的元素
+    			return items.pop(ele);
+    		};
+    		this.peek=function(){//返回栈顶元素
+    			return items[items.length-1];
+    		};
+    		this.isEmpty=function(){//查看栈是否为空
+    			return items.length==0;
+    		};
+    		this.size=function(){
+    			return items.length;
+    		}
+    		this.clear=function(){//删除所有元素
+    			items=[];
+    		};
+    		this.print=function(){//辅助方法实现把栈里的元素都输出到控制台
+    			console.log(items.toString());
+    		}
+    	}
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>event</title>
+<style type="text/css">
+	#btn{
+		width:350px;
+		height:350px;
+		border: 2px solid red;
+
+	}
+	#btn ul>li:hover{
+		cursor: pointer;
+	}
+</style>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<script type="text/javascript"src="js/jquery.js"></script>
+</head>
+<body>
+	<div id="btn">
+		<ul>
+			<li class="li1">li1</li>
+			<li class="li2">li2</li>
+			<li class="li3">li3</li>
+		</ul>
+
+	</div>
+	<script type="text/javascript">
+		/*document.getElementById('btn').addEventListener('click',function(e){
+	    var value=e.target.attributes['class'].value; 
+	    // 获取目标阶段元素的'data-key'属性的值
+	    console.log(value);
+		});*/
+		// $('#btn').delegate("li","click",function(){
+		// 	var value=$(this).val('class');
+		// 	console.log(value);
+		// });
+		$("#btn").on("click","li",function(e){
+			var value=$(this).attr("class");
+			console.log(value);
+		})
+		function clickHandle(e){
+    console.log("事件阶段:"+e.eventPhase+';target:'+e.target+';currentTarget:'+e.currentTarget)
+}
+ 
+	// window.addEventListener('click',clickHandle,false);
+	// window.addEventListener('click',clickHandle,true);
+	// document.getElementById('btn').addEventListener('click',clickHandle,false);
+	// document.getElementById('btn').addEventListener('click',clickHandle,true);
+	</script>
+    
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+	<textarea id="test"></textarea>
+	<button id="btn">get</button>
+    <script type="text/javascript">
+    	// document.getElementById("btn").onclick=function(){
+    	// 	var text=document.getElementById("test").value;
+    		// var arr=text.split("/n");
+//     		console.log(text);
+//     		console.log("text");
+//     	}
+//     	function getConcat(array){
+//    var result=[];
+// 	for(var i=0;i<array.length;i+3){
+//       var A=array[i+1].split(" ");
+//       var B=array[i+2].split(" ");
+//       var C=A.concat(B);
+//       result.push(uniq(C).join(" "));
+//     }
+//   return result;
+// }
+
+// function uniq(arr){
+//  arr.sort(function(a,b){
+//  return a-b;
+// });
+//   var temp=[arr[0]];
+//   for(var i=1;i<arr.length;i++){
+//   	if(arr[i]!==temp[temp.length-1])
+//       temp.push(arr[i]);
+  
+//   }
+//   return temp;
+// }
+var arr = [
+    {name:'zopp',age:0},
+    {name:'gpp',age:18},
+    {name:'yjj',age:8}
+];
+var xx={
+	name:'xxx',
+	age:20
+};
+arr.push(xx);
+console.log(arr);
+
+function compare(property){
+    return function(a,b){
+        var value1 = a[property];
+        var value2 = b[property];
+        return value2 - value1;
+    }
+}
+console.log(arr.sort(compare('age')))
+
+
+var sum=`6 2
+B 10 3
+S 50 2
+S 40 1
+S 50 6
+B 20 4
+B 25 10`;
+  var sum=sum.split("\n");
+  var n = sum[0].split(" ")[0];
+  var m =sum[0].split(" ")[1];
+  var S=[];
+  var B=[];
+  for(var i=0;i<n;i++){
+    if(sum[i].split(" ")[0]=="S")
+    {
+      var ss={
+        type:"S",
+        p:sum[i].split(" ")[1],
+        q:sum[i].split(" ")[2]
+      };
+    S.push(ss);
+    }
+    else if(sum[i].split(" ")[0]=="B"){
+       var bb={
+        type:"B",
+        p:sum[i].split(" ")[1],
+        q:sum[i].split(" ")[2]
+      };
+    B.push(bb);
+    
+    }
+}
+ S.sort(compare("p"));
+  B.sort(compare("p"));
+  for(var i=0;i<m;i++)
+  {
+    console.log(S[i].type+" "+S[ i].p+" "+S[ i].q);
+  }
+    for(var i=0;i<m;i++)
+  {
+    console.log(B[i].type+" "+B[ i].p+" "+B[ i].q);
+  }
+
+
+
+
+
+
+    </script>
+</body>
+</html>

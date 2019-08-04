@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>原生ajax请求</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    var btn = document.querySelector('button');
+	btn.onclick = function (){		
+		//(0)创建出一个xhr对象，准备发送ajax请求
+		var xhr = new XMLHttpRequest();
+		//(1)onreadystatechange()，目的是监听后台有没有真的接收到发送的请求
+		xhr.onreadystatechange = function (){
+			//(2)在本事件监听中，通过查看readyState属性的值，可以判断当前请求进行到了何种状态。注意是事件监听！！！
+			if(xhr.readyState == 4){//两个检测缺一不可
+				// 由于只使用readystate做判断，它不理会放回的结果是500还是200，只要响应成功返回了，就执行接下来的javascript代码，结果将造成各种不可预料的错误。所以只使用readyState判断是行不通的。
+				// 可见onreadystatechange函数的执行不是只在readyState变为4的时候触发的，而是readyState的每次变化都会触发，所以就出现了前面说的那种情况。可见，单独使用status判断也是行不通的。
+				// 0表示xhr对象尚未初始化
+				// 1表示xhr着手发送请求
+				// 2表示xhr请求发送完毕
+				// 3表示xhr开始解析响应
+				// 4表示xhr接收响应解析完毕
+				//(3)如果能进入到这个if结构，则代表后台已经接收到了前端发送的请求
+				//    此时可以通过status属性的状态，来判断前端是否准确收到了后台反馈的数据
+				if(xhr.status == 200){
+					//(4)真正接收到了数据，使用responseText属性获取后台反馈的准确数据
+					console.log(xhr.responseText);
+					console.log(typeof xhr.responseText);
+					console.log(JSON.parse(xhr.responseText));
+				}
+			}
+		};
+		//(5)当准备好接收后台数据的回调函数后，着手准备发送ajax请求
+		//   通过xhr对象的open方法设置发送目的地
+		//get请求的数据可以直接在url中设置
+		xhr.open('GET', '02xhr.php', true);
+		//(6)在设置完毕后，通过send()方法发送到后台地址
+		xhr.send(null);
+	};
+    </script>
+</body>
+</html>

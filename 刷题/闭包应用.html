@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+//完成一个生成计数器的函数 plusFor，调用它会返回一个计数器。计数器本身也是一个函数，每次调用会返回一个字符串。
+// 这个显然是用闭包来实现的。因为闭包可以储存变量，和单例模式有区别；虽然单例也可以用闭包实现，但是单例是一个类只有一个对象，所以要区分开来。
+    	const plusFor = function(str){
+    	  let i=0;
+		  return function(){
+			{
+			    i++;
+			    console.log(`为${str}+${i}s`) 
+		    }
+
+		  }
+		}
+	const counter2 = plusFor('李梅')
+	counter2() // => 为李梅+1s
+	counter2() // => 为李梅+2s
+	counter2() // => 为李梅+3s
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script type="text/javascript" src="jquery.js"></script>
+ </head>
+ <body>
+  <script>
+    //jQuery写ajax传数据
+    $.ajax({
+      type:'get',
+      url:'data/arr.txt',
+      dataType:'JSON',
+      success:function(data){
+        console.log(data);
+      },
+      error:function(error){
+        console.log(error);
+      }
+    });
+    let p=new Promise((resolve,reject)=>{
+      $.ajax({
+        url:'aaa.text',
+        dataType:'JSON',
+        type:'get',
+        success(data){
+          resolve(data);
+        },
+        error(err){
+          reject(err);
+        }
+      })
+    });
+    p.then((data)=>{
+      console.log(data)
+    },(err)=>{
+      console.log(err);
+    })
+
+
+  </script>
+ </body>
+</html>
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	function commafy (num) {
+	  /* TODO */
+	  var snum=num.toString();
+	  var idx="";
+	  var dot="";
+	  var res="";
+	  if(snum.indexOf(".")!=-1){
+	    dot=snum.slice(snum.indexOf("."));
+	    snum=snum.slice(0,snum.indexOf("."))
+	  }
+	  if(snum.indexOf("-")!=-1){
+	    idx="-";
+	    snum=snum.slice(1);
+	  }
+	  while(snum.length>3){
+	    res=","+snum.slice(-3)+res;
+	    snum=snum.slice(0,snum.length-3);
+	  }
+	  if(snum){
+	    res=snum+res;
+	  }
+	  return idx+res+dot;
+	}
+
+	function commafy1 (num) {
+	  /* TODO */
+	 var snum=num.toString();
+	 var idx="",dot="";
+	 var res="";
+	 if(snum.indexOf("-")!=-1){
+	   idx="-";
+	   snum=snum.slice(1);
+	 }
+	 if(snum.indexOf(".")!=-1){
+	   dot=snum.slice(snum.indexOf("."));
+	   snum=snum.slice(0,snum.indexOf("."));
+	 }
+	 res=snum.replace(/(\d)(?=(\d{3})+$)/g,"$1,");
+	 return idx+res+dot;
+}
+console.log(commafy1(123456));
+		const TRIM_REGX = /(^\s+)|(\s+$)/g;
+		var myres0=' ScriptOJ   '.replace(TRIM_REGX, '') // => ScriptOJ
+		console.log(myres0.length);
+    </script>
+</body>
+</html>

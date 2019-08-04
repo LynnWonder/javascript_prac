@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+  	#box{
+		position:absolute;
+		width:100px;
+		height:100px;
+		border: 2px solid red;
+		
+	}
+  </style>
+ </head>
+ <body>
+	<div id="box">
+	</div>
+	<script>
+	 var a=0;
+	 var timer;
+	 var obox=document.getElementById("box");
+		timer=setInterval(function(){
+			//设表先关
+//			clearInterval(timer);
+			a+=10;
+			if(a>900)
+			{
+				//拉终停表
+				a==900;
+				clearInterval(timer);
+			}
+			obox.style.left=a+"px";
+		},100);
+	</script>
+ </body>
+</html>

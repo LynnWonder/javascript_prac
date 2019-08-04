@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	// console.log(1);
+    	// new Promise((resolve)=>{
+    	// 	resolve();
+    	// 	console.log(2);
+    	// }).then(()=>{
+    	// 	console.log(3);
+    	// })
+    	// setTimeout(()=>{
+    	// 	console.log(4);
+    	// },0);
+    	// console.log(5);//顺序是12534
+        // 先执行同步任务，同步任务形成执行栈，输出1,2,5 异步 成功状态打印3 setTimeout添加在异步任务形成的任务队列的最底部所以最后打印4
+
+
+
+
+        // console.log(1);
+        // setTimeout(function() {
+        //     console.log(2);
+        // })
+        // var promise = new Promise(function(resolve, reject) {
+        //     console.log(3);
+        //     resolve();
+        // })
+        // promise.then(function() {
+        //     console.log(4);
+        // })
+        // console.log(5);
+
+//1 3 5 4 2
+
+
+
+        // for (var i = 0; i < 5; i++) {
+
+        //     setTimeout(function() {
+
+        //       console.log(i);
+
+        //     }, 0);
+
+        // }
+
+        // console.log(i);//输出5 然后输出五个5
+        // //先执行同步事件，然后异步输出5。同时考察闭包的影响
+
+
+
+
+                function Foo() {
+                    var i = 0;
+                    return function() {
+                        console.log(i++);
+                    }
+                }
+         
+            var f1 = Foo(),
+                f2 = Foo();
+            f1();
+            f1();
+            f2();
+//010 i++是先用初始值，之后再加；这是一个闭包，每次使用闭包都是全新的。
+
+    </script>
+</body>
+</html>

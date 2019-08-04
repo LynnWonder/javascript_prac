@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+//function calculateTotalAmount (vip) {
+//  var amount = 0
+//  if (vip) {
+//    var amount = 1
+//  }
+//  { // 让块来的更疯狂
+//    var amount = 100
+//    {
+//      var amount = 1000
+//      }
+//  }  
+//  return amount
+//}
+//
+//console.log(calculateTotalAmount(true))
+
+
+
+//function calculateTotalAmount (vip) {
+//  var amount = 0 // 或许应该用let, 但你可以混用
+//  if (vip) {
+//    let amount = 1 // 第一个数量为 0
+//  } 
+//  { // 更多的块
+//    let amount = 100 // 第一个数量为 0
+//    {
+//      let amount = 1000 // 第一个数量为 0
+//      }
+//  }  
+//  return amount
+//}
+//
+//console.log(calculateTotalAmount(true))
+
+
+function calculateTotalAmount (vip) {
+  var amount = 0  
+  if (vip) {
+    let  amount = 1 
+  } 
+  { // 更多的块
+    let amount = 100 
+    {
+      let amount = 1000
+      }
+  }  
+  return amount
+}
+
+console.log(calculateTotalAmount(true))
+  </script>
+ </body>
+</html>

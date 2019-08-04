@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+       function TreeNode(x) {
+          this.val = x;
+          this.left = null;
+          this.right = null;
+       }
+       const reConstructBinaryTree=(pre, vin)=>
+      {
+        //pre为前序遍历结果，vin为中序遍历结果
+        if(pre.length==0||vin.length==0)
+          return null;
+        const index=vin.indexOf(pre[0]);
+        const left=vin.slice(0,index+1);
+        const right=vin.slice(index+1);
+        const newPre0=pre.slice(1,index+1);
+        const newPre1=pre.slice(index+1);
+        const node=new TreeNode(pre[0]);
+        node.left=reConstructBinaryTree(newPre0,left);
+        node.right=reConstructBinaryTree(newPre1,right);
+        return node;
+      }
+      const pre0=[1,2,4,7,3,5,6,8];
+      const vin0=[4,7,2,1,5,3,8,6];
+      const myTree=reConstructBinaryTree(pre0,vin0);
+      console.info(myTree);
+      const postOrder=(tree)=>{
+        // 通过递归的方式实现后序遍历
+        const res=[];
+        dfs_post(tree,res);
+        return res;
+      }
+      const dfs_post=(tree,res)=>{
+        if (tree===null){
+            return;
+        }
+        dfs_post(tree.left,res);
+        dfs_post(tree.right,res);
+        res.push(tree.val);
+      }
+      const post=postOrder(myTree);
+      console.info(post);
+      const reConstructBinaryTree0=(vin,post)=>{
+        if(vin.length==0||post.length==0){
+          return null;
+        }
+        const index=vin.indexOf(post[post.length-1]);
+        const left=vin.slice(0,index);
+        const right=vin.slice(index+1);
+        const newPost0=post.slice(0,index);
+        const newPost1=post.slice(index,post.length-1);
+        const node=new TreeNode(post[post.length-1]);
+        node.left=reConstructBinaryTree0(left,newPost0);
+        node.right=reConstructBinaryTree0(right,newPost1);
+        return node;
+      }
+      console.info(reConstructBinaryTree0(vin0,post));
+    </script>
+</body>
+</html>

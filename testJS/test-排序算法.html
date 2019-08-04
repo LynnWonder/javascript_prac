@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	var test3=[6,0,2,9,3,5,8,0,5,4];
+    	var gaps=[5,3,1]; 
+    	function shellSort(gaps,arr){
+    		for (var g = 0; g < gaps.length; g++) {
+    			for (var i = gaps[g]; i < arr.length; i++) {
+    				var temp=arr[i];
+    				var j=i;
+    				while(j>=gaps[g]&&temp<=arr[j-gaps[g]]){
+    					arr[j]=arr[j-gaps[g]];
+    					j-=gaps[g];
+    				}
+    				arr[j]=temp;
+    			}
+    			console.log(arr);
+    		}
+    		return arr;
+    	}
+    	console.log(shellSort(gaps,test3));
+
+
+    </script>
+</body>
+</html>

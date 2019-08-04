@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<s>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const add1 = (x) => x + 1
+        const mul3 = (x) => x * 3
+        const div2 = (x) => x / 2
+        const compose=(...args)=>{
+            console.log(Array.isArray(args)) //true
+            return (x)=>{
+                return args.reduceRight((acc,item,index)=>{
+                return item(acc)
+            },x)
+            }
+        }
+    console.log(compose(div2,add1,add1)(1))
+    //我们用map来实现一个reduce
+    Array.prototype._map=function(fn,callbackThis){
+        let myself=this
+        let mythis=callbackThis || null
+        let res=[]
+        myself.reduce((acc,item,index,self)=>{
+            res.push(fn.call(mythis,item,index,self))
+            return item
+        },null)
+        return res
+    }
+    let arr=[1,2];
+    console.log(arr.map((item,index)=>{
+        return item*2
+    }))
+    console.log(arr);
+    console.log(arr._map((item,index)=>{
+        return item*2
+    }))
+    </script>
+</body>
+</html>

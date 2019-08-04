@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	// 核对隐性丢失
+var foo=11;
+function show(){
+	console.log(this.foo);
+}
+var obj={
+	foo:2,
+	show:show
+}
+setTimeout(function(){obj.show()},1000);
+// var my=obj.show;
+// my()
+    </script>
+</body>
+</html>

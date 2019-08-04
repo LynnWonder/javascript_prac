@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 闭包：能够访问另一个函数作用域中的变量的函数 -->
+    <script type="text/javascript">
+        var color="red";
+        console.log(this);
+        function createCF(pName){
+            var color="green";
+            return function(obj1,obj2){
+                var val1=obj1[pName];//访问了外部函数中的变量
+                var val2=obj2[pName];
+                  console.log(this);
+                if (val1<val2) {
+                    return 1;
+                }else{
+                    return 0;
+                }
+              
+            }
+        }
+        var a={name:"Nick"};
+        var b={name:"Tom"};
+        // var res=createCF("name")(a,b);
+        var compare=createCF("name");
+        var res=compare(a,b);
+        console.log(res);
+        compare=null;//及时清除防止内存泄露
+//闭包影响 详见test026
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	//js设计模式也即创建
+    	//工厂模式,解决了创建多个相似对象的问题，但是无法识别对象的类型
+	function createPerson(name,age,job){
+	    var obj = new Object();
+	    obj.name = name;
+	    obj.age = age;
+	    obj.job = job;
+	    obj.speak = function(){
+	        console.log(this.name);
+	    };
+	    return obj
+}
+var person1 = createPerson('panrui',20,'前端工程师')
+console.log(person1 instanceof Object);
+person1.speak();
+//构造函数模式：可以将构造函数的实例标识成某种特定的类型
+// 但是构造函数中的每个方法都要在实例上重新创建一遍
+		function Person(name,age,job){
+		    this.name = name;
+		    this.age = age;
+		    this.job = job;
+		    this.speak = function(){
+		        console.log(this.name);
+		    };        
+}
+var person2 = new Person('Jack',20,'前端工程师');
+var person20 = new Person('jackk',20,'前端工程师');
+console.log(person2.constructor == Person); //true
+console.log(person20.constructor == Person); //true
+console.log(person2 instanceof Object);//true
+console.log(person2 instanceof Person);//true
+console.log(person2.speak == person20.speak)//false
+ person2.speak();
+ //原型模式：解决了构造函数中每个方法都要在实例上重新创建一遍的问题
+ //但所有实例共享原型上的属性
+ 		function PersonP(){
+    
+		}
+		PersonP.prototype.name = 'tom';
+		PersonP.prototype.age = 23;
+		PersonP.prototype.job = '前端工程师';
+		PersonP.prototype.speak = function(){
+		    console.log(this.name);
+		}
+var person3 = new PersonP();
+	person3.speak();
+	//组合使用构造函数和原型模式
+	//构造函数定义属性，原型上定义共享属性以及方法
+	//可以向构造函数传递参数，并且每个实例都有自己的一份实例属性的副本是用来定义引用类型的默认模式
+	function PersonZ(name,age,job){
+	    this.name = name;
+	    this.age = age;
+	    this.job = job;    
+}
+		PersonZ.prototype.speak = function(){
+		    console.log(this.name);
+		}
+		var person4 = new PersonZ("zero",12,"xiaoxuesheng");
+		person4.speak();
+		//动态原型模式
+		// 动态定义原型的方法，可以确定新创建的对象的类型
+		// 但是不能在创建了实例后重写原型，否则会让创建的实例和新原型失联
+function PersonD(name,age,job){
+    this.name = name;
+    this.age = age;
+    this.job = job;   
+    //以下只会执行一次
+    if(typeof this.speakn !== "function"){//注意使用的是this.speaken
+        PersonD.prototype.speakn = function(){
+            console.log(this.name);
+        };
+    }
+}
+	var person5 = new PersonD("Five",12,"xiaoxuesheng");
+	person5.speakn();
+	var person6 = new PersonD("Five",12,"xiaoxuesheng");
+	console.log(person5 instanceof PersonD);//true
+	// PersonD.prototype={
+	// 	age:22,
+	// 	speakx:function(){
+	// 		console.log(this.age);
+	// 	}
+	// }
+	// person6.speakx();//报错
+
+// 寄生构造函数模式
+// 和构造函数模式类似，把构造函数的方法封装起来返回一个新的对象
+// 无法确定新创建对象的类型
+function PersonP1(name,age){
+	var obj=new Object();
+	obj.name=name;
+	obj.age=age;
+	obj.say=function(){
+		console.log(this.name);
+	}
+	return obj;
+}
+var person7=new PersonP1("mary",20);
+person7.say();
+console.log(person7 instanceof PersonP1);
+// 稳妥构建函数模式
+// 新创建实例方法不引用this 和不使用new创建新对象
+//适合安全环境，但除了调用它的方法没有其他途径访问其构造函数的原始数据
+// 不能确定类型(instanceof 在这里没有意义)
+function PersonP2(name,age){
+	var obj=new Object();
+	obj.name=name;
+	obj.age=age;
+	obj.say=function(){
+		console.log(name);
+	}
+	return obj;
+}
+ var person8=PersonP2("cook",12);
+ person8.say();
+ console.log(person8 instanceof PersonP2);
+    </script>
+</body>
+</html>

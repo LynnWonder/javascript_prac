@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<script type="text/javascript">
+var arr=[0,1,2,3,4,5,6];
+function GenerateRandom(min,max)
+{
+//	return  Math.floor(Math.random() * (max - min + 1) + min);
+
+	return Math.floor(Math.random() * (max - min)) + min;
+
+}
+console.log(GenerateRandom(0,2));
+for (var i=0;i<arr.length;i++ )
+{
+	var index=GenerateRandom(0, arr.length - 1);
+//返回min到max之间的任意数
+//return Math.floor(Math.random() * (max - min)) + min;
+//Math.floor(x)返回≤x的最大整数（向下取整）
+//Math.randow()返回[0,1）
+//	var index=Math.floor(Math.random()*i);
+//	console.log(index);
+	//因为总是在交换所以不存在重复值问题
+	var temp=arr[index];
+	arr[index]=arr[i];
+	arr[i]=temp;
+}
+	var str=arr.join();
+//	console.log(str);
+
+////sort 是对数组进行排序
+////他的是这样工作的。每次从数组里面挑选两个数 进行运算。
+////如果传入的参数是0 两个数位置不变。
+////如果参数小于0 就交换位置
+////如果参数大于0就不交换位置
+////join() 方法用于把数组中的所有元素转换一个字符串
+//    arr.sort(function({return 0.5-Math.random()}));
+//    var str=arr.join();
+//    console.log(str);
+
+</script>
+</body>
+
+</html>

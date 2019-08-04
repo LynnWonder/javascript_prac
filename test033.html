@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<script src="js/browser.min.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/react.js"></script>
+<script src="js/react-dom.js"></script>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+	<div id="first">
+	</div>
+    <script type="text/babel">
+{/*创建一个组件只用于视图显示*/}
+    	var Person=React.createClass({
+    		render(){
+    			var name=this.props.name;
+    			var age=this.props.age;
+    			return(
+    				<div>
+    					<p>{`name:${name}`}</p>
+    					<p>{`age:${age}`}</p>
+    				</div>
+
+    				)
+    		}
+    	})
+    {/*创建一个组件用于写逻辑*/}
+    	var User=React.createClass({
+    		getInitialState(){
+    			return({value:true})
+    		},
+    		click(){
+    			this.setState({
+    				value:!this.state.value
+    			})
+    		},
+    		render(){
+    		var user1={
+    			name:"jack",
+    			age:20
+    		}
+    		var user2={
+    			name:"Lynn",
+    			age:23
+    		}
+    		var user0=new Object();
+    		this.state.value?(user0=user1):(user0=user2);
+    			return(
+    				<div>
+	    				<Person name={user0.name} age={user0.age}/>
+	    				<button onClick={this.click}>change</button>
+    				</div>
+    				)
+    		}
+    		
+    	})
+    	ReactDOM.render(<User />,document.getElementById("first"));
+
+
+    </script>
+</body>
+</html>

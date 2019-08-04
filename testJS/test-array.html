@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	    	
+       var arr=[7,4,6,51,1];
+       try{arr.forEach((item,index)=>{
+    		if (item<5) {
+    			throw new Error("myerr")//创建一个新的error message为myerr
+    		}
+    		console.log(item)//只打印7 说明跳出了循环
+    	})}catch(e){
+       		console.log(e.message);
+    		if (e.message!=="myerr") {
+    			throw e
+    		}
+    	}
+    	//reduce接收一个函数作为累加器，数组中的每个值从左到右开始缩减，最终为一个值
+    	//函数上一次的返回值，当前值，当前值索引，当前数组对象
+    	//reduce求和
+    	let res=arr.reduce((val,item,index)=>{
+    		return val+item;
+    	});
+    	console.log(res);//69
+    	//reduce求平均值
+    	let res0=arr.reduce((val,item,index)=>{
+    		let res1=0;
+    		if (index<arr.length-1) {
+    			return (val+item);
+    		}else{
+    			return (val+item)/(arr.length)
+    		}
+    	})
+    	console.log(res0);
+    	//第二个参数为0表示不删除所以实现的是添加一个元素
+    	var arr0=[7,4,6,51,1];
+    	var arr1=[7,4,6,51,1];
+    	var arr2=[7,4,6,51,1];
+    	var arr3=[7,4,6,51,1];
+    	var arr4=[7,4,6,51,1];
+    	var arr5=[7,4,6,51,1];
+    	arr0.splice(0,0,123);
+    	console.log(arr0);
+    	//此时实现的是替换功能，因为删除了第一个又添加了第一个
+    	arr1.splice(0,1,12);
+    	console.log(arr1);
+    	//此时实现的是删除
+    	arr2.splice(0,2);
+    	console.log(arr2);
+    	//删除第二位以后的所有包含第二位
+    	arr3.splice(2);
+    	console.log(arr3);
+    	//删除第-5+5第0位后的所有
+    	arr4.splice(-5);
+    	console.log(arr4);
+    	//删除第-3+5第2位包含第二位两个
+    	arr5.splice(-3,2);
+    	console.log(arr5);
+
+    </script>
+</body>
+</html>

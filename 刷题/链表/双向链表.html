@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双向链表</title>
+</head>
+<body>
+    <script>
+        // 注意双向链表的最后一个节点指向的是null
+        class Node{
+          constructor(val){
+            this.element=val;
+            this.previous=null;
+            this.next=null;
+          }
+        }
+        class LinkedList{
+          constructor(){
+            this.head=new Node('head');
+          }
+          find(item){
+            let cur=this.head;
+            while(cur&&cur.element!==item){
+              cur=cur.next;
+            }
+            return cur;
+          }
+          insert(newElement,item){
+            const newNode=new Node(newElement);
+            let cur=this.find(item);
+            newNode.next=cur.next;
+            cur.next=newNode;
+            newNode.previous=cur;
+          }
+          deletes(item){
+            const cur=this.find(item);
+            cur.previous.next=cur.next;
+            cur.next.previous=cur.previous;
+            cur.next=null;
+            cur.previous=null;
+          }
+        }
+        let my_llist=new LinkedList();
+        const node0=new Node(1);
+        const node1=new Node(2);
+        my_llist.head.next=node0;
+        node0.previous=my_llist.head;
+        node0.next=node1;
+        node1.previous=node0;
+        console.info(my_llist);
+        my_llist.insert(3,2);
+        console.info(my_llist);
+        my_llist.deletes(2);
+        console.info(my_llist);
+    </script>
+</body>
+</html>

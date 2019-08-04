@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	//单例模式简单实现
+    	// 单例模式就是保证一个类只有一个实例
+    	function Single(name){
+    		this.name=name;
+    		if (!Single.instance) {//undefined取非为true
+    			Single.instance=this;
+    		}
+    		return Single.instance
+    	}
+    	
+    	var my1=new Single("tom");
+    	var my2=new Single("jack");
+    	console.log(my1===my2)
+    	// console.log(Single.instance)
+
+
+    	//惰性单例
+    var createDiv=(function(){
+    		var div;
+    		return function(){
+    		if (!div) {
+    			$('.box').append(" <p id='myId'>Hello world!</p>");
+    			div=document.getElementById("myId");
+	    	}
+	    		return div;
+    	}
+    })();
+    document.body.addEventListener('click',function(){
+    	console.log("test");
+    },false);
+    </script>
+</body>
+</html>

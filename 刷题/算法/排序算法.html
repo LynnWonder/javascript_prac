@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>排序算法</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	var test0=[1,0,3,3,5,4,5,0,6,7];
+    	//冒泡排序
+    	// function bubbleSort(arr){
+    	// 	for (var i = arr.length; i >1 ; i--) {
+    	// 		for (var j = 0; j < i; j++) {
+    	// 			if (arr[j]>arr[j+1]) {
+    	// 				var temp=arr[j];
+    	// 				arr[j]=arr[j+1];
+    	// 				arr[j+1]=temp;
+
+    	// 			}	
+    	// 		}
+    	// 		console.log(arr);
+    	// 	}
+    	// 	return arr;
+    	// }
+    	// console.log(bubbleSort(test0));
+
+    	// 选择排序
+    	var test1=[6,8,0,6,7,4,3,1,5,10];
+    	function selectionSort(arr){
+    		for (var i = 0; i < arr.length-1; i++) {
+    			var min=i;
+    			for (var j = i+1; j < arr.length; j++) {
+    				if (arr[min]>arr[j]) {
+    					min=j;
+    				}
+    			}
+    			var temp=arr[min];
+    			arr[min]=arr[i];
+    			arr[i]=temp;
+    			console.log(arr);
+    		}
+    		return arr;   		
+    	}
+    	// console.log(selectionSort(test1));
+    	var test2=[6,10,0,6,5,8,7,4,2,7];
+    	function insertionSort(arr){
+    		for (var i = 1; i < arr.length; i++) {
+    			var temp=arr[i];
+    			var j=i;
+    			while(j>0&&(temp<=arr[j-1])){
+    				arr[j]=arr[j-1];
+    				j--;
+    			}
+    			arr[j]=temp;
+    			console.log(arr);
+    		}
+    		return arr;
+    	}
+    	// console.log(insertionSort(test2));
+
+
+    	// 希尔排序
+    	var test3=[6,0,2,9,3,5,8,0,5,4];
+    	function shellSort(gaps,arr){
+    		for (var g = 0; g < gaps.length; g++) {
+    			for (var i = gaps[g]; i < arr.length; i++) {
+    				var temp=arr[i];
+                    var j=i;
+                    while(j>=gaps[g]&&temp<=arr[j-gaps[g]]){
+                        arr[j]=arr[j-gaps[g]];
+                        j-=gaps[g];
+                    }
+    				arr[j]=temp;
+    				
+    			}
+    			console.log(arr);
+    		}
+    		return arr;
+    	}
+    	var gaps=[5,3,1];
+    	// console.log(shellSort(gaps,test3))
+        // 快速排序
+        var test4=[7,4,6,3,1,5,8];
+        function quickSort(arr){
+            if (arr.length<=1) {
+                return arr;
+            }
+            var idx=Math.floor(arr.length/2);
+            var pivot=arr[idx];
+            arr.splice(idx,1);
+            console.log(arr);
+            var left=[],right=[];
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i]<pivot) {
+                    left.push(arr[i]);
+                }else{
+                    right.push(arr[i]);
+                }
+            }
+            return quickSort(left).concat([pivot],quickSort(right));
+
+        }
+        // console.log(quickSort(test4));
+    </script>
+</body>
+</html>

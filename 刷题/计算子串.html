@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算子串</title>
+</head>
+<body>
+    <script>
+        var calStr=function (str){
+          var res=[];
+          for (var i=0;i<str.length-1;i++){
+            var r=matchStr(str.slice(i))
+            if (r){
+              res.push(r);
+            }
+          }
+          return res;
+        }
+        var matchStr=function (str) {
+          // 先找到连续的0或者1
+          var j=str.match(/^(0+|1+)/)[0];
+          console.info(j);
+          // a^1表示对a取反
+          var o=(j[0]^1).toString().repeat(j.length);
+          // 自定义正则规则
+          var reg=new RegExp(`^(${j}${o})`);
+          // return  str.match(reg);
+          if (reg.test(str)) {
+            return RegExp.$1
+          } else {
+            return ''
+          }
+        }
+        console.info(calStr('10101'));
+        // var my_str='00110011';
+        // console.info(my_str.match(/^(0+|1+)/));
+        var countBinarySubstrings = function(str) {
+          let r = []
+          // 给定任意子输入都返回第一个符合条件的子串
+          let match = (str) => {
+            let j = str.match(/^(0+|1+)/)[0]
+            let o = (j[0] ^ 1).toString().repeat(j.length)
+            console.info(j,o,str,str.substr(j.length,j.length));
+            if(str.substr(j.length,j.length)===o)
+              return true;
+          }
+          // 通过for循环控制程序运行的流程
+          for (let i = 0, len = str.length - 1; i < len; i++) {
+            let sub = match(str.slice(i))
+            if (sub) {
+              r.push(sub)
+            }
+          }
+          console.info(r);
+          return r.length
+        };
+        countBinarySubstrings("00110");
+
+        // var strrr='hello';
+        // console.info(strrr[0]);
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+//es6写一个继承
+	// class People{
+
+	// 	constructor(name,age){
+	// 		this.name=name;
+	// 		this.age=age;
+	// 	}
+	// 	showName(){
+	// 		console.log(this.name);
+	// 	}
+	// }
+
+	// class Student extends People{
+	// 	constructor(name,age,gender){
+	// 		super(name,age);
+	// 		this.gender=gender;
+	// 	}
+	// 	showGender(){
+	// 		console.log(this.gender);
+	// 	}
+	// }
+
+	// var jack=new Student("jack",23,"male");
+	// jack.showName();
+	// jack.showGender();
+	// class People{
+	// 	constructor(name,age){
+	// 		this.name=name;
+	// 		this.age=age;
+	// 	}
+	// 	showName(){
+	// 		console.log(this.name);
+	// 	}
+	// }
+	// class Student extends People{
+	// 	constructor(name,age,height){
+	// 		super(name,age);
+	// 		this.height=height;
+	// 	}
+	// 	showHeight(){
+	// 		console.log(this.height);
+	// 	}
+	// }
+	// var tom=new Student("tom",22,180);
+	// tom.showName();
+	// tom.showHeight();
+//不用es6写继承
+function People(name,age){
+	this.name=name;
+	this.age=age;
+}
+People.prototype.showName=function(){
+	console.log(this.name);
+}
+function Student(name,age,height){
+	People.call(this,name,age);
+	this.height=height;
+}
+// Student的原型对象是people的实例对象
+Student.prototype=new People();
+Student.prototype.showHeight=function(){
+	console.log(this.height);
+}
+	var jack=new Student("jack",22,185);
+	jack.showName();
+	jack.showHeight();
+	// 任何一个对象都有一个__proto__属性，指向它的构造函数的原型对象
+	// jack.__proto__指向new people()即people的实例化对象
+	// people的实例化对象的__proto__指向构造函数的原型对象即people.prototype
+	//people.prototype的__proto__指向构造函数的原型对象，构造函数是object系统内置函数，即object.prototype顶端了，再__proto__没了
+	console.log(jack.__proto__.__proto__.__proto__);
+ // 	function People(name ,age){
+ // 		this.name=name;
+ // 		this.age=age;
+ // 	}
+ // 	People.prototype.showName=function(){
+ // 		console.log(this.name);
+ // 	}
+
+ // 	function Student(name,age,gender){
+ // 		People.call(this,name,age);
+ // 		this.gender=gender;
+ // 	}
+ // 	Student.prototype=new People();
+ // 	Student.prototype.showGender=function(){
+ // 		console.log(this.gender);
+ // 	}
+ // 	var jack=new Student("jack",23,"male");
+	// console.log(jack.name);
+	// jack.showGender();
+	// 定义一个数组
+	// let arr=[1,4,7,9];
+	// for(let c in arr){
+	// 	console.log(c+":"+arr[c]);//c返回的是数组的下标
+	// }
+	// let json={a:1,b:5,c:8};
+	// console.log(typeof json);
+	// for(let j in json){
+	// 	console.log(j+":"+json[j]);
+	// }
+		// let arr=[1,2,3];
+		// console.log(arr.map((item,index)=>{
+		// 	return (item+1);
+		// }));
+		// arr.forEach((item,index)=>{
+		// 	console.log (item+1);
+		// }
+
+		// 	);
+  </script>
+ </body>
+</html>

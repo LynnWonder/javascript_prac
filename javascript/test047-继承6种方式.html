@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	function People(name,age){
+    		this.name=name;
+    		this.age=age;
+    		this.color=['blue','red','orange'];
+    	}
+    	People.prototype.say=function(){
+    		console.log(this.name);
+    	}
+    	//构造继承：缺点：无法访问父类原型链上的属性和方法
+    	// function Student(name,age,gender){
+    	// 	People.call(this,name,age);//core
+    	// 	this.age=age;
+    	// }
+    	// var jack=new Student("jack",20,"male");
+    	// console.log(jack.name);
+    	// //原型链继承，能够访问父类原型链的属性方法，缺点：引用类型的属性被所有实例共享
+    	//创建子类实例时不能向父类传参
+    	// function Student (){
+    	// }
+    	// Student.prototype=new People();
+    	// //子类的构造函数没了所以需要加上
+    	// Student.constructor=Student;
+    	// var jack=new Student();
+    	// jack.say();
+    	// jack.color.push("white");
+    	// var tom=new Student();
+    	// console.log(jack.color);
+    	// console.log(tom.color);
+    	//组合继承 ：融合了以上两种的优点 	缺点是父类的构造函数被执行了两次
+   	 // function Student (name,age,gender){
+    	// 	People.call(this,name,age);//第二次调用父类构造函数
+    	// 	this.gender=gender;
+    	// }
+    	// Student.prototype=new People();//第一次调用父类构造函数
+    	// var jack=new Student("jack",20,"male");
+    	// jack.say();
+    	// jack.color.push("white");
+    	// var tom=new Student("tom",18,"male");
+    	// console.log(jack.color);
+    	// console.log(tom.color);
+    	// 原型式继承 缺点：引用类型的属性被所有实例共享
+    	// function objectCreate(obj){//core
+    	// 	function F(){
+    	// 	}
+    	// 	F.prototype=obj;//浅复制只将地址进行赋值
+    	// 	return new F();
+    	// }
+    	// var Person={
+    	// 	fruits:['apple','banana','orange']
+    	// }
+    	// var tom=objectCreate(Person);
+    	// tom.fruits.push('peach')
+    	// var jack=objectCreate(Person);
+    	// //原型式继承是浅拷贝，所以引用类型的数据共享在不同实例中
+    	// console.log(jack.fruits);
+    	// //使用es5的Object.create()
+    	// //接受两个参数：一个用作新对象原型的对象和（可选的）
+    	// //一个为新对象定义额外属性（会覆盖作新对象原型的对象上的同名属性）的对象
+    	// var tim=Object.create(Person,{
+    	// 	fruits:{
+    	// 		value:['grape']
+    	// 	}
+    	// });
+    	// console.log(tim.fruits);//grape覆盖
+    	//寄生式继承 缺点：每次创建对象都会创建一遍方法
+    	//创建一个仅用于封装继承过程的函数，该函数在内部以某种方式来增强对象，
+    	//最后再像真地是它做了所有工作一样返回对象
+    	// function createSub(sup){
+    	// 	var clone=Object.create(sup);
+    	// 	clone.sayAge=function(){
+    	// 		console.log("age");
+    	// 	}
+    	// 	return clone;
+    	// }
+    	// var tom=createSub(People);
+    	// tom.sayAge();
+    	// 寄生组合式继承 寄生式继承和组合式继承混合；规避组合式继承的调用两次构造函数的问题，避免Child.prototype=new Parent()直接使用父类的原型对象;
+    	function inheritPrototype(sup,sub){
+    		//使用寄生式继承来继承父类的原型（实在看不懂）
+    		var clone=Object.create(sup.prototype);
+    		clone.constructor=sub;//增强对象
+    		sub.prototype=clone;//将子类的原型指向 继承超类型的原型
+    	}
+    	function Student(name,age,gender){
+    		People.call(this,name,age);//只在此处调用一次父类构造函数
+    		this.gender=gender;
+    	}
+    	inheritPrototype(People,Student);
+    	var jjj=new Student("jjj",20,"male");
+    	jjj.say();
+    	var arr=[1,2];
+    	console.log(arr.__proto__);
+    	console.log(Array.prototype);
+
+    </script>
+</body>
+</html>

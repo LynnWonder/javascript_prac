@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>test1</title>
+</head>
+<body>
+  <h2>test060页面</h2>
+  <iframe src="http://127.0.0.1/test061.html" frameborder="1"></iframe>
+  <script>
+    var ifr = document.querySelector('iframe')
+    ifr.style.display = 'none'
+    var flag = 0;
+    ifr.onload = function () {
+        if (flag == 1) {
+            console.log('跨域获取数据', ifr.contentWindow.name);
+            ifr.contentWindow.close();
+        } else if (flag == 0) {
+            flag = 1;
+            ifr.contentWindow.location = 'test061.html';
+        }
+    }
+  
+    //         var pop=window.open("http://127.0.0.1/test061.html",'title');
+    //           window.onload=function(){
+    // pop.postMessage('hello',"http://127.0.0.1/test061.html");
+    // }
+
+  </script>
+</body>
+</html>

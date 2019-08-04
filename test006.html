@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+	<script>
+		function Node(element){
+		this.element = element;
+		this.next = null;
+		}
+
+function LList(){
+    this.head = new Node('head');
+    this.find = find;
+    this.insert = insert;
+    //this.remove = remove;
+    this.display = display;
+}
+
+function find(item){
+    var currNode = this.head;
+    while (currNode.element != item){
+        currNode = currNode.next;
+    }
+    return currNode;
+}
+
+//插入一个元素
+function insert(newElement, item){
+    var newNode = new Node(newElement);
+    var current = this.find(item);
+    newNode.next = current.next;
+    current.next = newNode;
+}
+
+function display(){
+    var currNode = this.head;
+    while (!(currNode.next == null)){
+        document.write(currNode.next.element + '&nbsp;');
+        currNode = currNode.next;
+    }
+}
+
+
+//测试程序
+//var cities = new LList();
+//cities.insert("Conway", "head");
+//cities.insert("Russellville", "Conway");
+//cities.insert("Alma", "Russellville");
+//cities.display();
+//var link=function(height=50,color='red',url='http://azat.co'){}
+//
+//var name='Your name is ${first}${last}';
+//var str=`nmsl
+//    gungungungnnnn`;
+//	  console.log(str);
+//var data=$('body').data();
+//var {house,mouse}=$('body').data();
+function getType(aa){
+
+	return typeof(aa);
+}
+var a=450;
+console.log(getType(a));
+	</script>
+ </body>
+</html>

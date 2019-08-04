@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            height:10000px;
+            width:1000px;
+            border:1px red solid;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">xxx</div>
+<script>
+  function throttle1(fn, wait) {
+    let previous = 0;
+    return function () {
+      let now = new Date().getTime();
+      if (now - previous > wait) {
+        fn.apply(this, arguments);
+        previous = now;
+      }
+    }
+  }
+
+  function raf_debounce(fn){ //touchmove  scroll节流
+    var ticking=false;
+    var that=this;
+
+    return function(e) {
+
+      var ev=e||window.event;
+      // console.log("正1确的e",e);
+      if(!ticking) {
+        ticking = true;
+        requestAnimationFrame(function(){
+          //console.log("正2确的e",ev);
+          fn(ev);
+          ticking = false;
+        });
+      }
+    }
+  };
+
+  var sb=1;
+  window.addEventListener("scroll",function(e){
+    if(sb){
+      sb=0;
+      //var d = (+new Date());
+      console.log("sb",e)
+    }
+  })
+  var sa=1;
+  window.addEventListener("scroll",throttle1(function(e){
+    if(sa){
+      //sa=0;
+      var d = (+new Date());
+      console.log("sa",e);
+    }
+  },12))
+
+
+  var sc=1;
+  window.addEventListener("scroll",raf_debounce(function(e){
+    if(sc){
+      //sa=0;
+      var d = (+new Date());
+      console.log("sc",e);
+    }
+  }))
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	//数组去重
+    	function uniq(param){
+    		var res=[];
+    		res[0]=param[0];
+    		for (var i = 1; i < param.length; i++) {
+    			if (res.indexOf(param[i])<0) {
+    				res.push(param[i]);
+    			}
+
+    	}
+    	return res;
+    }
+    var arr=["l",'description',1,1,2,5,7,4,7];
+    console.log(uniq(arr));
+    //去重方法2
+    console.log(Array.from(new Set(arr)));
+    //去重方法3
+    function uniq3(param){
+    	var res3=[];
+    	param.sort(function(a,b){
+    		return a-b;
+    	});
+    	console.log(param);
+    	res3[0]=param[0];
+    	for (var i = 1; i < param.length; i++) {
+    		if(res3[res3.length-1]!==param[i]){
+    			res3.push(param[i]);
+    		}
+    	}
+    	return res3;
+    }
+    console.log(uniq3(arr));
+    //去重方法4
+    function uniq4(param){
+    	return param.filter(function(item,index){
+    		if(param.indexOf(item)==index)
+    			return param;
+    	})
+    }
+    var arr0=[7,4,6,5,1,3,6,4,5]
+    console.log(uniq4(arr0));
+    </script>
+</body>
+</html>

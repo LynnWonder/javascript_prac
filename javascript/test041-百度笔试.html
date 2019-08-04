@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+	<div class="box">
+		<ul>
+			<li class="color1">color1</li>
+			<li class="color2">color2</li>
+			<li class="color3">color3</li>
+		</ul>
+		
+	</div>
+	<script type="text/javascript">
+		addChar("wtf我怎么当时没写出来！！！");
+		function addChar(str){
+			var strs=str.split("");
+			var newNode=document.createElement("li");
+			newNode.setAttribute("class","color"+4);
+			document.querySelector(".color3").appendChild(newNode);
+			for (var i = 0; i < strs.length; i++) 
+			{
+				(function(m){setTimeout(function(){
+					newNode.innerHTML+=strs[m];
+				},1000+200*m)})(i);
+			}
+		}
+		// setTimeout(function(){
+		// 	var newNode=document.createElement("li");
+		// 	newNode.setAttribute("class","color"+m+4);
+		// 	newNode.innerHTML=strs[m];
+		// 	document.querySelector(".color3").append(newNode);
+		// },1000);
+
+// setTimeout(function(){
+//    console.log("prepare chicken");
+//    setTimeout(function(){
+//       console.log("fired chicken");
+//       setTimeout(function(){
+//          console.log("stewed chicken");
+//        },500)
+//    },500)
+// },500);
+	</script>
+    
+</body>
+</html>

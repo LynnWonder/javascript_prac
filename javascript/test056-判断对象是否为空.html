@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	function isEmpty1(obj){
+    		for(var i in obj){
+    			return false;
+    		}
+    		return true;
+    	}
+    	var a={};
+    	var b={
+    		name:"jack"
+    	};
+    	console.log(isEmpty1(b));
+    	function isEmpty2(obj){
+    		if(JSON.stringify(obj)=="{}"){
+    			return true;
+    		}
+    		else return false;
+    	}
+    	console.log(isEmpty2(a));
+    	function isEmpty3(obj){
+    		if(Object.keys(obj).length==0){
+    			return true;
+    		}else return false;
+    	}
+    	console.log(isEmpty3(b));
+    </script>
+</body>
+</html>

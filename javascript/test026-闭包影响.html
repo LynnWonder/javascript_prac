@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+  	p{
+		width:100px;
+		height:100px;
+		border:2px solid red;
+
+	}
+  </style>
+ </head>
+ <body>
+   	<div id="box">
+		<p class="0">0</p>
+		<p class="1">1</p>
+		<p class="2">2</p>
+		<p class="3">3</p>
+		<p class="4">4</p>
+	</div>
+	<script type="text/javascript"src="../js/jquery.js"></script>
+  <script>
+  	var obox=document.getElementById("box");
+	// for (var i=0;i<obox.getElementsByTagName("p").length ;i++ )
+	// {
+	// 	(function(m){
+	// 		var element=obox.getElementsByTagName("p")[m];
+	// 		// obox.getElementsByTagName("p")[i].onclick=function(){
+	// 			element.onclick=function(){
+	// 		alert(m);//闭包只能取得外部包含函数中变量的最后值即5
+	// 	}
+	// 		// element=null;//及时清除
+	// 	})(i)
+	// }
+	obox.addEventListener("click",function(e){
+		e.stopPropagation();
+		var res=e.target.innerHTML;
+		console.log(res);
+		// console.log(res);
+	})
+	// $('#box').on("click","p",function(e){
+	// 	// console.log($(this).html());
+	// 	// return false;
+	// 	e.stopPropagation();
+	// 	console.log($(this).html);
+	// })
+  </script>
+ </body>
+</html>

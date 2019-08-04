@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>反转字符串中的单词</title>
+</head>
+<body>
+    <script>
+        // var reverseWords=function (s) {
+        //   return s.split(' ').map((item)=>{
+        //     return item.split('').reverse().join('');
+        //   }).join(' ');
+        // }
+        var reverseWords=function (s) {
+          return s.match(/[\w']+/g).map((item)=>{
+            return item.split('').reverse().join('');
+          }).join(' ');
+        }
+        var aa="Let's take LeetCode contest";
+        console.info(reverseWords(aa));
+    </script>
+</body>
+</html>

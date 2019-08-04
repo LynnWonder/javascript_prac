@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	var num=0;
+    	// var test1=setInterval(function(){
+    	// 	num++;
+    	// 	if (num>=5) {
+    	// 		clearInterval(test1);
+    	// 	}
+    	// 	console.log(num);
+    	// },100);
+    	//递归调用setTimeout实现循环执行，弥补setInterval不足
+    	function show(){
+    		num++;
+    		console.log(num);
+            console.log();
+    		if(num<5){
+    			setTimeout(show,100);
+    		}
+    	}
+    	show();
+    </script>
+</body>
+</html>

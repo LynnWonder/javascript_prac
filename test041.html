@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+	<div id="test" style="width:1px;height: 17px;background-color:#0f0;">0%</div>
+
+    <script type="text/javascript">
+    	/*
+* 调用函数
+* 参数分为：true和false;
+* 参数说明：传入true实现setInterval()功能；传入false取消setInterval()功能
+* */
+		// countTimer(false);
+		// //声明一个变量，用来获取函数，目的是为了能结束这个函数，也就是传入false时结束这个功能。
+		// var fun;
+		// //通过传入一个标记，来判断是否重复执行
+		// function countTimer(flag) {
+		//     if(flag){
+		//       fun = setTimeout(function () {
+		//             console.log("计数器" ,"ss")
+		//             //递归调用函数，不懂递归请百度
+		//             countTimer(true)
+		//         },2000);
+		//     }else{
+		//         //结束函数
+		//         clearTimeout(fun)
+		//     }
+		// }
+		//用递归setTimeout实现setInterval的功能
+		// myInterval(true,2000);
+		// var fun;
+		// function myInterval(flag,ms){
+		// 	if (flag) {
+		// 		fun=setTimeout(function(){
+		// 			console.log("this is myInterval!");
+		// 			myInterval(true,ms);
+		// 		},ms);
+		// 	}else{
+		// 		clearTimeout(fun);
+		// 	}
+
+		// }
+		// console.log(fun);
+		window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+		var start = null;
+		var ele = document.getElementById("test");
+		var progress = 0;
+
+		function step(timestamp) {
+		    progress += 0.1;
+		    ele.style.width = progress + "%";
+		    ele.innerHTML=progress + "%";
+		    if (progress <= 100) {
+		        requestAnimationFrame(step);
+		    }
+		}
+		requestAnimationFrame(step);
+		// document.getElementById("run").addEventListener("click", function() {
+		//     ele.style.width = "1px";
+		//     progress = 0;
+		//     requestAnimationFrame(step);
+		// }, false);
+    </script>
+</body>
+</html>

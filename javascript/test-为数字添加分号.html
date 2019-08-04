@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	//保留小数点；
+    	//方法一：使用字符串方法：
+    	//str.length返回字符串长度
+    	//str.charAt();返回某个字符的索引
+    	//str.indexOf();某个字符第一次出现的索引
+    	//str.slice();开始到结束（不包含）索引，没有第二个参数表示从开始到最后
+    	//str.substr();开始，长度
+    	//str.substring();开始，结束
+    	function toThousands0(item){
+    		var item0=item.toString();
+    		var dot="";
+    		if (item0.indexOf(".")!=-1) {
+    			dot=item0.slice(item0.indexOf("."));
+    			item0=item0.slice(0,item0.indexOf("."));
+    		}
+    		var res='';
+    		while(item0.length>3){
+    			res=","+item0.slice(-3)+res;
+    			item0=item0.slice(0,item0.length-3);
+    		}
+    		if (item0) {
+    			res=item0+res;
+    		}
+    		return res+dot;
+
+    	}
+    	console.log(toThousands0(22.12578));
+    	console.log(toThousands0(7777.0123));
+        console.log(toThousands0(10));
+    	//正则表达式
+    	// javascript中的toString()方法，主要用于Array、Boolean、Date、Error、Function、Number等对象。
+		function toThousands1(num) {
+			 var item0=num.toString();
+			 var res="";
+			 var dot="";
+    		 if (item0.indexOf(".")!=-1) {
+    			dot=item0.slice(item0.indexOf("."));
+    			item0=item0.slice(0,item0.indexOf("."));
+    		}
+		      res= item0.replace(/(\d)(?=(\d{3})+$)/g, "$1,");
+		      return res+dot;
+		 }
+		 console.log(toThousands1(12345678901.10));
+         console.log(toThousands1(123.5));
+		 // toThousands1(1234567890)
+
+
+var pattern=/str(?=ings)ing/; 
+console.log("strings.a".match(pattern)); 
+console.log("strings.a".match(/string(?=s)/));
+console.log("string_x".match(pattern));
+console.log("string_x".match(/string(?=s)/)); 
+
+
+
+    var str="abcdefg";
+    console.log(str.charAt(1));//参数是数字
+    console.log(str.indexOf("a"));
+    console.log(str.slice(0,1));
+    console.log(str.slice(0,-3));
+    console.log(str.slice(0));
+    console.log(str.substr(0,5));
+    console.log(str.substr(0,-5));
+    console.log(str.substr(1));
+    console.log(str.substring(1,0));
+    console.log(str.substring(1,-1));
+    </script>
+</body>
+</html>

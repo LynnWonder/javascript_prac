@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	function People(name,age){
+    		this.name=name;
+    		this.age=age;
+    		this.say0=function(){
+    			console.log("inside");
+    		}
+    	}
+
+    	People.prototype.say=function(){
+    		console.log(this.name);
+    	}
+    	// function student(name,age,gender){
+    	// 	People.call(this,name,age);
+    	// 	this.gender=gender;
+    	// }
+    	// var may=new student("may",20,"female");
+    	// may.say0();
+    	// 只能继承父类的属性不能继承原型对象上的属性和方法
+    	//原型链继承 共享父类的属性 没法传参
+    	// function student(){
+
+    	// }
+    	// student.prototype=new People("mary",20);
+    	// var s1=new student();
+    	// console.log(s1.name);
+    	// var s2=new student();
+    	// console.log(s2.name);
+
+    	//构造函数和原型链组合继承 两次调用构造函数
+    	// function student(name,age,gender){
+    	// 	People.call(this,name,age);
+    	// 	this.gender=gender;
+    	// }
+    	// student.prototype=new People();
+    	// var s1=new student("may",20,"female");
+    	// var s2=new student("jack",30,"male");
+    	// s1.say();
+    	//原型式继承 共享父类属性 且为浅复制
+    	// function objectCreate(param){
+    	// 	var F=new Function();
+    	// 	F.prototype=param;
+    	// 	return new F();
+    	// }
+    	// var Person={
+    	// 	name:'tom',
+    	// 	age:20,
+    	// 	friends:['jack']
+    	// }
+    	// var t1=objectCreate(Person);
+    	// console.log(t1.friends);
+    	// t1.friends.push("aaa");
+    	// console.log(Person.friends);
+    	//寄生组合式继承
+    	function comparasite(sup,sub){
+    		var clone=objectCreate(sup.prototype);
+    		clone.constructor=sub;
+    		sub.prototype=clone;
+    	}
+
+    </script>
+</body>
+</html>

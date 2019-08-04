@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	//G函数实现斐波那契数列
+    	function *fib0(){
+    		let [pre,cur]=[0,1];
+    		let i=0
+    		while(i<10){
+    			[pre,cur]=[cur,pre+cur];
+    			yield pre;
+    			i++
+    		}
+
+    	}
+    	for(let v of fib0()){
+    		console.log(v)
+    	}
+
+    	//也可以async函数实现
+    	 async function fib1(){
+    	 	let[pre,cur]=[0,1];
+    	 	let i=0,res=[];
+    	 	while (i<10){
+    			[pre,cur]=[cur,pre+cur];
+    			await res.push(pre)   
+    			i++; 	 		
+    	 	}
+    	 	return res;
+    	 }
+    	 fib1().then((data)=>{console.log(data)}).catch((err)=>{
+    	 	console.log(err);
+    	 })
+    </script>
+</body>
+</html>

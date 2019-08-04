@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+<a href="http://www.baidu.com/" id="testA" >baidu.com</a>
+<script type="text/javascript">
+	//取消元素默认事件
+	var a = document.getElementById("testA");
+	a.onclick =function(e){
+	if(e.preventDefault){
+	e.preventDefault();
+	}else{
+	window.event.returnValue == false;
+	}
+	}
+</script>
+
+</body>
+</html>

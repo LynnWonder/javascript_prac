@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+    	// split():字符串中的方法，把字符串转成数组。
+        // sort():数组中的排序方法，按照ACALL码进行排序。
+        // join():数组中的方法，把数组转换为字符串
+        function demo(str) {
+            var arr = str.split(''); //把字符串转换为数组
+            str = arr.sort().join(''); //首先进行排序，这样结果会把相同的字符放在一起，然后再转换为字符串
+
+            var value = '';
+            var index = 0;
+            var re = /(\w)\1+/g; //匹配字符，且重复这个字符，重复次数至少一次。
+            str.replace(re, function ($0, $1) {
+                //alert($0); 代表每次匹配成功的结果 : aa dd jj kk l sssssssssssssssss
+                //alert($1); 代表每次匹配成功的第一个子项，也就是\w: a d j k l S 
+
+                if (index < $0.length) { //如果index保存的值小于$0的长度就进行下面的操作
+                    index = $0.length; // 这样index一直保存的就在最大的长度
+                    value = $1; //value保存的是出现最多的这个字符
+                }
+            });
+            console.log('最多的字符:' + value + ',重复的次数:' + index); // s 17
+        }
+         //找重复项最多的字符个数
+        demo("aabbabbbbbcck");
+        //深拷贝练习
+        var a=[1,2,4,5];
+        var b=a;
+        b.push(6);
+        console.log(a);
+        function deepCopy(a,b){
+            var b=b||{};
+            for(var x in a){
+                if (typeof(a[x])==="object") {
+                    b[x]=a[x] instanceof Array?[]:{};
+                    deepCopy(a[x],b[x]);
+                       
+                }else{
+                    b[x]=a[x];
+                }
+                    }
+            
+            return b;
+        }
+        var c=[];
+        console.log(deepCopy(a,c));
+        c.push("1215");
+        console.log(a);
+        console.log(c);
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+.outer{display: flex; border: 1px solid red;}
+.sidebar{flex:0 0 100px;height:150px;background: #BCE8F1;}
+.content{flex:1;height:100px;background: #F0AD4E;}
+/*形成BFC*/
+/*.outer{overflow: auto; border: 1px solid red;}
+.sidebar{float:left;height:150px;background: #BCE8F1;}
+.content{overflow:auto;height:100px;background: #F0AD4E;}*/
+/*.outer{ overflow: hidden;border: 1px solid red;}
+.sidebar{float: left;width:200px;height: 150px; background: #BCE8F1;}
+.content{height:100px;background: #F0AD4E;overflow: auto}*//*此时也是BFC
+/*.outer{overflow: hidden; border: 1px solid red;}
+.sidebar{float: left;width:200px;height: 150px; background: #BCE8F1;}
+.content{margin-left:200px;height:100px;background: #F0AD4E;}*//*此时不是BFC*/
+</style>
+</head>
+<body>
+    <div class="outer">
+    <div class="sidebar">固定宽度区(sideBar)</div>
+     <div class="content">自适应区(content)</div>
+	</div>
+<div class="footer">footer</div>
+</body>
+</html>

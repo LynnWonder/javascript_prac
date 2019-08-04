@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+   <script type="text/javascript">
+   	//使用reduce实现map
+   	var arr0=[1,2,3];
+   	var res1=arr0.map((item,index,self)=>{
+   		return item*2;
+   	});
+   	console.log(res1);
+   	Array.prototype._map=function(fn,callbackthis){
+   		var res=[];
+   		var mythis=callbackthis||null;
+   		this.reduce((res0,item,index,self)=>{
+   			res.push(fn.call(mythis,item,index,self));	
+   		},0);
+   		return res;
+   	}
+   	var res2=arr0._map((item,index,self)=>{
+   		return item*10;
+   	})
+   	console.log(res2);
+   </script> 
+</body>
+</html>

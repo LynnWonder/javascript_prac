@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<style>
+/*	p.ex1 {*/
+/*	margin:100px;*/
+/*	padding:200px;*/
+/*	border:solid 2px black;}*/
+/*	.x1{*/
+/*/*	position:relative;*/*/
+/*	width:500px; */
+/*	height:500px;*/
+/*	display:flex;*/
+/*	justify-content:center;*/
+/*	align-items:center;*/
+/*	border:15px solid #eee; */
+/*	background-color:blue;}*/
+/*	.xx1{*/
+/*/*	position:absolute;*/*/
+/*	width:100px; */
+/*	height:100px;*/
+/*/*	left:50%;*/*/
+/*/*	top:50%;*/*/
+/*/*	margin:-50px 0 0 -50px;*/*/
+/*/*	transform:translate(-50%,-50%);*/*/
+/*	border:15px solid #000;*/
+/*	background-color:red;*/
+/*	text-align:center;*/
+/*	}*/
+/*.kailong{*/
+/*	width:0;*/
+/*    height:0;*/
+/*	border-right:50px solid transparent;*/
+/*	border-left:50px solid transparent;*/
+/*	border-bottom:50px solid blue;*/
+/*}*/
+/*想获取朝那边三角形,给相反的一边设置颜色,font-size: 0;line-height: 0;可以兼容ie6*/
+    	.up{width: 0;height: 0;border-left: 20px solid transparent;border-right: 20px solid transparent;border-bottom: 20px solid #f00;}
+    	.down{width: 0;height: 0;border-left: 20px solid transparent;border-right: 20px solid transparent;border-top: 20px solid #f00;font-size: 0;line-height: 0;}
+    	.left{width: 0;height: 0;border-top: 20px solid transparent;border-right: 20px solid #f00;border-bottom: 20px solid transparent;font-size: 0;line-height: 0;}
+    	.right{width: 0;height: 0;border-top: 20px solid transparent;border-left: 20px solid #f00;border-bottom: 20px solid transparent;font-size: 0;line-height: 0;}
+
+</style>
+</head>
+
+<body>
+<!-- <p class="ex1">这个文本两边的填充边距一样。每边的填充边距为2厘米。</p> -->
+<div class="kailong"></div>
+<!-- 	<div class="x1"> -->
+<!-- 		<div class="xx1"> -->
+<!-- 		 hello -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<div class="up"></div> <!--向上的三角形-->
+	<div class="down"></div> <!--向下的三角形-->
+	<div class="left"></div> <!--向左的三角形-->
+	<div class="right"></div> <!--向右的三角形-->
+
+</body>
+<script>
+//var str= '012.345 ';
+//var x = str-0;
+//x = x*1;
+//console.log(typeof(x));
+
+// 定义一个动物类
+//function Animal (name) {
+//  // 属性
+//  this.name = name || 'Animal';
+//  // 实例方法
+//  this.sleep = function(){
+//    console.log(this.name + '正在睡觉！');
+//  }
+//}
+//// 原型方法
+//Animal.prototype.eat = function(food) {
+//  console.log(this.name + '正在吃：' + food);
+//};
+//function Cat(){ 
+//}
+//Cat.prototype = new Animal();
+//Cat.prototype.name = 'cat';
+//
+////　Test Code
+//var cat = new Cat();
+//console.log(cat.name);
+//console.log(cat.eat('fish'));
+//console.log(cat.sleep());
+//console.log(cat instanceof Animal); //true 
+//console.log(cat instanceof Cat); //true
+
+
+
+//function Cat(name){
+//  Animal.call(this);
+//  this.name = name || 'Tom';
+//}
+//
+//// Test Code
+//var cat = new Cat();
+//console.log(cat.name);
+//console.log(cat.sleep());
+//console.log(cat instanceof Animal); // false
+//console.log(cat instanceof Cat); // true
+
+
+//function Cat(name){
+//  var instance = new Animal();
+//  instance.name = name || 'Tom';
+//  return instance;
+//}
+//
+//// Test Code
+//var cat = new Cat();
+//console.log(cat.name);
+//console.log(cat.sleep());
+//console.log(cat instanceof Animal); // true
+//console.log(cat instanceof Cat); // false
+
+
+
+
+//var roadPoem = `Then took the other, as just as fair,
+//    And having perhaps the better claim
+//    Because it was grassy and wanted wear,
+//    Though as for that the passing there
+//    Had worn them really about the same,`
+//
+//console.log(roadPoem);
+//function getUrlPara(name) {
+//	var str="http://localhost:8080/pms/be/user/index?type=student";
+//    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
+//    var r = window.location.href.substr(1).match(reg);
+//		console.log(r);
+//    if (r!=null) return (r[0]); return null;
+//
+//}
+//console.log(getUrlPara("test"));
+//console.log(window.location.href);
+</script>
+</html>

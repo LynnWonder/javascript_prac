@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<script src="js/browser.min.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/react.js"></script>
+<script src="js/react-dom.js"></script>
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+	.forp{
+		color:blue;
+		font-size:20px;
+	}
+	.forp:hover{
+		cursor:pointer;
+	}
+</style>
+</head>
+<body>
+	<div id="first"></div>
+    <script type="text/babel">
+    	let Hello=React.createClass({
+    		render(){
+    			// let arr=["beijing","shanghai","hangzhou"];
+    			return(
+    				<div>
+    					<ul>
+    						{
+    							this.props.Data.map((item,index)=>{
+    								return (<li key={index}>{item}</li>)
+    							})
+    						}
+    					</ul>
+    				</div>
+    			)
+    		}
+    	});
+    	let Hello1=React.createClass({
+    		getInitialState(){
+    			// return({value:"myfirst"})
+    			return({value:true})
+    		},
+
+    		click(event){
+
+    			// this.setState({value:"mysecond"});
+    			this.setState({value:!(this.state.value)});
+    			// console.log("click test");
+    		},
+    		render(){
+    			let styleOBJ={
+    				color:"red",
+    				fontSize:"20px"
+    			};
+    			let info=null;
+    			if (this.state.value) {
+    				info="myfirst";
+    			}else{
+    				info="mysecond";
+    			}
+    			let arr=["beijing","shanghai","hangzhou"];
+    			let arr0=["test0","test1","test2"];
+    			let p=this.props.title;
+    			return(
+    				<div>
+    					<Hello Data={arr}/>
+    					<Hello Data={arr0}/>
+    					<span className="forp"onClick={this.click} >{info}</span>
+
+    				</div>
+    				)
+    		}
+    	});
+
+    	ReactDOM.render(<div><Hello1 title="myfirst"/></div>,document.getElementById("first"));
+    </script>
+</body>
+</html>
