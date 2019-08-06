@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>奇偶排序</title>
+</head>
+<body>
+    <script>
+      // var sortArrayByParityII = function(A) {
+      //   if (A.length<=0||A.length%2!=0) return null;
+      //   if (A.length==1) return A;
+      //   for (var i=0;i<A.length-1;i++){
+      //     if (i%2!=A[i]%2){
+      //       var sp=i;
+      //     }
+      //     for (var j=i+1;j<A.length;j++){
+      //       if (j%2!=A[j]%2){
+      //         var temp=A[sp];
+      //         A[sp]=A[j];
+      //         A[j]=temp;
+      //       }
+      //     }
+      //   }
+      //   return A;
+      // };
+      // 想起了快排的思路
+      var sortArrayByParityII=function(arr){
+          if (arr.length<=0||arr.length%2!=0) return null;
+          if (arr.length==1) return A;
+        var single=[],double=[],res=[];
+        arr.forEach((item)=>{
+          if (item%2!=0){
+            single.push(item);
+          }else
+            double.push(item);
+        })
+        console.info(single,double);
+        for (var i=0;i<arr.length;i+=2){
+          res[i]=double.pop();
+        }
+        for (var j=1;j<arr.length;j+=2){
+          res[j]=single.pop();
+        }
+        return res;
+      }
+      var arr0=[3,1,4,2];
+      console.info(sortArrayByParityII(arr0));
+    </script>
+</body>
+</html>

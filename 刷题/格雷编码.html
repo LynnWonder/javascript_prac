@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>格雷编码</title>
+</head>
+<body>
+    <script>
+      // var grayCode = function(n) {
+      //   if (n==1){
+      //     return ['0','1']
+      //   }else{
+      //     var prev=grayCode(n-1);
+      //     var result=[];
+      //     // x的y次幂
+      //     var max=Math.pow(2,n)-1;
+      //     // 这样一个对称的结构很有意义借鉴
+      //     for (var i=0;i<prev.length;i++){
+      //       result[i]=`0${prev[i]}`
+      //       result[max-i]=`1${prev[i]}`
+      //     }
+      //     return result;
+      //   }
+      // };
+      // var convert=function (str){
+      //   var res=0;
+      //   for (var i=0;i<str.length;i++){
+      //     res+=parseInt(str[i])*Math.pow(2,str.length-1-i);
+      //   }
+      //   return res;
+      // }
+      // var myres=grayCode(3).map((item)=>{
+      //   return convert(item);
+      // })
+      // console.info(myres);
+      var grayCode = function(nn) {
+        var gray=function (n) {
+              if (n==1){
+                return ['0','1']
+              }else{
+                var prev=gray(n-1);
+                var result=[];
+                // x的y次幂
+                var max=Math.pow(2,n)-1;
+                // 这样一个对称的结构很有意义借鉴
+                for (var i=0;i<prev.length;i++){
+                  result[i]=`0${prev[i]}`
+                  result[max-i]=`1${prev[i]}`
+                }
+                return result;
+            }
+        }
+        if(nn==0){
+          return ['0'];
+        }
+        return gray(nn).map(item=>convert(item));
+      };
+      const convert=function (str){
+        let res=0;
+        for (var i=0;i<str.length;i++){
+          res+=parseInt(str[i])*Math.pow(2,str.length-1-i);
+        }
+        return res;
+      }
+      console.info(grayCode(3));
+    </script>
+</body>
+</html>
