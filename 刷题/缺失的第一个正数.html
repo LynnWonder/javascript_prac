@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>缺失的第一个正数</title>
+</head>
+<body>
+    <script>
+      // 这种情况下的时间复杂度：filter+sort+n
+      // const firstMissingPositive = (nums)=>{
+      //   // 思路还是不够清晰，应该首先把为正数的挑选出来
+      //   if(nums.length<1) return 1;
+      //   const nums0=nums.filter((item)=>item>0);
+      //   console.info(nums0);
+      //   nums0.sort((a,b)=>a-b);
+      //   console.info(nums0);
+      //   if (nums0[0]>1||nums0.length<1) return 1;
+      //   for (let i=0;i<nums0.length-1;i++){
+      //     if (nums0[i+1]-nums0[i]>1){
+      //       return nums0[i]+1;
+      //     }
+      //   }
+      //   return nums0[nums0.length-1]+1;
+      // };
+      // const arr=[7,8,9,11,12];
+      // console.info(firstMissingPositive(arr));
+      // 改进版，思考选择排序，正是在一次循环中找出了最小值
+      // 改进版：filter+排序过程中确定最小值并和前一位比较
+      const firstMissingPositive = (nums)=>{
+        nums=nums.filter((item)=>item>0);
+        if(nums.length<1) return 1;
+        for (let i=0;i<nums.length;i++){
+          let min=i;
+          for (let j=i+1;j<nums.length;j++){
+            if (nums[j]<nums[min]){
+              min=j;
+            }
+          }
+          let temp=nums[min];
+          nums[min]=nums[i];
+          nums[i]=temp;
+          console.info('==>',nums);
+          if (nums[0]>1) return 1;
+          console.info(nums[i]-nums[i-1]);
+          if (nums[i]-nums[i-1]>1){
+            return nums[i-1]+1;
+          }
+        }
+        // 如果是排好顺序的
+        return nums[nums.length-1]+1;
+      }
+      const arr=[2];
+      console.info(firstMissingPositive(arr));
+    </script>
+</body>
+</html>
