@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>连字符转驼峰</title>
+</head>
+<body>
+    <script>
+        const changeTo=(str)=>{
+            let mark=0;
+            // 用循环的方式实现的对连字符后第一个字母的转换
+            while(str.match(/(\_)+/)){
+                let a=str.match(/(\_)+/).index;
+                if (a==0) {
+                    str=str.slice(1);
+                    mark=1;
+                    // console.info(str)
+                    continue;
+                }else if (a==str.length-1){
+                    mark=2;
+                    break;
+                }
+                str=str.slice(0,a)+str[a+1].toUpperCase()+str.slice(a+2);
+            }
+
+            if(mark==1){
+                return `_${str}`;
+            }
+
+            return str;
+            // console.info(str);
+        }
+        const res=changeTo('_a_b_c_');
+        console.info(res);
+    </script>
+</body>
+</html>
