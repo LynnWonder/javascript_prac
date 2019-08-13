@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>统计</title>
+</head>
+<body>
+    <script>
+        // 改造一下这个堆类
+        class Heap{
+            constructor(data){
+                const str_a=data.split('');
+                let map=new Map();
+                str_a.forEach((item)=>{
+                    map.has(item)?map.set(item,map.get(item)+1):map.set(item,1);
+                });
+                this.map=map;
+                console.info(map);
+                this.data=[...map.values()];
+            }
+            //交换结点
+            static swap=(arr,i,j)=>{
+                if (i!==j){
+                    let temp=arr[i];
+                    arr[i]=arr[j];
+                    arr[j]=temp;
+                }
+            };
+            // 构建大根堆
+            static  maxHeap=(arr,start,size)=>{
+                let l=start*2+1;
+                let r=start*2+2;
+                let max=start;
+                if (l<size&&arr[l]>arr[max]){
+                    max=l;
+                }
+                if (r<size&&arr[r]>arr[max]){
+                    max=r;
+                }
+                console.info('maxHeap',arr);
+                if (max!==start){
+                    Heap.swap(arr,start,max);
+                    Heap.maxHeap(arr,max,size);
+                }
+            };
+            sort=()=>{
+                let arr=this.data;
+                let len=arr.length;
+                if (len<=1) return arr;
+                let start=Math.floor(len/2)-1; //寻找最后一个根结点
+                console.info('start',start);
+                for (let i=start;i>=0;i--){
+                    Heap.maxHeap(arr,i,len); // 首先构建大根堆
+                }
+                for (let i=0;i<len;i++){
+                    Heap.swap(arr,0,len-i-1); //交换位置,重新构建大根堆
+                    Heap.maxHeap(arr,0,len-i-1);
+                }
+                return arr;
+            };
+            toString=()=>{
+                let arr=this.sort();
+                let str='';
+              while(arr.length){
+                  let count=arr.pop();
+                  for (let [k,v] of this.map){
+                      if (v===count){
+                          str+=k.repeat(v);
+                          this.map.delete(k);
+                      }
+                  }
+              }
+              console.info(str);
+              return str;
+            }
+        }
+        let my_heap=new Heap('aabbccc');
+        my_heap.toString()
+    </script>
+</body>
+</html>

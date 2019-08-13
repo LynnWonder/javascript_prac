@@ -37,6 +37,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -85,7 +86,8 @@
       <workItem from="1564403303635" duration="723000" />
       <workItem from="1564451633512" duration="33385000" />
       <workItem from="1564726287601" duration="47917000" />
-      <workItem from="1565352870596" duration="8309000" />
+      <workItem from="1565352870596" duration="10725000" />
+      <workItem from="1565451664254" duration="19616000" />
     </task>
     <servers />
   </component>
@@ -97,7 +99,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

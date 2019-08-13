@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>This的指向问题</title>
+</head>
+<body>
+    <script>
+        function close(a){
+            console.info(this); // window
+            return function (b){
+                return a+'hello world';
+            }
+        }
+        // close(100);
+        const func={
+            hi:'hi',
+            say:function(){
+                console.info(this);
+            }
+        };
+        // func.say();
+        const timer=setTimeout(func.say,1000);
+        // const timer=setTimeout(func.say(),1000);
+    </script>
+</body>
+</html>
