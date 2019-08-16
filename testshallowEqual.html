@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 1. hasOwnProperty 判断对象中是否含有指定属性，区别于in，它忽略从原型链上继承的属性
+    // 2. 下面用的Object.is实际源码中用的是polyfill
+    const shallowEqual=(objA,objB)=>{
+        const hasOwn=Object.prototype.hasOwnProperty;
+        if (Object.is(objA,objB)) return true;
+        if (typeof (objA)!=='object'||objA===null||typeof (objB)!=='object'||objB===null) return false;
+        const keysA=Object.keys(objA);
+        const keysB=Object.keys(objB);
+        if (keysA.length!==keysB.length) return false;
+        for (let i=0;i<keysA.length;i++){
+            if (!hasOwn.call(objB,keysA[i])||Object.is(objA[keysA[i]],objB[keysA[i]])) return false;
+        }
+        return true;
+    }
+</script>
+
+</body>
+</html>
