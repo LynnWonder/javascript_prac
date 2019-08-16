@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>不同路径无障碍版</title>
+</head>
+<body>
+    <script>
+        // const uniquePaths=(m,n)=>{
+        //     const find =(m,n)=>{
+        //         if (m===0||n===0) return null;
+        //         if (m===1||n===1) return 1;
+        //         return find(m-1,n)+find(m,n-1);
+        //     };
+        //     return find(m,n);
+        // };
+        // console.info(uniquePaths(3,2));
+        // console.info(uniquePaths(7,3));
+        // console.info(uniquePaths(51,9));
+        var uniquePaths = function(m, n) {
+            console.info(new Date());
+            // 用二维数组来盛接所有的情况
+            var ans = [];
+            for(var i = 0; i < m; i++)
+                ans[i] = [];
+            for(var i = 0; i < m; i++)
+                for(var j = 0; j < n; j++) {
+                    if (i + j === 0) ans[i][j] = 1;
+                    else if (i === 0) ans[i][j] = ans[i][j - 1];
+                    else if (j === 0) ans[i][j] = ans[i - 1][j];
+                    else ans[i][j] = ans[i][j - 1] + ans[i - 1][j];
+                }
+            console.info(ans);
+            return ans[m - 1][n - 1];
+        };
+        console.info(uniquePaths(51,9));
+        console.info(new Date());
+    </script>
+</body>
+</html>

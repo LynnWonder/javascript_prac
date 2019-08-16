@@ -21,6 +21,9 @@
         };
         // func.say();
         const timer=setTimeout(func.say,1000);
+        // 箭头函数函数体内部的this就是定义时的this，而不是运行时指向window，因为箭头函数本身没有this，内部的this就是外层代码块的
+        // this
+        const timer1=setTimeout(()=>{func.say()},1000);
         // const timer=setTimeout(func.say(),1000);
     </script>
 </body>

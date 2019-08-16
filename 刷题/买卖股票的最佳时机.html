@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>买卖股票的最佳时机</title>
+</head>
+<body>
+    <script>
+        const greed=(prices)=>{
+            //save profit
+            let count=0;
+            //todo 遍历所有价格,判断下一天的价格是不是比当前高，如果高就可以买
+            for(let i=0;i<prices.length;i++){
+                //再次遍历一次比较下一天价格
+                for (let j=i;j<prices.length-1;j++){
+                    console.info('i,j',i,j,count);
+                    if (prices[j+1]>prices[j]){
+                        count+=prices[j+1]-prices[j];
+                        // 这一步表示可以理解为此时的卖出即为下一次的买入
+                        i=j;
+                    }else{
+                        // 如果下一天不比当前高，那么下一天直接买入吧，并且跳出当前循环
+                        i=j;
+                        break;
+                    }
+                }
+            }
+            return count;
+        };
+        console.info(greed([7,1,5,3,6,4]));
+        // console.info(greed([1,2,3,4,5]));
+        // console.info(greed([5,4,2,1]));
+    </script>
+</body>
+</html>
