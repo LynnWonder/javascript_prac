@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>react-redux</title>
+</head>
+<body>
+<script>
+    function reducer(action,state){
+        // 修改state
+        if(!state){
+            return{
+                // 没有state就初始化state
+            }
+        }
+        switch (action.type) {
+            case 'ADD_NUM':
+                return{
+                    ...state,
+                    action.payload,
+                };
+            case 'DELETE_NUM':
+                return{
+                    ...state,
+                    action.payload
+                };
+            default: return state;
+        }
+    }
+    function createStore(reducer){
+        let state=null;
+        let listeners=[];
+        const getState=()=>{
+            return state
+        };
+        const subscribe=(listener)=>{
+            listeners.push(listener);
+            return ()=>{
+                return listeners.filter(l=>l!==listener)
+            }
+        };
+        const dispatch=(action)=>{
+            state=reducer(action,state);
+            listeners.forEach(item=>item());
+        };
+        return {getState,dispatch,subscribe};
+    }
+    function combineReducer(reducers){
+        let combineReducers={};
+        // state中的key必须跟子reducer同名
+        // 返回的是一个函数，调用时会自动查找相应的reducer并执行
+        return (action,state)=>{
+            Object.keys(reducers).forEach((item)=>{
+                combineReducers[item]=reducers[item](action,state[item]);
+            });
+            return combineReducers;
+            // // 这个地方用reduce就太牛逼了'
+            // return Object.keys(reducers).reduce((res,item)=>{
+            //     res[item]=reducers[item](state[item],action);
+            //     return res;
+            // },{})
+        }
+    }
+
+    function addNum(payload){
+        return {
+            type:'ADD_NUM',
+            payload
+        }
+    }
+    const store=createStore(reducer);
+    store.dispatch(addNum(1));
+
+</script>
+</body>
+</html>
