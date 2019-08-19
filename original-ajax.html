@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生ajax请求</title>
+</head>
+<body>
+    <script>
+        var xhr=new XMLHttpRequest();
+        xhr.onreadystatechange=function(){
+            if (xhr.readyState===4){ //核对请求发送解析状态
+                // 0 xhr对象尚未初始化
+                // 1 开始发送请求
+                // 2 请求发送完毕
+                // 3 后台开始解析请求
+                // 4 请求解析完毕
+                if (xhr.status===200){
+                    // 表示请求已经被后端成功处理，前端成功接收
+                    console.info(xhr.responseText); // 返回的后端数据
+                }
+            }
+        };
+        xhr.open('GET',url,true); // 请求类型，URL地址，默认为异步请求true ，同步请求改为false
+        xhr.send(null);
+        // JQ
+        $.ajax({
+            url:'',
+            dataType:'json', //text,xml,json,jsonp
+            type:'get',// post
+            success(data){
+                console.info(data);
+            },
+            error(err){
+                console.info(err);
+            }
+        })
+    </script>
+</body>
+</html>

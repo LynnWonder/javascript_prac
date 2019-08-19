@@ -71,6 +71,64 @@
     const store=createStore(reducer);
     store.dispatch(addNum(1));
 
+    /**
+     * 自己实现的applyMiddleware
+     * 以及middlerware
+     **/
+    function reduxLogger(store){
+        return function (dispatch){
+            return function (action){
+                console.info(`before update${store.getState()}}`);
+                dispatch(action);
+                console.info(`after update${store.getState()}`);
+            }
+        }
+    }
+
+    function applyMidlleware(middlewares){
+        return function (createStore){
+            return function (reducer){
+                let store=createStore(reducer);
+                let newDispatch=middlewares(store)(store.dispatch);
+                return{
+                    ...store,
+                    dispatch:newDispatch
+                }
+            }
+        }
+    }
+    /**
+     * 洋葱模型：
+     * 多个中间件执行时，后一个中间件会嵌套在前一个中间件里面
+     * 同样使用洋葱模型来实现一个compose方法
+     * 目的：组合所有的中间件，调用该函数的时候依次执行所有的中间件
+     * @param middlewares
+     * @returns {Function}
+     */
+    function compose(...middlewares){
+        if (middlewares.length===0){
+            return arg=>arg;
+        }
+        if (middlewares.length===1){
+            return middlewares[0];
+        }
+        return middlewares.reduce((res,item)=>(...args)=>item(res(...args)));
+    }
+    function applyMiddlewares(middlewares){
+        return function(createStore){
+            return function(reducer){
+                let store=createStore(reducer);
+                let chain=middlewares.map((item)=>{
+                   return item(store);
+                });
+                let newDispatch=compose(...chain)(store.dispatch);
+                return{
+                    ...store,
+                    newDispatch
+                }
+            }
+        }
+    }
 </script>
 </body>
 </html>

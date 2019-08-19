@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chained</title>
+</head>
+<body>
+<script>
+    /**
+     * Composes single-argument functions from right to left. The rightmost
+     * function can take multiple arguments as it provides the signature for
+     * the resulting composite function.
+     *
+     * @param {...Function} funcs The functions to compose.
+     * @returns {Function} A function obtained by composing the argument functions
+     * from right to left. For example, compose(f, g, h) is identical to doing
+     * (...args) => f(g(h(...args))).
+     */
+
+    // export default function compose(...funcs) {
+    //     if (funcs.length === 0) {
+    //         return arg => arg
+    //     }
+    //
+    //     if (funcs.length === 1) {
+    //         return funcs[0]
+    //     }
+    //
+    //     return funcs.reduce((a, b) => (...args) => a(b(...args)))
+    // }
+
+    // chained([a,b,c,d])(input)
+    /**
+     * 想要达到的效果是d(c(b(a(input))))，依次执行输入（洋葱模型，前一个函数嵌套在后一个函数里面）
+     * 注意点：只能处理单输入
+     * @param funcs
+     * @returns {Function}
+     */
+    // function chained(...funcs){
+    //     return function(...input){
+    //         console.info(funcs);
+    //         return funcs.reduce((res,next)=>{
+    //            return next(res);
+    //         },input)
+    //     }
+    // }
+        function chained (...funcs){
+            if(funcs.length===0){
+                return arg=>arg;
+            }
+            if (funcs.length===1){
+                console.info(funcs,funcs[0]);
+                return funcs[0];
+            }
+            return funcs.reduce((res,item)=>{
+                return function(...args){
+                    // 因为返回的永远是函数，所以永远能作为函数执行
+                    // 并且此时能够处理多输入的情况
+                    console.info(...args);
+                    console.info(res,item);
+                    return item(res(...args));
+                }
+            });
+            // 一行代码解决，牛逼
+            // return funcs.reduce((res,item)=>(...args)=>item(res(...args)));
+    }
+    const a=(a1,a2)=>a1+a2;
+    const b=(b1)=>b1*2;
+    const c=(c1)=>c1/3;
+    console.info(chained(a,b,c)(10,11));
+    function compose(...middlewares){
+        if (middlewares.length===0){
+            return arg=>arg;
+        }
+        if (middlewares.length===1){
+            return middlewares[0];
+        }
+        return middlewares.reduce((res,item)=>(...args)=>item(res(...args)));
+    }
+    const f1=(x,y)=>x+y;
+    const f2=(x)=>x*2;
+    const f3=(x)=>x+3;
+    console.info(compose(f1,f2,f3)(11,12));
+</script>
+</body>
+</html>
