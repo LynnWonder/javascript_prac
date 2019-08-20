@@ -33,7 +33,38 @@
             error(err){
                 console.info(err);
             }
-        })
+        });
+        // promise封装AJAX
+        let p=new Promise((resolve,reject)=>{
+            $.ajax({
+                url:'xxx',
+                type:'get',
+                dataType: 'json',
+                success:(data)=>resolve(data),
+                error:(err)=>reject(err)
+            })
+        });
+        p.then((data)=>{
+            console.info(data);
+        }).catch(err=>{
+            console.info(err);
+        });
+        // 接收两个函数作为参数，分别是成功和失败状态的回调函数
+        // promise.all源码
+        function all(promises){
+            return new Promise((resolve,reject)=>{
+                let len=promises.length;
+                let count=0;
+                let res=new Array(len);
+                for (let i=0;i<len;i++){
+                    return Promise.resolve(promises[i]).then(value=>{
+                        count++;
+                        res[i]=value;
+                        if (count===len) resolve(res);
+                    }).catch(err=>reject(err));
+                }
+            })
+        }
     </script>
 </body>
 </html>

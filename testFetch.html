@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fetch请求</title>
+</head>
+<body>
+<script>
+    const url='https://www.baidu.com';
+    const opt={
+        method:'get',
+        credentials:'include',
+        heads:{
+            // 允许接收的编码类型
+            Accept:'application/json',
+            // 发送给接收者的实体正文媒体类型
+            'Content-Type': 'application/json; charset=utf-8',
+        }
+    };
+    const checkStatus=(response)=>{
+        const {status}=response;
+        if (status>=200&&status<300){
+            return response;
+        }
+        const error=new Error(response.statusText);
+        error.response = response;
+        throw error;
+    };
+    const parseJSON=(response)=>{
+        // 一个http响应，并不是真的json
+        console.info(response.json);
+    };
+    fetch(url,opt).then(checkStatus).then(parseJSON).then((data)=>{
+        console.info(data);
+    }).catch((err)=>{
+        console.info(err);
+    })
+</script>
+</body>
+</html>

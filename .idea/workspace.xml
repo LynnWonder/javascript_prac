@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-redux.html" beforeDir="false" afterPath="$PROJECT_DIR$/react-redux.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/original-ajax.html" beforeDir="false" afterPath="$PROJECT_DIR$/original-ajax.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -91,6 +91,7 @@
       <workItem from="1565352870596" duration="10725000" />
       <workItem from="1565451664254" duration="49500000" />
       <workItem from="1566131952700" duration="10139000" />
+      <workItem from="1566185702325" duration="4914000" />
     </task>
     <servers />
   </component>
