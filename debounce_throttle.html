@@ -43,6 +43,7 @@
                 if(!timer){
                     timer=setTimeout(()=>{
                         fn.apply(that,arguments);
+                        // 使用clearTimeout不起作用，建议直接赋值为null
                         timer=null;
                         // clearTimeout(timer);
                     },delay);
@@ -54,7 +55,7 @@
             num++;
             console.log(`第 ${num}次滚动`);
         }
-        // 此处的触发时间间隔设置的很小
+        // 设置触发间隔
         document.addEventListener('scroll', throttle(scrollTap, 3000))
     }
 </script>
