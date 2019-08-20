@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    .box {
+        width: 800px;
+        height: 1200px;
+    }
+</style>
+<body>
+<div class="container">
+    <div class="box" style="background: tomato"></div>
+    <div class="box" style="background: skyblue"></div>
+    <div class="box" style="background: red"></div>
+    <div class="box" style="background: yellow"></div>
+</div>
+<script>
+    window.onload = function() {
+        const debounce=(fn,delay)=>{
+            let timer=null;
+            // 已经是一个闭包了，所以整个对象会保存
+            return ()=>{
+                const that=this;
+                let args=arguments;
+                // 如果有timer就清除，确保每次函数调用只执行一次fn函数
+                if (timer) clearTimeout(timer);
+                timer=setTimeout(()=>{
+                    fn.apply(that,args)
+                },delay);
+            }
+        };
+        const throttle=(fn,delay)=>{
+            let timer=null;
+            return ()=>{
+                const that=this;
+                if(!timer){
+                    timer=setTimeout(()=>{
+                        fn.apply(that,arguments);
+                        timer=null;
+                        // clearTimeout(timer);
+                    },delay);
+                }
+            }
+        };
+        let num = 0;
+        function scrollTap() {
+            num++;
+            console.log(`第 ${num}次滚动`);
+        }
+        // 此处的触发时间间隔设置的很小
+        document.addEventListener('scroll', throttle(scrollTap, 3000))
+    }
+</script>
+</body>
+</html>
