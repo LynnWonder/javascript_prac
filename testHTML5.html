@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>testHTML5</title>
+</head>
+<body>
+    <div class="box">
+        <canvas class="canvas"></canvas>
+    </div>
+    <script>
+        const canvas=document.querySelector('.canvas');
+        // get a pencil
+        const ctx=canvas.getContext('2d');
+        ctx.fillStyle="blue";
+        ctx.fillRect(0,0,100,100);
+        // get 落笔点
+        ctx.beginPath();
+        ctx.moveTo(100,0);
+        ctx.lineTo(200,0);
+        // 画线
+        ctx.strokeStyle='red';
+        ctx.stroke();
+        ctx.closePath();
+    </script>
+</body>
+</html>
