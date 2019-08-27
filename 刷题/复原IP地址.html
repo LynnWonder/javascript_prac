@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>复原IP地址</title>
+</head>
+<body>
+<script>
+    const restoreIpAddresses = (s)=>{
+        let res=[];
+        // 注意递归应该有输入,还有边界条件,有返回
+        const findStr=(res0,str)=>{
+            // 处理边界，结果已经有三段，处理最后一段
+            /**
+             * 代码冗余点：处理边界不对，造成了前后代码冗余
+             */
+            if(res0.length===3){
+                if (str.length>3||!handleNum(str)||(str.length>1&&str[0]==='0')){
+                    return null;
+                }
+                res0.push(str);
+                res.push(res0.join('.'));
+            }
+            let setTemp=[];
+            setTemp.push(str.slice(0,1));
+            setTemp.push(str.slice(0,2));
+            setTemp.push(str.slice(0,3));
+            setTemp.forEach((item,index)=>{
+                if (handleNum(item)){
+                    if ((item.length>1&&item[0]!=='0')||item.length===1)
+                    findStr(res0.concat([item]),str.slice(index+1));
+                }
+            });
+        };
+        const handleNum=(str)=>{
+            let strNum=parseInt(str);
+            return strNum <= 255&&strNum>=0;
+
+        };
+        let param=[];
+        findStr(param,s);
+        return res;
+    };
+    const restoreIpAddresses0 = (s)=>{
+        let res=[];
+        // 注意递归应该有输入,还有边界条件,有返回
+        const findStr=(res0,str)=> {
+            if (str.length > 12) return;
+            // 处理边界 应该是最后的最后的边界
+            if (res0.length === 4 && res0.join('') === s) {
+                res.push(res0.join('.'));
+            } else {
+                for (let i = 1; i <= str.length && i <= 3; i++) {
+                    let temp = str.slice(0, i);
+                    if (handleNum(temp)) {
+                        if ((temp.length > 1 && temp[0] !== '0') || temp.length === 1) {
+                            findStr(res0.concat([temp]), str.slice(i));
+                        }
+                    }
+                }
+            }
+        };
+        const handleNum=(str)=>{
+            let strNum=parseInt(str);
+            return strNum <= 255&&strNum>=0;
+
+        };
+        let param=[];
+        findStr(param,s);
+        return res;
+    };
+    console.info(restoreIpAddresses0('25525511135'));
+    console.info(restoreIpAddresses0('010010'));
+</script>
+</body>
+</html>
