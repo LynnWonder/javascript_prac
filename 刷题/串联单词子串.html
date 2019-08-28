@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>串联所有单词的子串</title>
+</head>
+<body>
+<script>
+    /**
+     * 找出所有符合的子串的起始位置，输入words是一个数组，首先或许应该打乱他，获得一个全新的数组，内容是里面元素的排列组合
+     * 然后用正则匹配子串位置
+     * 存在bug：重复子串无法检测，大数组递归复杂度过高
+     * @param s
+     * @param words
+     * @returns {[]}
+     */
+    const findSubstring = (s, words)=>{
+        let res=[];
+        // 存放所有可能的单词组合
+        let res0=[];
+        /**
+         * 你在打乱一个数组的时候遇到了困难，不是用Math.random就能打乱，针对于此其实还是
+         * 用到了递归啊
+         * 输入上次结果，剩余数组
+         * @param arr
+         */
+        const changeArr=(prev,arr)=>{
+            // handle boundary
+            if (prev.length===words.length){
+                res0.push(prev.join(''));
+            }
+            for (let i=0;i<arr.length;i++){
+                let temp=[...arr];
+                temp.splice(i,1);
+                changeArr(prev.concat([arr[i]]),temp);
+            }
+
+        };
+        if(words.length===0) return res;
+        changeArr([],words);
+        let findStr=(reg,str,idx)=>{
+            if (!str) return;
+            let mat=str.match(reg);
+            if (mat){
+                res.push(mat.index+idx);
+                findStr(reg,str.slice(parseInt(mat.index)+1),mat.index+1);
+            }
+        };
+        res0.forEach((item)=>{
+            let reg=new RegExp(`${item}`);
+            findStr(reg,s,0);
+        });
+        return [...new Set(res)];
+    };
+    const s='barfooxxxthexxxfoobarmanxxxfoobar';
+    const words=["foo","bar",'xxx'];
+    const s1="pjzkrkevzztxductzzxmxsvwjkxpvukmfjywwetvfnujhweiybwvvsrfequzkhossmootkmyxgjgfordrpapjuunmqnxxdrqrfgkrsjqbszgiqlcfnrpjlcwdrvbumtotzylshdvccdmsqoadfrpsvnwpizlwszrtyclhgilklydbmfhuywotjmktnwrfvizvnmfvvqfiokkdprznnnjycttprkxpuykhmpchiksyucbmtabiqkisgbhxngmhezrrqvayfsxauampdpxtafniiwfvdufhtwajrbkxtjzqjnfocdhekumttuqwovfjrgulhekcpjszyynadxhnttgmnxkduqmmyhzfnjhducesctufqbumxbamalqudeibljgbspeotkgvddcwgxidaiqcvgwykhbysjzlzfbupkqunuqtraxrlptivshhbihtsigtpipguhbhctcvubnhqipncyxfjebdnjyetnlnvmuxhzsdahkrscewabejifmxombiamxvauuitoltyymsarqcuuoezcbqpdaprxmsrickwpgwpsoplhugbikbkotzrtqkscekkgwjycfnvwfgdzogjzjvpcvixnsqsxacfwndzvrwrycwxrcismdhqapoojegggkocyrdtkzmiekhxoppctytvphjynrhtcvxcobxbcjjivtfjiwmduhzjokkbctweqtigwfhzorjlkpuuliaipbtfldinyetoybvugevwvhhhweejogrghllsouipabfafcxnhukcbtmxzshoyyufjhzadhrelweszbfgwpkzlwxkogyogutscvuhcllphshivnoteztpxsaoaacgxyaztuixhunrowzljqfqrahosheukhahhbiaxqzfmmwcjxountkevsvpbzjnilwpoermxrtlfroqoclexxisrdhvfsindffslyekrzwzqkpeocilatftymodgztjgybtyheqgcpwogdcjlnlesefgvimwbxcbzvaibspdjnrpqtyeilkcspknyylbwndvkffmzuriilxagyerjptbgeqgebiaqnvdubrtxibhvakcyotkfonmseszhczapxdlauexehhaireihxsplgdgmxfvaevrbadbwjbdrkfbbjjkgcztkcbwagtcnrtqryuqixtzhaakjlurnumzyovawrcjiwabuwretmdamfkxrgqgcdgbrdbnugzecbgyxxdqmisaqcyjkqrntxqmdrczxbebemcblftxplafnyoxqimkhcykwamvdsxjezkpgdpvopddptdfbprjustquhlazkjfluxrzopqdstulybnqvyknrchbphcarknnhhovweaqawdyxsqsqahkepluypwrzjegqtdoxfgzdkydeoxvrfhxusrujnmjzqrrlxglcmkiykldbiasnhrjbjekystzilrwkzhontwmehrfsrzfaqrbbxncphbzuuxeteshyrveamjsfiaharkcqxefghgceeixkdgkuboupxnwhnfigpkwnqdvzlydpidcljmflbccarbiegsmweklwngvygbqpescpeichmfidgsjmkvkofvkuehsmkkbocgejoiqcnafvuokelwuqsgkyoekaroptuvekfvmtxtqshcwsztkrzwrpabqrrhnlerxjojemcxel";
+    const words1=["dhvf","sind","ffsl","yekr"];
+    const s2='wordgoodgoodgoodbestword';
+    const words2=["word","good","best","word"];
+    console.info(findSubstring(s2,words2));
+    console.info(findSubstring('a',[]));
+    /**
+     * Substring with Concatenation of All Words
+     * 与所有单词相关联的字串
+     */
+
+    /**
+     * 标准答案
+     * @param s
+     * @param words
+     * @returns {[]}
+     */
+    var findSubstring1 = function (s, words) {
+        let len;
+        if (words.length > 0) {
+            // 第一个元素的长度
+            len = words[0].length;
+        }
+        return existsStr(s, words, len);
+    };
+
+    function initListMap(list) {
+        let map = {};
+        for (let i of list) {
+            if (!map[i]) {
+                map[i] = {
+                    start: 0
+                };
+            }
+            map[i].start += 1;
+        }
+        console.info(map);
+        return map;
+    }
+
+    function formateListMap(map) {
+        for (let i in map) {
+            map[i]["exist"] = map[i].start;
+        }
+        // console.info('format===>',map);
+    }
+
+    /**
+     *
+     * @param str
+     * @param list：words数组，字典
+     * @param len ：list数组第一个元素的长度
+     * @returns {[]}
+     */
+    function existsStr(str, list, len) {
+        let rst = [];
+        if (len) {
+            let long = len * list.length;
+            let listMap = initListMap(list);
+            for (let i = 0; i + long <= str.length; i++) {
+                let st = str.substr(i, long);
+                formateListMap(listMap);
+                let exist = true;
+                for (let k = 0; k < long; k += len) {
+                    let s = st.substr(k, len);
+                    if (listMap[s] && listMap[s].exist > 0) {
+                        listMap[s].exist = listMap[s].exist - 1;
+                    } else {
+                        exist = false;
+                        break;
+                    }
+                }
+                if (!exist) {
+                    continue;
+                }
+                rst.push(i);
+            }
+        }
+        return rst;
+    }
+    console.info(findSubstring1(s,words));
+</script>
+</body>
+</html>
