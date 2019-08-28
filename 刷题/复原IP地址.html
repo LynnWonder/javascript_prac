@@ -41,34 +41,40 @@
         findStr(param,s);
         return res;
     };
-    const restoreIpAddresses0 = (s)=>{
+    /**
+     * 将一个字符串还原成IP地址，首先查看IP地址分为了四段，每段大小为0-255，每段不超过三位，四段一样的规则
+     * 显然是需要递归来完成这个操作，每次输入应该是上次截掉的剩余字符串，还应该有一个数组a来放结果，最后结果数组b是由数组a组成的
+     * 处理边界条件：有了四段，且四段组合之后就是原来的s，则push到数组b中
+     * @param s
+     * @returns {[]}
+     */
+    const restoreIpAddresses0=(s)=>{
         let res=[];
-        // 注意递归应该有输入,还有边界条件,有返回
-        const findStr=(res0,str)=> {
-            if (str.length > 12) return;
-            // 处理边界 应该是最后的最后的边界
-            if (res0.length === 4 && res0.join('') === s) {
-                res.push(res0.join('.'));
-            } else {
-                for (let i = 1; i <= str.length && i <= 3; i++) {
-                    let temp = str.slice(0, i);
-                    if (handleNum(temp)) {
-                        if ((temp.length > 1 && temp[0] !== '0') || temp.length === 1) {
-                            findStr(res0.concat([temp]), str.slice(i));
+        let getIP=(prev,str)=>{
+            // 不要漏掉这个边界条件
+            if (str.length>12) return;
+            if(prev.length===4&&prev.join('')===s){
+                res.push(prev.join('.'));
+            }else{
+                // recursion
+                for (let i=0;i<str.length&&i<3;i++){
+                    let temp=str.substr(0,i+1);
+                    if (testNum(temp)){
+                        if (temp.length===1||(temp.length>1&&temp[0]!=='0')){
+                            // push返回的是新数组的长度
+                            getIP(prev.concat([temp]),str.slice(i+1));
                         }
                     }
                 }
             }
         };
-        const handleNum=(str)=>{
-            let strNum=parseInt(str);
-            return strNum <= 255&&strNum>=0;
-
+        let testNum=(str)=>{
+            return parseInt(str)>=0&&parseInt(str)<=255;
         };
-        let param=[];
-        findStr(param,s);
+        getIP([],s);
         return res;
     };
+    console.info(restoreIpAddresses('25525511135'));
     console.info(restoreIpAddresses0('25525511135'));
     console.info(restoreIpAddresses0('010010'));
 </script>
