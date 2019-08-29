@@ -19,6 +19,7 @@
     	// 	console.log(num);
     	// },100);
     	//递归调用setTimeout实现循环执行，弥补setInterval不足
+        // 但如果动画用setTimeout虽然规避了以上缺陷，但是仍然由CPU决定这个刷新频率和浏览器刷新频率不匹配就会卡顿
     	function show(){
     		num++;
     		console.log(num);
