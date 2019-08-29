@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>堆排序</title>
+</head>
+<body>
+<script>
+    const HeapSort=(arr)=>{
+
+    };
+    const buildMaxHeap=(arr,i)=>{
+        // 找出最后一个父节点
+        let left=i*2+1;
+        let right=i*2+2;
+        if (left>=arr.length||right>=arr.length) return;
+        if(arr[left]>arr[i]){
+            swap(arr,left,i);
+        }
+        if(arr[right]>arr[i]){
+            swap(arr,lst,i);
+        }
+        buildMaxHeap(arr,i*2+1);
+        buildMaxHeap(arr,i*2+2);
+    };
+    /**
+     * change position
+     * @param arr
+     * @param i
+     * @param j
+     */
+    const swap=(arr,i,j)=>{
+        let temp=arr[i];
+        arr[i]=arr[j];
+        arr[j]=temp;
+    }
+</script>
+</body>
+</html>

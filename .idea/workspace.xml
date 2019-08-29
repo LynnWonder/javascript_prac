@@ -2,34 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/bind.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/bind.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/generator.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/generator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/img/0.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/img/0.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/img/1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/img/1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/img/2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/img/2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/img/3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/img/3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/img/4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/img/4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/test-array.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/test-array.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/test-bind.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/test-bind.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/test-download.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/test-download.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/test-map-reduce.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/test-map-reduce.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/test-reduce用法.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/test-reduce用法.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/test-二叉树.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/test-二叉树.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/test-异步.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/test-异步.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/test-排序.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/test-排序.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/test-排序算法.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/test-排序算法.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/test-格式化数字.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/test-格式化数字.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/test-深拷贝.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/recursion/test-深拷贝.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/test-轮播.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/test-轮播.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/test1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/二叉树.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/二叉树.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/再次二叉树.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/再次二叉树.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/再次练习二叉树.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/再次练习二叉树.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/双飞翼.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/双飞翼.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/圣杯.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/圣杯.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/练习二叉树.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/练习二叉树.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testJS/链表.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/链表.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -129,7 +103,7 @@
       <workItem from="1565451664254" duration="49500000" />
       <workItem from="1566131952700" duration="10139000" />
       <workItem from="1566185702325" duration="22032000" />
-      <workItem from="1566745127864" duration="22067000" />
+      <workItem from="1566745127864" duration="28351000" />
     </task>
     <servers />
   </component>
