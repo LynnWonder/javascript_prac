@@ -7,21 +7,51 @@
 <body>
 <script>
     const HeapSort=(arr)=>{
-
+        let len=arr.length;
+        if(len<=1) return arr;
+        // 首先构建最大堆
+        let lst=Math.floor(len/2)-1;
+        /**
+         * 思路错误：我们应该从倒数第一个根节点往前遍历构建最大堆
+         * 直到构建到根节点
+         **/
+        for(let i=lst;i>=0;i--){
+            // console.info('first',i,arr);
+            buildMaxHeap(arr,i,len);
+        }
+        /**
+         * 那么此时一轮最大堆才构建完毕，我们要做的是交换根节点和最后一个叶子结点
+         * 此处应该是一个循环，循环构建最大堆，同时交换位置
+         **/
+        for(let i=0;i<len;i++){
+            // console.info('second',i,arr);
+            swap(arr,0,len-1-i);
+            /**
+             * 此时的构建最大堆不是从最后一个根节点开始了
+             * 因为此时我们就从根节点开始，往里面递归，注意buildMaxHeap做了这种操作
+             **/
+            buildMaxHeap(arr,0,len-i-1);
+        }
+        return arr;
     };
-    const buildMaxHeap=(arr,i)=>{
+    const buildMaxHeap=(arr,i,size)=>{
         // 找出最后一个父节点
         let left=i*2+1;
         let right=i*2+2;
-        if (left>=arr.length||right>=arr.length) return;
-        if(arr[left]>arr[i]){
-            swap(arr,left,i);
+        let temp=i;
+        if (left>=size||right>=size) return;
+        if(arr[left]>arr[temp]){
+            temp=left;
         }
-        if(arr[right]>arr[i]){
-            swap(arr,lst,i);
+        if(arr[right]>arr[temp]){
+            temp=right;
         }
-        buildMaxHeap(arr,i*2+1);
-        buildMaxHeap(arr,i*2+2);
+        // 递归的位置不对，构建完最大堆之后，应该从交换前的那个位置进行再次构建
+        // 以避免由于交换破坏了子树的最大堆结构
+        if (temp!==i){
+            swap(arr,temp,i);
+            buildMaxHeap(arr,temp,size);
+        }
     };
     /**
      * change position
@@ -33,7 +63,9 @@
         let temp=arr[i];
         arr[i]=arr[j];
         arr[j]=temp;
-    }
+    };
+    let arr0=[7,4,6,5,1,3,6];
+    console.info(HeapSort(arr0));
 </script>
 </body>
 </html>
