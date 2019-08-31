@@ -10,15 +10,17 @@
 </head>
 <body>
     <script type="text/javascript">
-    	let p=new Promise((res)=>{
+    	let p=new Promise((resolve)=>{
     		console.log(1);
     		resolve();
-    	})
-    	let p1=new Promise((res)=>{
-    		p.then((res)=>{console.log(2)
-    		 resolve()})
+    	});
+    	let p1=new Promise((resolve)=>{
+    		p.then((res)=>{
+    		    console.log(2);
+    		    resolve();
+    		});
     		console.log(4)
-    	})
+    	});
     	console.log(3);
 
 

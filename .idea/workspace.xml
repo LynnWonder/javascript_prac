@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/刷题/算法/堆排序.html" beforeDir="false" afterPath="$PROJECT_DIR$/刷题/算法/堆排序.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviews/simple_prac.html" beforeDir="false" afterPath="$PROJECT_DIR$/interviews/simple_prac.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-promise.html" beforeDir="false" afterPath="$PROJECT_DIR$/test-promise.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +105,7 @@
       <workItem from="1565451664254" duration="49500000" />
       <workItem from="1566131952700" duration="10139000" />
       <workItem from="1566185702325" duration="22032000" />
-      <workItem from="1566745127864" duration="43341000" />
+      <workItem from="1566745127864" duration="54960000" />
     </task>
     <servers />
   </component>
