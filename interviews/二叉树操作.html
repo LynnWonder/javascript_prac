@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>二叉树操作</title>
+</head>
+<body>
+<script>
+    /**
+     * 首先用数组构建一个二叉树
+     */
+    function Node(ele){
+        this.val=ele;
+        this.left=null;
+        this.right=null;
+    }
+    const buildTree=(arr,i)=>{
+        if (i>arr.length-1) return;
+        let node=new Node(arr[i]);
+        node.left=buildTree(arr,i*2+1);
+        node.right=buildTree(arr,i*2+2);
+        return node;
+    };
+    let arr0=[1,2,3,4,5,6,7,8];
+    let tree=buildTree(arr0,0);
+    console.info(tree);
+    const preOrder=(tree)=>{
+        let res=[];
+        const dfs=(node)=>{
+            if(!node){
+                return;
+            }else{
+                res.push(node.val);
+            }
+            dfs(node.left);
+            dfs(node.right);
+        };
+        dfs(tree);
+        return res;
+    };
+    const midOrder=(tree)=>{
+        let res=[];
+        const dfs=node=>{
+            if (!node) return;
+            dfs(node.left);
+            res.push(node.val);
+            dfs(node.right);
+        };
+        dfs(tree);
+        return res;
+    };
+    const postOrder=tree=>{
+        let res=[];
+        const dfs=node=>{
+            if (!node) return;
+            dfs(node.left);
+            dfs(node.right);
+            res.push(node.val);
+        };
+        dfs(tree);
+        return res;
+    };
+    // 实现非递归前序遍历
+    const preOrder0=(tree)=>{
+        let res=[];
+        // 主要依靠数据结构栈，压入和弹出
+        let temp=[];
+        tree&&temp.push(tree);
+        while(temp.length>0){
+            /** 这个地方解决了我的疑惑
+             * 因为如果用栈，压入树的时候如何保证不断的压入树，先读出的是根节点呢
+             * 解决方法就是压入后立即读出来
+            */
+            let tempTree=temp.pop();
+            res.push(tempTree.val);
+            if (tempTree.right)
+                temp.push(tempTree.right);
+            if (tempTree.left){
+                temp.push(tempTree.left);
+            }
+        }
+        return res;
+    };
+    /**
+     * 非递归中序遍历
+     * 之前完全错误的思路,
+     * 按照上面的前序遍历的思路首先应该把整个树压进栈
+     * 然后参照中序遍历的特点：先左然后根然后右不停的把左树压进去
+     * @param tree
+     * @returns {[]}
+     */
+    const midOrder0=tree=>{
+        // 结果数组
+        let res=[];
+        // 暂存栈
+        let temp=[];
+        tree&&temp.push(tree);
+        while(temp.length>0){
+            while(tree.left){
+                tree=tree.left;
+                temp.push(tree);
+            }
+            let tempTree=temp.pop();
+            res.push(tempTree.val);
+            // 记住这里，如果没有右树会直接进入循环重复上面压栈的行为，如果有子树会再压栈
+            // 再pop一棵树出来，一直到pop到最后的整棵树，继续压栈
+            if (tempTree.right){
+                tree=tempTree.right;
+                // 这里应该把右树压进来啊！右树还可能有子树
+                temp.push(tree);
+            }
+        }
+        return res;
+    };
+    /**
+     * 后序遍历的非递归写法
+     * 左右根节点的顺序进行遍历
+     * @param tree
+     */
+    const postOrder0=tree=>{
+        let res=[];
+        let res0=[];
+        let temp=[];
+        tree&&temp.push(tree);
+        while(temp.length>0)
+        {
+            /**
+             * 因为temp的压栈顺序是先整个树，但是随即弹出对整个树进行验证
+             * 所以temp实际压栈顺序还是左右
+             * 于是res内部的顺序就变成了根右左，反序后就是左右根和后序遍历顺序一样
+             */
+            let tempTree=temp.pop();
+            res.push(tempTree);
+            if (tempTree.left){
+                temp.push(tempTree.left);
+            }
+            if (tempTree.right){
+                temp.push(tempTree.right);
+            }
+            // console.info('temp',temp);
+        }
+        res.reverse();
+        res.forEach(item=>res0.push(item.val));
+        return res0;
+    };
+    /**
+     * 那么三种非递归的思路是不是一样的呢，我们借助后序遍历的思路解决中序遍历
+     * 答案是不能不能：因为根不是在一侧，它在中间，就不能操作第一次的时候把tempTree压入第二个中间栈res
+     */
+    /**
+     * 下面解决广度优先遍历的问题
+     * 也就是将一棵树还原成数组
+     * 主体思路是借助队列来实现
+     * 最后写完代码有没有发现和前序遍历有点点类似
+     */
+    const BFS=tree=>{
+        let res=[];
+        let temp=[];
+        tree&&temp.push(tree);
+        while(temp.length>0){
+            let tempTree=temp.shift();
+            res.push(tempTree.val);
+            if (tempTree.left){
+                temp.push(tempTree.left);
+            }
+            if(tempTree.right){
+                temp.push(tempTree.right);
+            }
+        }
+        return res;
+    };
+    const depth=tree=>{
+        let res=0;
+        let temp=[];
+        while(tree){
+            res++;
+            tree=tree.left;
+        }
+        return res;
+    };
+    console.info('递归前序=>',preOrder(tree));
+    console.info('非递归前序=>',preOrder0(tree));
+    console.info('递归中序=>',midOrder(tree));
+    console.info('非递归中序=>',midOrder0(tree));
+    console.info('递归后序=>',postOrder(tree));
+    console.info('非递归后序=>',postOrder0(tree));
+    console.info('广度优先遍历=>',BFS(tree));
+    console.info('二叉树的深度=>',depth(tree));
+</script>
+</body>
+</html>
