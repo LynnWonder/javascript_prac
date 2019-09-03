@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-redux.html" beforeDir="false" afterPath="$PROJECT_DIR$/redux/react-redux.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testFetch.html" beforeDir="false" afterPath="$PROJECT_DIR$/testFetch.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,8 +20,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="jsx" />
-        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -107,7 +105,7 @@
       <workItem from="1565451664254" duration="49500000" />
       <workItem from="1566131952700" duration="10139000" />
       <workItem from="1566185702325" duration="22032000" />
-      <workItem from="1566745127864" duration="93714000" />
+      <workItem from="1566745127864" duration="98695000" />
     </task>
     <servers />
   </component>
