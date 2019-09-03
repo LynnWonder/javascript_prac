@@ -10,6 +10,7 @@
     const opt={
         method:'get',
         credentials:'include',
+        mode:'cors',
         heads:{
             // 允许接收的编码类型
             Accept:'application/json',
@@ -26,9 +27,14 @@
         error.response = response;
         throw error;
     };
+    /**
+     * 读取 Response对象并且将它设置为已读（因为Responses对象被设置为了 stream 的方式，所以它们只能被读取一次） ,并返回一个被解析为JSON格式的promise对象。
+     *以上参考了MDN
+     * @param response
+     */
     const parseJSON=(response)=>{
         // 一个http响应，并不是真的json
-        console.info(response.json);
+        return response.json;
     };
     fetch(url,opt).then(checkStatus).then(parseJSON).then((data)=>{
         console.info(data);

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>中序遍历</title>
+</head>
+<body>
+<script>
+    function Node(ele){
+        this.val=ele;
+        this.left=null;
+        this.right=null;
+    }
+    const buildTree=(arr,i)=>{
+        if (i>arr.length-1) return;
+        let node=new Node(arr[i]);
+        node.left=buildTree(arr,i*2+1);
+        node.right=buildTree(arr,i*2+2);
+        return node;
+    };
+    let arr0=[1,2,3,4,5,6,7];
+    let tree=buildTree(arr0,0);
+    console.info(tree);
+    const midOrder=tree=>{
+        let res=[];
+        let temp=[];
+        tree&&temp.push(tree);
+        while(temp.length>0){
+            // 中序遍历是左根右 一定要深入到左
+            while(tree.left){
+                tree=tree.left;
+                temp.push(tree);
+            }
+            let tempTree=temp.pop();
+            res.push(tempTree.val);
+            if (tempTree.right){
+                tree=tempTree.right;
+                temp.push(tree);
+            }
+        }
+        return res;
+    };
+    console.info(midOrder(tree));
+</script>
+</body>
+</html>
