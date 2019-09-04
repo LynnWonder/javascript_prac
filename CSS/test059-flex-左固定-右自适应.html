@@ -8,19 +8,21 @@
 <meta name="keywords" content="">
 <link href="" rel="stylesheet">
 <style type="text/css">
-.outer{display: flex; border: 1px solid red;}
+    /*flex相对于其他元素扩张的量，相对于其他元素收缩的量，元素宽度*/
+/*.outer{display: flex; border: 1px solid red;}
 .sidebar{flex:0 0 100px;height:150px;background: #BCE8F1;}
-.content{flex:1;height:100px;background: #F0AD4E;}
+.content{flex:1;height:100px;background: #F0AD4E;}*/
 /*形成BFC*/
 /*.outer{overflow: auto; border: 1px solid red;}
 .sidebar{float:left;height:150px;background: #BCE8F1;}
 .content{overflow:auto;height:100px;background: #F0AD4E;}*/
 /*.outer{ overflow: hidden;border: 1px solid red;}
 .sidebar{float: left;width:200px;height: 150px; background: #BCE8F1;}
-.content{height:100px;background: #F0AD4E;overflow: auto}*//*此时也是BFC
-/*.outer{overflow: hidden; border: 1px solid red;}
+.content{height:100px;background: #F0AD4E;overflow: auto}*/
+.outer{overflow: hidden; border: 1px solid red;}
 .sidebar{float: left;width:200px;height: 150px; background: #BCE8F1;}
-.content{margin-left:200px;height:100px;background: #F0AD4E;}*//*此时不是BFC*/
+.content{margin-left:200px;height:100px;background: #F0AD4E;}
+    /*此时不是BFC*/
 </style>
 </head>
 <body>
@@ -29,5 +31,20 @@
      <div class="content">自适应区(content)</div>
 	</div>
 <div class="footer">footer</div>
+<script>
+    /**
+     * BFC:块级格式化上下文；
+     * 特点：
+     * 1。每个BFC都是垂直排布的
+     * 2。相邻盒子之间的margin会发生重叠，解决重叠的方式是每个盒子都设置为BFC
+     * 3。不会和float元素重叠，计算高度的时候会将float元素的高度计算进去
+     * 形成BFC的条件：
+     * 1。body根元素
+     * 2。绝对定位的元素：position：absolute fixed
+     * 3。display设置为inline-block flex inline-flex等
+     * 4。overflow设置为auto hidden scroll
+     * 5。浮动元素
+     */
+</script>
 </body>
 </html>

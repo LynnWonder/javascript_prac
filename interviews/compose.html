@@ -23,7 +23,7 @@
         if (arr.length<=0) return;
         return (...args)=>{
             return arr.reduce((prev,item)=>{
-                return item(...prev);
+                return item(prev);
             },...args)
         }
     };
@@ -43,10 +43,10 @@
         })
     }
 
-    const f1=(a,b)=>a+b;
+    const f1=(a,b)=>a+1;
     const f2=a=>a*2;
     const f3=a=>a/4;
-    console.info(compose(f1,f2,f3)(1,5));
+    console.info(compose0(f1,f2,f3)(1));
 </script>
 </body>
 </html>
