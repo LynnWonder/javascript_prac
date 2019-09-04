@@ -114,7 +114,7 @@
         }
         return middlewares.reduce((res,item)=>(...args)=>item(res(...args)));
     }
-    function applyMiddlewares(middlewares){
+    function applyMiddlewares(...middlewares){
         return function(createStore){
             return function(reducer){
                 let store=createStore(reducer);
@@ -124,9 +124,31 @@
                 let newDispatch=compose(...chain)(store.dispatch);
                 return{
                     ...store,
-                    newDispatch
+                    dispatch:newDispatch
                 }
             }
+        }
+    }
+
+    /**
+     * 给react-redux提供store
+     * key：store怎么加到子组件上面去,不该这么问，应该是怎么把子组件的store放在context上面去
+     */
+    class Provider extends React.Component{
+        static childContextTypes={
+            store:PropsType.object,
+        };
+        constructor(props){
+            super(props);
+        }
+        // 设置context的一个过程
+        getChildContext(){
+            return {
+                store:this.props.store,
+            };
+        }
+        render(){
+            return this.props.children;
         }
     }
 </script>

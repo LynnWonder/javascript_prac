@@ -1,101 +1,47 @@
-import connectAdvanced from '../components/connectAdvanced'
-import shallowEqual from '../utils/shallowEqual'
-import defaultMapDispatchToPropsFactories from './mapDispatchToProps'
-import defaultMapStateToPropsFactories from './mapStateToProps'
-import defaultMergePropsFactories from './mergeProps'
-import defaultSelectorFactory from './selectorFactory'
-
-/*
-  connect is a facade over connectAdvanced. It turns its args into a compatible
-  selectorFactory, which has the signature:
-    (dispatch, options) => (nextState, nextOwnProps) => nextFinalProps
-
-  connect passes its args to connectAdvanced as options, which will in turn pass them to
-  selectorFactory each time a Connect component instance is instantiated or hot reloaded.
-  selectorFactory returns a final props selector from its mapStateToProps,
-  mapStateToPropsFactories, mapDispatchToProps, mapDispatchToPropsFactories, mergeProps,
-  mergePropsFactories, and pure args.
-  The resulting final props selector is called by the Connect component instance whenever
-  it receives new props or store state.
+/**
+ * 1、从context里获取store
+ * 2、在componentWillMount 里通过mapStateToProps获取stateProp的值
+ * 3、在componentWillMount 里通过mapDispatchToProps获取dispatchProps的值
+ * 4、在componentWillMount 里订阅store的变化
+ * 5、将获得的stateProp，dispatchProps，还有自身的props合成一个props传给下面的组件
+ * 6,当然其中包含shouldComponentUpdate的性能优化，selectorFactory函数等等
+ * @param mapStateToProps
+ * @param mapDispatchToProps
+ * @returns {{new(): wrapConnectComponent, prototype: wrapConnectComponent}}
+ * @constructor
  */
-
-function match(arg, factories, name) {
-    for (let i = factories.length - 1; i >= 0; i--) {
-        const result = factories[i](arg)
-        if (result) return result
+const Connect=(mapStateToProps,mapDispatchToProps)=>{
+    return (wrappedComponent)=>class wrapConnectComponent extends React.Component{
+        static contextTypes={
+            store:PropTypes.object,
+        };
+        constructor(props){
+            super(props);
+            this.state={
+                allProps:{},
+            }
+        };
+        componentWillMount(){
+            const {store}=this.context;
+            this._updateProps();
+            store.subscribe(()=>this._updateProps());
+        };
+        _updateProps(){
+            // 收集所有的props，setState
+            const {store}=this.context;
+            const stateProps=mapStateToProps?mapStateToProps(store.getState,this.props):{};
+            const dispatchProps=mapDispatchToProps?mapDispatchToProps(store.getState,this.props):{};
+            this.setState({
+                allProps:{
+                    ...this.props,
+                    ...stateProps,
+                    ...dispatchProps,
+                }
+            })
+        };
+        render(){
+            const {allProps}=this.state;
+            return(<wrappedComponent {...allProps} />)
+        }
     }
-
-    return (dispatch, options) => {
-        throw new Error(
-            `Invalid value of type ${typeof arg} for ${name} argument when connecting component ${
-                options.wrappedComponentName
-            }.`
-        )
-    }
-}
-
-function strictEqual(a, b) {
-    return a === b
-}
-
-// createConnect with default args builds the 'official' connect behavior. Calling it with
-// different options opens up some testing and extensibility scenarios
-export function createConnect({
-                                  connectHOC = connectAdvanced,
-                                  mapStateToPropsFactories = defaultMapStateToPropsFactories,
-                                  mapDispatchToPropsFactories = defaultMapDispatchToPropsFactories,
-                                  mergePropsFactories = defaultMergePropsFactories,
-                                  selectorFactory = defaultSelectorFactory
-                              } = {}) {
-    return function connect(
-        mapStateToProps,
-        mapDispatchToProps,
-        mergeProps,
-        {
-            pure = true,
-            areStatesEqual = strictEqual,
-            areOwnPropsEqual = shallowEqual,
-            areStatePropsEqual = shallowEqual,
-            areMergedPropsEqual = shallowEqual,
-            ...extraOptions
-        } = {}
-    ) {
-        const initMapStateToProps = match(
-            mapStateToProps,
-            mapStateToPropsFactories,
-            'mapStateToProps'
-        )
-        const initMapDispatchToProps = match(
-            mapDispatchToProps,
-            mapDispatchToPropsFactories,
-            'mapDispatchToProps'
-        )
-        const initMergeProps = match(mergeProps, mergePropsFactories, 'mergeProps')
-
-        return connectHOC(selectorFactory, {
-            // used in error messages
-            methodName: 'connect',
-
-            // used to compute Connect's displayName from the wrapped component's displayName.
-            getDisplayName: name => `Connect(${name})`,
-
-            // if mapStateToProps is falsy, the Connect component doesn't subscribe to store state changes
-            shouldHandleStateChanges: Boolean(mapStateToProps),
-
-            // passed through to selectorFactory
-            initMapStateToProps,
-            initMapDispatchToProps,
-            initMergeProps,
-            pure,
-            areStatesEqual,
-            areOwnPropsEqual,
-            areStatePropsEqual,
-            areMergedPropsEqual,
-
-            // any extra options args can override defaults of connect or connectAdvanced
-            ...extraOptions
-        })
-    }
-}
-
-export default createConnect()
+};
