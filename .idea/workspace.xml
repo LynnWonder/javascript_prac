@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSS/test059-flex-左固定-右自适应.html" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/test059-flex-左固定-右自适应.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interviews/compose.html" beforeDir="false" afterPath="$PROJECT_DIR$/interviews/compose.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviews/节流防抖.html" beforeDir="false" afterPath="$PROJECT_DIR$/interviews/节流防抖.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,13 +47,14 @@
     <property name="javascript.nodejs.core.library.configured.version" value="8.11.1" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/刷题/test.html" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/redux" />
+      <recent name="$PROJECT_DIR$/review" />
       <recent name="$PROJECT_DIR$/interviews" />
+      <recent name="$PROJECT_DIR$/redux" />
       <recent name="$PROJECT_DIR$/H_algorithom/recursion" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -74,14 +74,9 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="重建二叉树.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63341/笔试题/刷题/重建二叉树.html" useBuiltInWebServerPort="true">
+    <configuration type="JavascriptDebugType" editBeforeRun="true" engineId="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" useFirstLineBreakpoints="true">
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JavaScript Debug.重建二叉树.html" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -107,7 +102,7 @@
       <workItem from="1565451664254" duration="49500000" />
       <workItem from="1566131952700" duration="10139000" />
       <workItem from="1566185702325" duration="22032000" />
-      <workItem from="1566745127864" duration="111107000" />
+      <workItem from="1566745127864" duration="117842000" />
     </task>
     <servers />
   </component>

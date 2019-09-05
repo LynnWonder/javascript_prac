@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数防抖节流等</title>
+    <style>
+        .box{
+            width:200px;
+            height:2000px;
+            background-color: #E79F6D;
+        }
+    </style>
+</head>
+<body>
+<div class="box">testtttttt...</div>
+<script>
+    let i=0;
+    /**
+     * 节流函数，将高频事件变成低频事件
+     * @param func
+     * @param delay
+     */
+    // const throttle=(func,delay)=>{
+    //     let timer=null;
+    //     return ()=>{
+    //         if(!timer){
+    //             timer=setTimeout(()=>{
+    //                 func();
+    //                 timer=null;
+    //             },delay);
+    //         }
+    //     }
+    // };
+    /**
+     * 节流函数这是一种利用标志位的写法
+     * @param func
+     * @param delay
+     * @returns {Function}
+     */
+    const throttle=(func,delay)=>{
+            let flag=false;
+            return ()=>{
+                if(!flag){
+                    flag=true;
+                    setTimeout(()=>{
+                        func();
+                        flag=false;
+                    },delay);
+                }
+            }
+        };
+    const debounce=(func,delay)=>{
+        let timer=null;
+        return ()=>{
+            if (timer){
+                clearTimeout(timer);
+            }
+            timer=setTimeout(()=>{
+                func();
+            },delay);
+        }
+    };
+    const scroll=()=>{
+        i++;
+        console.info(`第${i}次触发ing...`);
+    };
+    window.addEventListener('scroll',throttle(scroll,500));
+    // window.addEventListener('scroll',scroll);
+</script>
+</body>
+</html>
