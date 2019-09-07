@@ -66,6 +66,18 @@
     };
     window.addEventListener('scroll',throttle(scroll,500));
     // window.addEventListener('scroll',scroll);
+    let box=document.querySelector('.box');
+    console.info(box);
+    box.addEventListener('touchstart',()=>{
+        console.info('nmsl');
+    });
+    // var event=new CustomEvent('tapp',{
+    //     bubbles: true,
+    //     cancelable: true
+    // });
+    //
+    // //触发btn上的tap事件
+    // box.dispatchEvent(event);
 </script>
 </body>
 </html>

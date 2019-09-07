@@ -50,13 +50,26 @@
                 }
             }
         };
+        const throttle1=(fn,delay=500)=>{
+            // 通过设置标志位的方式实现节流效果
+            let flag=false;
+            return (...args)=>{
+                if (!flag){
+                    flag=true;
+                    setTimeout(()=>{
+                        fn.apply(this,args);
+                        flag=false;
+                    },delay);
+                }
+            }
+        };
         let num = 0;
         function scrollTap() {
             num++;
             console.log(`第 ${num}次滚动`);
         }
         // 设置触发间隔
-        document.addEventListener('scroll', throttle(scrollTap, 3000))
+        document.addEventListener('scroll', throttle1(scrollTap, 500))
     }
 </script>
 </body>
