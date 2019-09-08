@@ -3,9 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debounce_throttle.html" beforeDir="false" afterPath="$PROJECT_DIR$/debounce_throttle.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interviews/节流防抖.html" beforeDir="false" afterPath="$PROJECT_DIR$/interviews/节流防抖.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/review/20190905review.html" beforeDir="false" afterPath="$PROJECT_DIR$/review/20190905review.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvvm/Compile.js" beforeDir="false" afterPath="$PROJECT_DIR$/theory/mvvm/Compile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvvm/Dep.js" beforeDir="false" afterPath="$PROJECT_DIR$/theory/mvvm/Dep.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvvm/Observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/theory/mvvm/Observer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvvm/Watcher.js" beforeDir="false" afterPath="$PROJECT_DIR$/theory/mvvm/Watcher.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvvm/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/theory/mvvm/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvvm/mvvm.js" beforeDir="false" afterPath="$PROJECT_DIR$/theory/mvvm/mvvm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/connect.js" beforeDir="false" afterPath="$PROJECT_DIR$/theory/redux/connect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/react-redux.html" beforeDir="false" afterPath="$PROJECT_DIR$/theory/redux/react-redux.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,10 +59,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/theory/tap-click" />
+      <recent name="$PROJECT_DIR$/theory" />
       <recent name="$PROJECT_DIR$/review" />
       <recent name="$PROJECT_DIR$/interviews" />
       <recent name="$PROJECT_DIR$/redux" />
-      <recent name="$PROJECT_DIR$/H_algorithom/recursion" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\tju\笔试题\js" />
@@ -104,7 +110,10 @@
       <workItem from="1565451664254" duration="49500000" />
       <workItem from="1566131952700" duration="10139000" />
       <workItem from="1566185702325" duration="22032000" />
-      <workItem from="1566745127864" duration="122563000" />
+      <workItem from="1566745127864" duration="125040000" />
+      <workItem from="1567845666808" duration="205000" />
+      <workItem from="1567853997089" duration="148000" />
+      <workItem from="1567854214517" duration="4214000" />
     </task>
     <servers />
   </component>

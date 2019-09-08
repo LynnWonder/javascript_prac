@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * string的replace方法：当第二个参数是函数的时候，其三个参数的对应如下：
+     * 第一批参数是前面正则匹配到的字符串
+     * 第二批参数是匹配到字符串的第一个索引
+     * 第三批参数是原字符串
+     */
+    (function (window) {
+        function fn(str) {
+            this.str = str;
+        }
+        fn.prototype.format = function () {
+            // var arg = Array.from(arguments);
+            var arg=Array.prototype.slice.call(arguments)
+            return this.str.replace(/\{(\d+)\}/g, function (a, b) {
+                console.log(a)
+                return arg[b] || '';
+            });
+        }
+        window.fn = fn;
+    })(window);
+    // use
+    (function(){
+        var t = new fn('<p><a href="{0}">{1}</a><span>{2}</span></p>');
+        console.log( t.format('http://www.alibaba.com', 'Alibaba', 'Welcome') );
+    })();
+    /**
+     * 传入的是一个字符串，如<p><a class={name}>{content}</p>，以及一个对象{name:'xx',content:'xxx'}
+     * 输出应该是<p><a class="xx">xxx</p>
+     * 其实就是对于vue  react模版引擎的操作
+     * 待明确的是：有没有{1+}这种操作
+     */
+    const replaceStr=(str,obj)=>{
+        let reg=/\{(\w){1，}\}/g;
+        return str.replace(reg,(str0)=>{
+            return obj[str0.slice(1,str0.length-1)];
+        });
+        // console.info(str.match(reg));
+    };
+    let res=replaceStr('<p><a class={name}>{content}</p>',{name:'box-1',content:'this is a test'});
+    console.info(res);
+</script>
+</body>
+</html>
