@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvvm/Compile.js" beforeDir="false" afterPath="$PROJECT_DIR$/theory/mvvm/Compile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvvm/Dep.js" beforeDir="false" afterPath="$PROJECT_DIR$/theory/mvvm/Dep.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvvm/Observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/theory/mvvm/Observer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvvm/Watcher.js" beforeDir="false" afterPath="$PROJECT_DIR$/theory/mvvm/Watcher.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvvm/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/theory/mvvm/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvvm/mvvm.js" beforeDir="false" afterPath="$PROJECT_DIR$/theory/mvvm/mvvm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/connect.js" beforeDir="false" afterPath="$PROJECT_DIR$/theory/redux/connect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/react-redux.html" beforeDir="false" afterPath="$PROJECT_DIR$/theory/redux/react-redux.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviews/RegExp/replace.html" beforeDir="false" afterPath="$PROJECT_DIR$/interviews/RegExp/replace.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -113,7 +106,7 @@
       <workItem from="1566745127864" duration="125040000" />
       <workItem from="1567845666808" duration="205000" />
       <workItem from="1567853997089" duration="148000" />
-      <workItem from="1567854214517" duration="4214000" />
+      <workItem from="1567854214517" duration="4768000" />
     </task>
     <servers />
   </component>

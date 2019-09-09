@@ -38,7 +38,8 @@
      * 待明确的是：有没有{1+}这种操作
      */
     const replaceStr=(str,obj)=>{
-        let reg=/\{(\w){1，}\}/g;
+        // let reg=/\{(\w)+\}/g;
+        let reg=/\{(\w){1,}\}/g;
         return str.replace(reg,(str0)=>{
             return obj[str0.slice(1,str0.length-1)];
         });
