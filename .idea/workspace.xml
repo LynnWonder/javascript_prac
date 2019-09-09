@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interviews/RegExp/replace.html" beforeDir="false" afterPath="$PROJECT_DIR$/interviews/RegExp/replace.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviews/RegExp/thenable.html" beforeDir="false" afterPath="$PROJECT_DIR$/interviews/thenable.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,15 +51,15 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/刷题/test.html" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\tju\笔试题\js" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/interviews" />
       <recent name="$PROJECT_DIR$/theory/tap-click" />
       <recent name="$PROJECT_DIR$/theory" />
       <recent name="$PROJECT_DIR$/review" />
-      <recent name="$PROJECT_DIR$/interviews" />
       <recent name="$PROJECT_DIR$/redux" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\tju\笔试题\js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -106,7 +106,7 @@
       <workItem from="1566745127864" duration="125040000" />
       <workItem from="1567845666808" duration="205000" />
       <workItem from="1567853997089" duration="148000" />
-      <workItem from="1567854214517" duration="4768000" />
+      <workItem from="1567854214517" duration="5110000" />
     </task>
     <servers />
   </component>
