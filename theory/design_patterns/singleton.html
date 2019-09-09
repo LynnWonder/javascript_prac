@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设计模式</title>
+</head>
+<body>
+    <input type="button" class='btn' value="click"/>
+<script>
+    /**
+     * 单例模式:保证一个类只有一个实例，并且提供全局访问
+     * 惰性单例是指：只有在需要的时候才进行创建单例，应用广泛
+     * 另一个demo是在js里面单例模式的一个小应用
+     */
+    function Single(name){
+        this.name=name;
+    }
+    Single.getInstance=function(name){
+        if (!this.instance){
+            this.instance=new Single(name);
+        }
+        return this.instance;
+    };
+    let demo1=Single.getInstance('jack');
+    let demo2=Single.getInstance('tom');
+    // 将返回true
+    console.info(demo1===demo2);
+    let addP=(function (){
+        let box=null;
+        return ()=>{
+            if (!box){
+                box=document.createElement('p');
+                box.innerHTML='this is a test';
+                box.style.display='none';
+                document.body.appendChild(box);
+            }
+            return box;
+        };
+    })();
+    document.querySelector('.btn').addEventListener('click',()=>{
+        let box=addP();
+        box.style.display='block';
+    })
+</script>
+</body>
+</html>
