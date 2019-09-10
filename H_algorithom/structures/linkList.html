@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>链表</title>
+</head>
+<body>
+<script>
+    /**
+     * 首先创建一个链表
+     */
+    function Node(ele){
+        this.element=ele;
+        this.next=null;
+        // judge2 use
+        this.visited=0;
+    }
+    function linkList(){
+        this.head=new Node('head');
+        this.find=find;
+        this.findPre=findPre;
+        this.insert=insert;
+        this.delete=delete0;
+    }
+    function find(element){
+        var node=this.head;
+        while(node&&node.element!==element){
+            node=node.next;
+        }
+        return node;
+    }
+    function findPre(element){
+        var node=this.head;
+        while(node.next&&node.next.element!==element){
+            node=node.next;
+        }
+        return node;
+    }
+    function insert(element,item){
+        var node=this.find(element);
+        var nNode=new Node(item);
+        nNode.next=node.next;
+        node.next=nNode;
+    }
+    function delete0(element){
+        var node=this.find(element);
+        var preNode=this.findPre(element);
+        preNode.next=node.next;
+    }
+    var llist=new linkList();
+    llist.head.next=new Node(1);
+    llist.insert(1,2);
+    llist.insert(2,3);
+    llist.insert(3,4);
+    llist.insert(4,5);
+    // 此时创建了一个带环的链表
+    llist.find(4).next=llist.find(2);
+    console.info(llist.head);
+    /**
+     * 方法1：创建哈希表，会占用较大的空间
+     * 事件复杂度O(n)
+     */
+    function judge1(list){
+        var set=new Set();
+        while(list){
+            if (set.has(list)){
+                return list;
+            }
+            set.add(list);
+            list=list.next;
+        }
+        return false;
+    }
+    console.info(judge1(llist.head));
+    /**
+     * 方法2：给节点添加visited标记
+     * 事件复杂度为O(n)
+     */
+    function judge2(list){
+        while(list){
+            if (list.visited){
+                return list;
+            }
+            list.visited=1;
+            list=list.next;
+        }
+        return false;
+    }
+    console.info(judge2(llist.head));
+    /**
+     * 方法3：快慢指针法，设定快指针fast,慢指针slow
+     */
+    function judge3(list){
+        var fast=list.next.next;
+        var slow=list.next;
+        while(list){
+            if (fast===slow){
+                return fast;
+            }
+            fast=fast.next.next;
+            slow=slow.next;
+        }
+        return false;
+    }
+    console.info(judge3(llist.head));
+</script>
+</body>
+</html>

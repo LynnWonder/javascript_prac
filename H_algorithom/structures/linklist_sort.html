@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单向链表排序</title>
+</head>
+<body>
+<script>
+    /**
+     * 首先创建一个链表
+     */
+    // function Node(ele){
+    //     this.element=ele;
+    //     this.next=null;
+    //     // judge2 use
+    //     this.visited=0;
+    // }
+    // function linkList(){
+    //     this.head=new Node('head');
+    //     this.find=find;
+    //     this.findPre=findPre;
+    //     this.insert=insert;
+    //     this.delete=delete0;
+    // }
+    // function find(element){
+    //     var node=this.head;
+    //     while(node&&node.element!==element){
+    //         node=node.next;
+    //     }
+    //     return node;
+    // }
+    // function findPre(element){
+    //     var node=this.head;
+    //     while(node.next&&node.next.element!==element){
+    //         node=node.next;
+    //     }
+    //     return node;
+    // }
+    // function insert(element,item){
+    //     var node=this.find(element);
+    //     var nNode=new Node(item);
+    //     nNode.next=node.next;
+    //     node.next=nNode;
+    // }
+    // function delete0(element){
+    //     var node=this.find(element);
+    //     var preNode=this.findPre(element);
+    //     preNode.next=node.next;
+    // }
+    // var llist=new linkList();
+    // llist.head.next=new Node(1);
+    // llist.insert(1,2);
+    // llist.insert(2,3);
+    // llist.insert(3,4);
+    // llist.insert(4,5);
+    // console.info(llist.head);
+    /**
+     * 下面写一个另一种用数组创建链表的方式
+     */
+    class Node{
+        constructor(val){
+            this.element=val;
+            this.next=null;
+        }
+    }
+    class linkList{
+        constructor(arr){
+            this.head=new Node(arr.shift());
+            let node=this.head;
+            while(arr.length>0){
+                node.next=new Node(arr.shift());
+                node=node.next;
+            }
+        }
+    }
+    let arr=[7,4,6,5,1,3,6];
+    let list=new linkList(arr);
+    console.info(list.head);
+    /**
+     * 下面定义单向链表排序的方法
+     */
+    let swap=(node1,node2)=>{
+        let ele=node1.element;
+        node1.element=node2.element;
+        node2.element=ele;
+    };
+    let sort0=(start,end)=>{
+        /** 链表是一个只能知道头节点的一类数据结构
+         * 注定它的排序方式肯定会区别于普通数组的排序，
+         * 下面借助快排的思路完成对链表的排序
+         * 因此定义两个指针，p指针负责不停遍历，q指针负责移动位置，最后和基准交换。
+         */
+        let ele=start.element;
+        let p=start.next;
+        let q=start;
+        while(p!==end){
+            // console.info(p,end);
+            if (p.element<ele){
+                q=q.next;
+                swap(q,p);
+            }
+            p=p.next;
+        }
+        // 将基准变换到中间位置
+        swap(start,q);
+        return q;
+    };
+    let sort=(start,end)=>{
+        if (start!==end){
+            let temp=sort0(start,end);
+            sort(start,temp);
+            sort(temp.next,end);
+        }
+    };
+    sort(list.head,null);
+    console.info(list.head);
+    /**
+     * leetcode-148解决方案
+     * @param head
+     * @returns {*}
+     */
+    var sortList = function(head) {
+        var swap=(n,m)=>{
+            var val=n.val;
+            n.val=m.val;
+            m.val=val;
+        };
+        var sort=(start,end)=>{
+            let val=start.val;
+            let p=start.next;
+            let q=start;
+            while(p!==end){
+                if(p.val<val){
+                    q=q.next;
+                    swap(p,q);
+                }
+                p=p.next;
+            }
+            swap(start,q);
+            return q;
+        };
+        var sort0=(start,end)=>{
+            if(start!==end){
+                let temp=sort(start,end);
+                sort0(start,temp);
+                sort0(temp.next,end);
+            }
+        };
+        sort0(head,null);
+        return head;
+    };
+    console.info(sortList(list.head));
+</script>
+</body>
+</html>

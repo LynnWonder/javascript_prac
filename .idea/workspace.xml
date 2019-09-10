@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/刷题/链表/循环链表.html" beforeDir="false" afterPath="$PROJECT_DIR$/刷题/链表/循环链表.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +21,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="jsx" />
-        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -105,7 +106,7 @@
       <workItem from="1566745127864" duration="125040000" />
       <workItem from="1567845666808" duration="205000" />
       <workItem from="1567853997089" duration="148000" />
-      <workItem from="1567854214517" duration="14557000" />
+      <workItem from="1567854214517" duration="25460000" />
     </task>
     <servers />
   </component>
