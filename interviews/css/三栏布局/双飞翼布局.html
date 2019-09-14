@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双飞翼布局</title>
+    <style>
+        .box{
+            float: left;
+        }
+        .middle{
+            width:100%;
+            background-color: #E79F6D;
+        }
+        /*我们在内层设置margin的原因是此时只会压缩内层布局，而在外层加margin时会因为其固定的宽度撑开布局而影响其他布局。*/
+        .inner-middle{
+            margin-left:200px;
+            margin-right:200px;
+        }
+        .right{
+            margin-left:-200px;
+            width:200px;
+            background-color: #5544aa;
+        }
+        .left{
+            margin-left:-100%;
+            width:200px;
+            background-color: #ff0b20;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="middle box">
+        <div class="inner-middle">middle</div>
+    </div>
+    <div class="left box">left</div>
+    <div class="right box">right</div>
+</div>
+</body>
+</html>

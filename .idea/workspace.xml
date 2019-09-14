@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="" />
+    <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/test059-flex-左固定-右自适应.html" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/test059-flex-左固定-右自适应.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,11 +55,11 @@
       <recent name="E:\tju\笔试题\js" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/interviews/css/三栏布局" />
       <recent name="$PROJECT_DIR$/interviews/event-loop" />
       <recent name="$PROJECT_DIR$/theory/design_patterns" />
       <recent name="$PROJECT_DIR$/interviews" />
       <recent name="$PROJECT_DIR$/theory/tap-click" />
-      <recent name="$PROJECT_DIR$/theory" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -103,7 +106,8 @@
       <workItem from="1566745127864" duration="125040000" />
       <workItem from="1567845666808" duration="205000" />
       <workItem from="1567853997089" duration="148000" />
-      <workItem from="1567854214517" duration="35736000" />
+      <workItem from="1567854214517" duration="36964000" />
+      <workItem from="1568452740135" duration="3103000" />
     </task>
     <servers />
   </component>
