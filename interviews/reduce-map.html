@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>reduce</title>
+</head>
+<body>
+<script>
+    /**
+     * 用reduce实现一个map函数
+     * 首先剖析以下map的组成，参数是 函数(当前值，idx) this指向
+     */
+    /**
+     * 箭头函数没有this总是指向外层代码块的this，所以不能用为构造函数
+     * @param func
+     * @param mthis
+     * @returns {[]}
+     * @private
+     */
+    Array.prototype._map=function (func,mthis){
+        console.info(this);
+        let that=null;
+        if (mthis!==undefined){
+            that=mthis;
+        }
+        let res=[];
+        this.reduce((res0,item,idx)=>{
+            res.push(func.call(that,item,idx));
+        },null);
+        return res;
+    }
+    let arr0=[1,2,3];
+    let arr1=arr0._map(item=>{
+        return item*2;
+    })
+    console.info(arr1);
+</script>
+</body>
+</html>
