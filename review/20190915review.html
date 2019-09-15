@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>review</title>
+</head>
+<body>
+<script>
+    /**
+     * 创建树
+     */
+    function Node(ele) {
+        this.val = ele;
+        this.left = null;
+        this.right = null;
+    }
+
+    const buildTree = (arr, idx) => {
+        if (idx > arr.length - 1) return;
+        let left = idx * 2 + 1;
+        let right = idx * 2 + 2;
+        let node = new Node(arr[idx]);
+        node.left = buildTree(arr, left);
+        node.right = buildTree(arr, right);
+        return node;
+    };
+    let arr0 = [1, 2, 3, 4, 5, 6];
+    let tree = buildTree(arr0, 0);
+    console.info(tree);
+    /**
+     * 重建二叉树，一定是一个递归的过程
+     * 输入前序遍历结果 中序遍历结果，
+     * 输出向树中添加节点
+     */
+    const rebuildTree=(pre,mid)=>{
+        if (pre.length<1||mid.length<1) return;
+        let node=new Node(pre[0]);
+        let rootIdx=mid.indexOf(pre[0]);
+        node.left=rebuildTree(pre.slice(1,rootIdx+1),mid.slice(0,rootIdx));
+        node.right=rebuildTree(pre.slice(rootIdx+1),mid.slice(rootIdx+1));
+        return node;
+    };
+    let pre0=[1,2,4,5,3,6];
+    let mid0=[4,2,5,1,6,3];
+    const pre1=[1,2,4,7,3,5,6,8];
+    const mid1=[4,7,2,1,5,3,8,6];
+    console.info(rebuildTree(pre0,mid0));
+    console.info(rebuildTree(pre1,mid1));
+</script>
+</body>
+</html>
