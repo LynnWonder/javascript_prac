@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>整型和浮点型</title>
+</head>
+<body>
+<script>
+    let a=12;
+    let b=12.0;
+    console.info(parseInt(a)===parseFloat(b));
+    console.info(0.1+0.2===0.3);
+    console.info(999928299928282828920===999928299928282828929);
+    console.info(Number.MIN_SAFE_INTEGER);
+    console.info(Number.EPSILON===Math.pow(2,-52),Math.pow(2,-52));
+    console.info(12+'.0'==12);
+    function withinErrorMargin (left, right) {
+        return Math.abs(left - right) < Number.EPSILON * Math.pow(2, 2);
+    }
+    console.info(withinErrorMargin(0.1+0.2,0.3));
+    let aa=123456789012345678;
+    console.info(aa);
+</script>
+</body>
+</html>
