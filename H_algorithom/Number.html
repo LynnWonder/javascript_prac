@@ -20,6 +20,36 @@
     console.info(withinErrorMargin(0.1+0.2,0.3));
     let aa=123456789012345678;
     console.info(aa);
+    /**
+     * 讲一下两个大整数相加的问题
+     * 其实所谓大整数就是超过js表示范围的整数，在上面已经讲过，整型最大54位，最大位2^53-1
+     * 因此我们用字符串来操作相加，思考一个问题：
+     * 总是两个相同的位相加然后加上一级来的进位，因此可以用while循环来做
+     * 输入 相同位的两个数以及进位，输出是进位
+     * @param str1
+     * @param str2
+     */
+    const bigNumber=(str1,str2)=>{
+        let arr1=str1.split('');
+        let arr2=str2.split('');
+        let res=[];
+        let c=0;
+        while(arr1.length||arr2.length){
+            let a=arr1.pop()||0;
+            let b=arr2.pop()||0;
+            let temp=parseInt(a)+parseInt(b)+c;
+            if (temp>=10){
+                c=1;
+                res.unshift(temp%10);
+            }else{
+                c=0;
+                res.unshift(temp);
+            }
+        }
+        return res.join('');
+    };
+    console.info(bigNumber('12345678901234567','457'));
+    console.info(bigNumber('45486646468484544661134868968','544545867466464646'));
 </script>
 </body>
 </html>
