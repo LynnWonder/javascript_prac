@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路径之和</title>
+</head>
+<body>
+<script>
+    /**
+     * 构建一颗树，实现dfs bfs 并简述特点
+     */
+    function Node(ele) {
+        this.val = ele;
+        this.left = null;
+        this.right = null;
+    }
+
+    const buildTree = (arr, idx) => {
+        if (idx > arr.length - 1) return;
+        let left = idx * 2 + 1;
+        let right = idx * 2 + 2;
+        let node = new Node(arr[idx]);
+        node.left = buildTree(arr, left);
+        node.right = buildTree(arr, right);
+        return node;
+    };
+    let arr0 = [1, 2, 3, 4, 5, 6];
+    let tree = buildTree(arr0, 0);
+    console.info(tree);
+    /**
+     * 整道题还是应该用递归的思路来解决
+     * 反思这道题没有解出来的原因：
+     * 首先为什么用递归，可以发现总是有一样的处理过程
+     * 有输入、有输出、有边界条件处理
+     * 边界条件应该是sum为0，并且此时节点没有子节点
+     * @param root
+     * @param sum
+     */
+    const hasPathSum = (root, sum) => {
+        let res0=false,res1=false;
+        if (!root) return false;
+        // 边界条件处理的过于混乱
+        // if (sum===0&&!root.left&&!root.right) return false;
+        // if(root.val>=sum) return true;
+        if (!root.left && !root.right) {
+            return sum === root.val;
+        }
+        if (root.left) {
+            res0=hasPathSum(root.left, sum - root.val);
+        }
+        if (root.right) {
+            res1=hasPathSum(root.right, sum - root.val);
+        }
+        return res0||res1;
+    };
+    console.info(hasPathSum(tree, 10));
+</script>
+</body>
+</html>
