@@ -50,15 +50,15 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/刷题/test.html" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\tju\笔试题\js" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/interviews/css/同心圆" />
       <recent name="$PROJECT_DIR$/interviews/css/三栏布局" />
       <recent name="$PROJECT_DIR$/interviews/event-loop" />
       <recent name="$PROJECT_DIR$/theory/design_patterns" />
       <recent name="$PROJECT_DIR$/interviews" />
-      <recent name="$PROJECT_DIR$/theory/tap-click" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\tju\笔试题\js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -106,7 +106,7 @@
       <workItem from="1567845666808" duration="205000" />
       <workItem from="1567853997089" duration="148000" />
       <workItem from="1567854214517" duration="36964000" />
-      <workItem from="1568452740135" duration="23851000" />
+      <workItem from="1568452740135" duration="26477000" />
     </task>
     <servers />
   </component>

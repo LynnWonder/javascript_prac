@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>画同心圆</title>
+    <style>
+        /*一个div画三个同心圆*/
+        .box{
+            width:100px;
+            height:100px;
+            border-radius: 50%;
+            background-color: darkred;
+            border:20px solid blue;
+        }
+        .box::before {
+            position: absolute;
+            top:50px;
+            left:50px;
+            content: '';
+            width: 50px;
+            height: 50px;
+            background-color: green;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script>
+
+</script>
+</body>
+</html>
