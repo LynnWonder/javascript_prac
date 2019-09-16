@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function get() {
+// 请补全函数参数和实现逻辑
+        let res=[];
+        let args=[...arguments];
+        let obj=args[0];
+        for (let i=1;i<args.length;i++){
+            res.push(eval(`obj.${args[i]}`));
+        }
+        console.info(res);
+    }
+    const obj = {
+        selector: { to: { toutiao: 'FE coder' } },
+        target: [1, 2, { name: 'byted' }]
+    };
+    // 运行代码
+    get(obj, 'selector.to.toutiao', 'target[0]', 'target[2].name')
+    //  输出结果：// ['FE coder', 1, 'byted']
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正则匹配</title>
+</head>
+<body>
+<script>
+    /**
+     * 写一个正则匹配手机号
+     * 注意点：因为手机号是固定长短的，所以要注意限制头尾，否则无法匹配成功
+     */
+    const matchPhone=str=>{
+        if(!(/^1[3456789]\d{9}$/.test(str))){
+            console.info('plz input the correct number');
+        }
+    };
+    matchPhone('182223081011');
+    /**
+     * 写一个正则转换大驼峰
+     * _test_you_are_idiot==>__testYouAreIdiot
+     * 注意点1：有可能有多个_所以要_+表示大于等于1
+     * 注意点2：是否是第一个匹配的问题，因此会用到第二个参数
+     */
+    const convertCamel=str=>{
+        return str.replace(/_+[a-z]/g, (str0, idx) => {
+            // 这样写的一个问题是第一位也会跟着转，如果我们不想第一位也跟着转呢
+            // return str0[1].toUpperCase();
+            console.info('str0', str0, idx);
+            if (idx) {
+                return str0.match(/[a-zA-Z]/)[0].toUpperCase();
+            }
+            return str0;
+        });
+    };
+    console.info(convertCamel('__test_you_are_idiot'));
+</script>
+</body>
+</html>
