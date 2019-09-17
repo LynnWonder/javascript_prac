@@ -30,7 +30,7 @@
     var test0=curry(add);
     test0(1)(2)(3);
     test0(2)(7)(8);
-    const curry0=(fn,len=fn.length,args=[])=>len===0?fn(...args):(...args0)=>curry0(fn,len-args0.length,[...args,...args0]);
+    const curry0=(fn,args=[])=>fn.length===args.length?fn(...args):(...args0)=>curry0(fn,[...args,...args0]);
     let test1=curry0(add);
     test1(10)(20)(30);
     test1(2)(7)(8);

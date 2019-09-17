@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="text" class="model"/>
+<div class="text"></div>
+</body>
+<script>
+let model=document.querySelector('.model');
+let text=document.querySelector('.text');
+let val={};
+let defaultVal='this is a test';
+model.value=defaultVal;
+text.textContent=defaultVal;
+/**
+ * 实现model向视图
+ */
+Object.defineProperty(val,"name",{
+    get(){
+        return defaultVal;
+    },
+    set(newVal){
+        defaultVal=newVal;
+        model.value=defaultVal;
+        text.textContent=defaultVal;
+    }
+});
+/**
+ * 实现视图向model
+ */
+    model.addEventListener("keyup",(e)=>{
+        val.name=e.target.value;
+    },false);
+
+
+/**
+ * 实现函数curry化
+ * 首先阐述概念，curry：把一个多参数的函数变成每次只处理一个参数并且返回值为处理剩余参数的函数
+ */
+ var add=function (a,b,c,d){
+     console.info(a+b+c+d);
+};
+//es5写法
+    var curry=function (fn){
+        var len=fn.length;
+        // 收集参数
+        var args=[];
+        return function curry_fn(){
+            var args0=Array.prototype.slice.call(arguments);
+            args=args.concat(args0);
+            if (args.length===len){
+                return fn.apply(null,args);
+            }
+            return curry_fn;
+        }
+    };
+    var newAdd=curry(add);
+    // add(1,2,3,4);
+    // newAdd(1)(2)(3)(4);
+    newAdd(1)(2)(3,3);
+    let curry0=(fn,args=[])=>fn.length===args.length?fn(...args):(...args0)=>curry0(fn,[...args,...args0]);
+    let newAdd1=curry0(add);
+    newAdd1(1)(2)(3)(4);
+</script>
+</html>
