@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双向数据绑定</title>
+</head>
+<body>
+<input type="text" id="model"><br/>
+<div id="modelText"></div>
+<script>
+    var user = {};
+    var defaultName = "请输入搜索词";
+
+    document.querySelector("#model").value = defaultName;
+    document.querySelector("#modelText").textContent = defaultName;
+
+    //定义属性 监控改变
+    Object.defineProperty(user,"name",{
+        get:function(){
+            console.log("你是不是来获取值啦");
+            return defaultName;
+        },
+        set:function(newValue){
+            console.log("设置新值");
+            defaultName = newValue;
+            console.log("实现 模型 => 视图");
+            document.querySelector("#model").value = newValue;
+            document.querySelector("#modelText").textContent = newValue;
+        }
+    });
+
+    console.log("2s 后改变值");
+
+    // setTimeout(() => {
+    //     //改变值
+    //     user.name = "狂奔的萝卜";
+    // }, 2000);
+    model.addEventListener("keyup", function () {
+        user.name = this.value;
+        console.log("实现 视图 => 模型");
+    }, false);
+    /**
+     * 对于中文事件的处理
+     * @type {boolean}
+     */
+    // var isEnd = true;
+    // model.addEventListener("keyup", function () {
+    //     if (isEnd) {
+    //         user.name = this.value;
+    //     }
+    // }, false);
+    // //加入监听中文输入事件
+    // model.addEventListener("compositionstart", function () {
+    //     console.log("开始输入中文");
+    //     isEnd = false;
+    // });
+    // model.addEventListener("compositionend", function () {
+    //     isEnd = true;
+    //     console.log("结束输入中文");
+    // });
+</script>
+</body>
+</html>
