@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .btn {
+            width: 100px;
+            height: 35px;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #F97B39;
+            position: absolute;
+            top: 130px;
+            left: 160px;
+            opacity: 0.2;
+            cursor: pointer; /*鼠标小手*/
+        }
+
+        .btn:hover, .btn:focus { /*focus 取得焦点状态*/
+            background-color: #8AA7F9;
+            opacity: 0.5;
+            color: #FFFFFF;
+        }
+
+        .modalBox {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modalBox-matter {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-between;
+            width: 50%;
+            height: 80%;
+            margin: 30px auto 100px;
+            border-radius: 10px;
+            -webkit-animation: zoom 1s ease;
+            animation: zoom 1s ease;
+            resize: both;
+            overflow: auto;
+        }
+
+        @keyframes zoom {
+            from {
+                /*transform: scale(0)*/
+                transform: translate(0,200px);
+            }
+            to {
+                /*transform: scale(1)*/
+                transform: translate(0,0);
+            }
+        }
+
+        .modalBox-header {
+            margin-left: 617px;
+        }
+
+        .mtclose {
+            color: #602E2A;
+            font-size: 3em;
+            font-weight: bold;
+            transition: all 0.3s;
+            /*z-index: 1010; */
+        }
+
+        .mtclose:hover, .mtclose:focus {
+            color: #602E2A;
+            cursor: pointer;
+        }
+
+        .modalBox-body {
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<img src="images/8.jpg" alt="">
+<button class="btn" id="showMax">显示大图</button>
+<div id="modalBox" class="modalBox">
+    <div class="modalBox-matter">
+        <header class="modalBox-header">
+            <span class="mtclose">×</span>
+        </header>
+        <div class="modalBox-body">
+            <img src="../../../assets/loading.gif">　　
+        </div>
+        　
+    </div>
+</div>
+<script>
+    var btn = document.getElementById('showMax');
+    var mtclose = document.getElementsByClassName('mtclose')[0];
+    var modalBox = document.getElementById('modalBox');
+    btn.addEventListener('click', function () {
+        modalBox.style.display = "block";
+    });
+    mtclose.addEventListener('click', function () {
+        modalBox.style.display = "none";
+    });
+</script>
+</body>
+</html>
