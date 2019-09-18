@@ -74,6 +74,33 @@
     };
     a.b(1).c(2).d(3);// 1// 2// 3
 
+
+    /**
+     * 实现下面的函数
+     * 实现counter函数，能实现以下功能：
+     */
+    function counter(val){
+        this.val=val;
+        this.add=function(){
+            this.val+=1;
+            console.info(this.val);
+        };
+        this.sub=function(){
+            this.val-=1;
+            console.info(this.val);
+        };
+        // this是window对象
+        return this;
+    }
+    let aa = counter(3);
+    console.info('aa.add---');
+    aa.add();//4
+    console.info('aa.sub---');
+    aa.sub();//3
+    console.info('aa.add---');
+    aa.add();//4
+    console.info('aa.add---');
+    aa.add();//5
 </script>
 </body>
 </html>
