@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 首先写一个函数的curry化
+     */
+    var add=function (a,b,c,d){
+        console.info(a+b+c+d);
+    };
+    var minus=function(a,b,c,d){
+        console.info(a-b-c-d);
+    };
+    var curry=function (fn){
+        var len=fn.length;
+        var args=[];
+        return function curry_fn(){
+            var args0=Array.prototype.slice.call(arguments);
+            args=args.concat(args0);
+            if (args.length===len){
+                return fn.apply(null,args);
+            }
+            return curry_fn;
+        }
+    };
+    add(1,2,3,4);
+    var add0=curry(add);
+    // add0(1,2)(3)(5);
+    // add0(3)(4)(5)(6);
+    let curry0=(fn,args=[])=>fn.length===args.length?fn(...args):(...args0)=>curry0(fn,[...args,...args0]);
+    // let add1=curry0(add);
+    // add1(1,2)(3)(5);
+    // add1(3)(4)(5)(6);
+    function curry1(fn) {
+        var length = fn.length; //获取原函数的参数个数
+        var args = []; // args存储传入参数
+        return function curryFn() {
+            // 将arguments转换成数组
+            var curryArgs = Array.prototype.slice.call(arguments);
+            args = args.concat(curryArgs);
+            if (args.length > length) {
+                throw new Error('arguments length error')
+            }
+            // 存储的参数个数等于原函数参数个数时执行原函数
+            if (args.length === length) {
+                return fn.apply(null, args);
+            }
+            // 否则继续返回函数
+            return curryFn;
+        };
+    }
+    var add2=curry1(add);
+    var minus1=curry1(minus);
+    add2(1,2)(3)(5);
+    minus1(3)(4)(5)(6);
+    /**
+     * 手写promise.all源码
+     * 两个关键点，一是将非thenable的转化
+     * 一个是收集所有结果
+     * 我犯了两个错误：
+     * 收集的是什么值不知道：应该是所有参数then之后的值也就是执行完之后的值，而非再次收集初始参数
+     * 对于then的处理不对
+     */
+    // 错误示范代码
+    // const promise_all=(...args)=>{
+    //     if (args.length<0) return;
+    //     let res=[];
+    //     for (let i=0;i<args.length;i++) {
+    //         let p=new Promise((resolve,reject)=>{
+    //             resolve(args[i]);
+    //         })
+    //         res.push(p);
+    //     }
+    //     if (res.length===args.length)return resolve(res);
+    // }
+    const promise_all=(...args)=>{
+        let res=[];
+        return new Promise((resolve,reject)=>{
+            if (args.length<1) return;
+            for (let i=0;i<args.length;i++){
+                promise.resolve(args[i]).then(val=>{res.push(val)}).catch(err=>{
+                    reject(err);
+                })
+            }
+            if (res.length===args.length) resolve(res);
+        })
+    };
+    /**
+     * 手写一个promise实现的ajax
+     */
+    let p=new Promise((resolve,reject)=>{
+        $.ajax({
+            url:'aaa.php',
+            dataType:'json',
+            type:'get',
+            success(val){
+                resolve(val);
+            },
+            error(err){
+                reject(err);
+            }
+        })
+    });
+    p.then((val)=>{
+        console.info(val);
+    }).catch(err=>{
+        console.info(err);
+    })
+</script>
+</body>
+</html>

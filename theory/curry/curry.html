@@ -18,6 +18,12 @@
      * 可以发现函数的一个特性，length即为它的参数的多少
      */
     // console.info(add.length);
+    /**
+     * 同时发现一个问题es5版的curry因为用到闭包会导致储存变量，无法连续调用同一个函数
+     * todo github有没有对这个问题做过一些解决
+     * @param fn
+     * @returns {function(): function()}
+     */
     var curry=function(fn){
         var len=fn.length;
         var args=[];
