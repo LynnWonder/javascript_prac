@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。
+     * 因为既要寻找左树也要寻找右树，每次寻找的思路是一样的，所以用递归来实现
+     * 递归要有输入和输出以及边界条件
+     */
+    const hasPathSum = (root, sum) => {
+        if(!root.left&&!root.right){
+            return sum === root.val;
+        }
+        let resL=false,resR=false;
+        if(root.left){
+            resL=hasPathSum(root.left,sum-root.val);
+        }
+        if (root.right){
+            resR=hasPathSum(root.right,sum-root.val);
+        }
+        return resL||resR;
+    };
+    /**
+     * 实现一个深拷贝
+     */
+    let obj0={
+        name:'lynn',
+        age:22,
+        friends:['tom','json'],
+    };
+    let obj1=JSON.parse(JSON.stringify(obj0));
+    obj1.friends.push('test');
+    console.info(obj1,obj0);
+    const deepCopy=(param)=>{
+        if (typeof (param)!=='object'){
+            return param;
+        }
+        let res=Array.isArray(param)?[]:{};
+        for (let i in param){
+            res[i]=deepCopy(param[i]);
+        }
+        return res;
+    };
+    let obj2=deepCopy(obj0);
+    obj2.friends.push('12345');
+    console.info(obj2,obj0,obj1);
+    /**
+     * 下面写一个单向链表的饭庄
+     */
+    /**
+     * 首先写一个单向链表
+     */
+    class Node{
+        constructor(val){
+            this.val=val;
+            this.next=null;
+        }
+    }
+    class LinkList{
+        constructor(arr){
+            this.data=arr;
+            this.head=new Node(arr.shift());
+            this.giveVal();
+        }
+        giveVal(){
+            let node=this.head;
+            while(this.data.length>0){
+                node.next=new Node(this.data.shift());
+                node=node.next;
+            }
+        }
+    }
+    let arr0=[1,2,3,4,5,6];
+    let llist=new LinkList(arr0);
+    console.info(llist.head);
+    const reverse=head=>{
+        var last=new Node(head.val);
+        last.next=null;
+        head=head.next;
+        while(head){
+            let node=new Node(head.val);
+            node.next=last;
+            last=node;
+            head=head.next;
+        }
+        return last;
+    }
+    console.info(reverse(llist.head));
+</script>
+</body>
+</html>

@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/interviews/css/两栏布局/两栏布局.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interviews/byteDance.html" beforeDir="false" afterPath="$PROJECT_DIR$/interviews/byteDance.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -108,7 +106,7 @@
       <workItem from="1567845666808" duration="205000" />
       <workItem from="1567853997089" duration="148000" />
       <workItem from="1567854214517" duration="36964000" />
-      <workItem from="1568452740135" duration="47906000" />
+      <workItem from="1568452740135" duration="52766000" />
     </task>
     <servers />
   </component>
