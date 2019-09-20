@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0920复习</title>
+</head>
+<body>
+    <script>
+        let obj0={
+            name:'lynn',
+            age:22,
+        };
+        let obj1={};
+        // 合并两个对象
+        let obj2=Object.assign(obj1,obj0);
+        obj2.friends='test';
+        console.info(obj2,obj0);
+        /**
+         * 实现函数curry化
+         * add(1,2,3,4)==> add(1)(2)(3)(4)
+         */
+        var add=function (a,b,c,d){
+            console.info(a+b+c+d);
+        };
+        function curry0(fn){
+            var len=fn.length;
+            // 不能像es6那样把它放在参数里，因为es6才有的默认参数这一说
+            var args=[];
+            return function curry_fn(){
+                var args0=Array.prototype.slice.call(arguments);
+                args=args.concat(args0);
+                if (args.length===len){
+                    return fn.apply(null,args);
+                }
+                return curry_fn;
+            }
+        }
+        var add0=curry0(add);
+        add(1,2,3,4);
+        add0(1)(2,3)(4);
+        let curry1=(fn,args=[])=>fn.length===args.length?fn(...args):(...args0)=>curry1(fn,[...args,...args0]);
+        let add1=curry1(add);
+        add1(1)(2)(3,4);
+        console.info('add1======>');
+        add1(1,2,3)(4);
+        /**
+         * 下面根据es6版改造一下es5
+         */
+        function curry2(fn,args){
+            if (fn.length===args.length){
+                return fn.apply(null,args);
+            }else if (fn.length<args.length){
+                throw new Error('have a error');
+            }
+            return function (){
+                var args0=Array.prototype.slice.call(arguments);
+                var args1=args.concat(args0);
+                return curry2(fn,args1);
+            }
+        }
+        var add2=curry2(add,[]);
+        console.info('改造版curry es5');
+        add2(1,2,3)(4);
+        add2(1)(7)(3)(6);
+    </script>
+</body>
+</html>
