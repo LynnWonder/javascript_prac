@@ -86,6 +86,21 @@
         console.info('改造版curry es5');
         add2(1,2,3)(4);
         add2(1)(7)(3)(6);
+        /**
+         * 手写promise.all源码
+         * 注意点：1。resolve非thenable数据2。收集结果
+         */
+        const promise_all=(args)=>{
+            let res=[];
+            return new Promise((resolve,reject)=>{
+                for (let i=0;i<args.length;i++){
+                    Promise.resolve(args[i]).then(data=>res.push(data)).catch(error=>reject(error));
+                }
+                if (res.length===args.length){
+                    resolve(res);
+                }
+            })
+        }
     </script>
 </body>
 </html>
