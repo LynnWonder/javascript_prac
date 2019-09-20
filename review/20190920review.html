@@ -5,7 +5,31 @@
     <title>0920复习</title>
 </head>
 <body>
+<div class="list">
+    <ul>
+        <li class="1">1</li>
+        <li class="2">2</li>
+        <li class="3">3</li>
+    </ul>
+</div>
     <script>
+        /**
+         * 事件代理
+         */
+        let list=document.querySelector('.list');
+        list.addEventListener('click',(e)=>{
+            switch (e.target.className) {
+                case '1':
+                    console.info('this is list1');
+                    break;
+                case '2':
+                    console.info('this is list2');
+                    break;
+                case '3':
+                    console.info('this is list3');
+                    break;
+            }
+        });
         let obj0={
             name:'lynn',
             age:22,
