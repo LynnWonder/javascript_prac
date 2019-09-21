@@ -41,6 +41,19 @@
         let box=addP();
         box.style.display='block';
     })
+    // 惰性单例
+    Single.getInstance1=(function(){
+        var instance=null;
+        return function(name){
+            if (!instance){
+                instance=new Single(name);
+            }
+            return instance;
+        }
+    })();
+    var demo3=Single.getInstance1('jack');
+    var demo4=Single.getInstance1('tom');
+    console.info(demo3===demo4);
 </script>
 </body>
 </html>
