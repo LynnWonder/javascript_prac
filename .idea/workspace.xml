@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/review/20190920review.html" beforeDir="false" afterPath="$PROJECT_DIR$/review/20190920review.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviews/css/三栏布局/flex.html" beforeDir="false" afterPath="$PROJECT_DIR$/interviews/css/三栏布局/r-l/flex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviews/css/三栏布局/双飞翼布局.html" beforeDir="false" afterPath="$PROJECT_DIR$/interviews/css/三栏布局/r-l/双飞翼布局.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviews/css/三栏布局/圣杯布局.html" beforeDir="false" afterPath="$PROJECT_DIR$/interviews/css/三栏布局/r-l/圣杯布局.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,11 +54,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/interviews/css/三栏布局/t-b" />
+      <recent name="$PROJECT_DIR$/interviews/css/三栏布局/r-l" />
       <recent name="$PROJECT_DIR$/interviews/css/同心圆" />
       <recent name="$PROJECT_DIR$/interviews/css/三栏布局" />
       <recent name="$PROJECT_DIR$/interviews/event-loop" />
-      <recent name="$PROJECT_DIR$/theory/design_patterns" />
-      <recent name="$PROJECT_DIR$/interviews" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\tju\笔试题\js" />
@@ -107,7 +109,7 @@
       <workItem from="1567845666808" duration="205000" />
       <workItem from="1567853997089" duration="148000" />
       <workItem from="1567854214517" duration="36964000" />
-      <workItem from="1568452740135" duration="61204000" />
+      <workItem from="1568452740135" duration="65444000" />
     </task>
     <servers />
   </component>
