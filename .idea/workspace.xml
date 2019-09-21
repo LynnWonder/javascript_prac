@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/theory/design_patterns/singleton.html" beforeDir="false" afterPath="$PROJECT_DIR$/theory/design_patterns/singleton.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +46,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="8.11.1" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/刷题/test.html" />
   </component>
   <component name="RecentsManager">
@@ -107,7 +106,7 @@
       <workItem from="1567845666808" duration="205000" />
       <workItem from="1567853997089" duration="148000" />
       <workItem from="1567854214517" duration="36964000" />
-      <workItem from="1568452740135" duration="66579000" />
+      <workItem from="1568452740135" duration="66770000" />
     </task>
     <servers />
   </component>
