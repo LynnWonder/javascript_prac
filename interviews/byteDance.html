@@ -89,7 +89,7 @@
             this.val-=1;
             console.info(this.val);
         };
-        // this是window对象
+        // this是window对象，return this 是为了解决链式调用的问题
         return this;
     }
     let aa = counter(3);
