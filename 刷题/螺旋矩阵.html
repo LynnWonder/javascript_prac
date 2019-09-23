@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>螺旋矩阵</title>
+</head>
+<body>
+<script>
+    /**
+     * 顺时针旋转矩阵
+     */
+    let arr0=[
+        [1,2,3,4],
+        [12,13,14,5],
+        [11,16,15,6],
+        [10,9,8,7]
+    ];
+    let arr1=[
+        [7],
+        [9],
+        [6]
+    ];
+    let arr2=[[1,2,3],[4,5,6],[7,8,9]];
+    let arr3=[[1,11],[2,12],[3,13],[4,14],[5,15],[6,16],[7,17],[8,18],[9,19],[10,20]];
+    console.info(arr0);
+    const matrix=(arr)=>{
+        let res=[];
+        const getRes=arr=>{
+            for (let i=0;i<arr.length;i++){
+                if (i===0){
+                    res=res.concat(arr[i]);
+                }else if (i===arr.length-1){
+                    res=res.concat(arr[i].reverse());
+                }else{
+                    res.push(arr[i].pop());
+                }
+            }
+            arr.pop();
+            arr.shift();
+            if(arr.length<1||arr[0].length<1) return;
+            console.info('test',arr,res);
+            for (let j=arr.length-1;j>=0;j--){
+                res.push(arr[j].shift());
+            }
+            console.info(res);
+            console.info(arr);
+            if (arr.length>0&&arr[0].length>0){
+                getRes(arr);
+            }
+        };
+        getRes(arr);
+        return res;
+    };
+    console.info(matrix(arr3));
+</script>
+</body>
+</html>
