@@ -23,6 +23,10 @@
          }
          return false;
      };
+     /**
+      /w匹配一个单字字符（字母、数字或者下划线）。等价于 [A-Za-z0-9_]。
+      /W匹配一个非单字字符。等价于 [^A-Za-z0-9_]。
+      */
      const repeatedSubstringPattern0=str=>{
          return (/^(\w)\1+$/).test(str);
      };
