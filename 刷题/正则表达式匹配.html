@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正则表达式匹配</title>
+</head>
+<body>
+<script>
+    const  isMatch=(s,p)=>{
+        const match=(s,p)=>{
+            if (p.length===0){
+                return s.length === 0;
+            }
+            let flag=false;
+            if (s.length>0&&(p[0]===s[0]||p[0]==='.')){
+                flag=true;
+            }
+            if (p.length>1&&p[1]==='*'){
+                // p *后无法匹配s
+                // 则继续检查是不是*前的内容是否出现了多次
+                return match(s,p.slice(2))||(flag&&match(s.slice(1),p));
+            }else{
+                return flag&& match(s.slice(1),p.slice(1));
+            }
+        };
+        return match(s,p);
+    };
+    let s='abaa';
+    let p='aba*';
+    console.info(isMatch(s,p));
+</script>
+</body>
+</html>
