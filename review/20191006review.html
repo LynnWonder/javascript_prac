@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>20191006review</title>
+</head>
+<body>
+<input class='txt' type="text"/>
+<div class="box"></div>
+<script>
+    /**
+     * 徒手实现一个vue双向绑定的原理
+     * 数据的双向绑定，通过object.defineProperty对需要观察的数据进行数据劫持，结合订阅者和观察者模式实现数据的双向绑定
+     * 注意get是获取值，因此需要返回默认值，set是设置值，所以要将默认值重新赋值，然后要相应的改变输入框和div中的值。
+     */
+    var input=document.querySelector('.txt');
+    var box=document.querySelector('.box');
+    var defaultVal='this is test';
+    var content={};
+    input.value=defaultVal;
+    box.textContent=defaultVal;
+    Object.defineProperty(content,'val',{
+        get(){
+            // console.info('getter',content.val);
+            // input.value=content.val;
+            // box.contentDocument=content.val;
+            return defaultVal;
+        },
+        set(val){
+            defaultVal=val;
+            box.textContent=val;
+            input.value=val;
+        }
+    });
+    input.addEventListener('keyup',(e)=>{
+        content.val=e.target.value;
+    })
+    /**
+     * 写一个二叉树的后序遍历，非递归版
+     */
+    /**
+     * 首先构建一棵树
+     */
+    function Node(ele){
+        this.val=ele;
+        this.left=null;
+        this.right=null;
+    }
+    const buildTree=(arr,i)=>{
+        if (i>arr.length-1) return;
+        let left=i*2+1;
+        let right=i*2+2;
+        let node=new Node(arr[i]);
+        node.left=buildTree(arr,left);
+        node.right=buildTree(arr,right);
+        return node;
+    };
+    let arr=[1,2,3,4,5];
+    let tree=buildTree(arr,0);
+    console.info(tree);
+    /**
+     * 下面实现二叉树的中序遍历，
+     * 中序遍历特点：左 根 右
+     * 因此要不断的寻找左树
+     * use stack压入左树，然后弹出 同时对右树进行同样的操作
+     */
+    const midOrder=tree=>{
+        let temp=[];
+        let res=[];
+        tree&&temp.push(tree);
+        while(temp.length){
+            while(tree.left){
+                tree=tree.left;
+                temp.push(tree);
+            }
+            let tempTree=temp.pop();
+            res.push(tempTree.val);
+            if (tempTree.right){
+                tree=tempTree.right;
+                res.push(tree.val);
+            }
+        }
+        return res;
+    };
+    console.info(midOrder(tree));
+    /**
+     * redux的原理
+     */
+    /**
+     * 唯一可以改变state的地方
+     * @param action
+     * @returns {{count: number}}
+     */
+    // function reducer(action,state){
+    //     if(!state){
+    //         return {
+    //             count:0,
+    //         }
+    //     }
+    //     switch(action.type){
+    //         case 'ADD':
+    //             return{
+    //                 ...state,
+    //                 action.payload,
+    //             }
+    //
+    //             // ...
+    //     }
+    // }
+
+    /**
+     * createStore 实现返回dispatch subscribe getState
+     */
+    function createStore(reducer){
+        var state=null;
+        var listeners=[];
+        var getState=function (){
+            return state;
+        };
+        var dispatch=function (action){
+            state=reducer(action,state);
+            listeners.forEach(item=>item());
+        };
+        var subscribe=function (listener){
+            listeners.push(listener);
+            return function(){
+                return listeners.filter(item=>item!==listener);
+            }
+        };
+        return {getState,dispatch,subscribe};
+    }
+
+    /**
+     * 以上就是redux模式的原理，即reducer用来改变state，redux模式强调数据的不变性，所以会要求通过覆盖state的方式修改state
+     * 通过createStore生成store 同时有三个方法 getState dispatch subscribe
+     * 将redux模式和react相融合，有了 react-redux模式：
+     * 其增加了connect高阶组件，用来将UI组件和容器组件相连接mapStateToProps mapDispatchToProps 实现一个从state dispatch向props的转换
+     * 增加了provider组件，实现将store放到context上，因此能够全局访问。
+     */
+    /**
+     * 写一下jsonp的原理
+     */
+    /**
+     * 动态添加script标签
+     */
+    var script=document.createElement('script');
+    script.src="test1.php?callback=getData";
+    var getData=function (data){
+        console.info(data);
+    };
+    box.appendChild(script);
+    console.info([1]==true);
+    var obj2 = {
+        [Symbol.toPrimitive](hint) {
+            if (hint == "number") {
+                return 10;
+            }
+            if (hint == "string") {
+                return "hello";
+            }
+            return '10';
+        }
+    };
+    console.info([10]==10);
+    var obj1={name:'test'};
+    console.info(obj1=='test');
+    console.info(obj2==10);
+</script>
+</body>
+</html>
