@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>20191007review</title>
+    <style>
+        .box{
+            width:200px;
+            height:2000px;
+            background-color: #ff0b20;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+
+</div>
+<script>
+    let box=document.querySelector('.box');
+    let i=0;
+    /**
+     * 节流函数 就像一个节流阀一样 将高频事件降为低频事件
+     */
+    const throttle=(fn,delay=500)=>{
+        let flag=false;
+        return(...args)=>{
+            if (!flag){
+                flag=true;
+                setTimeout(()=>{
+                    fn.apply(null,args);
+                    flag=false;
+                },delay);
+            }
+        }
+
+    };
+    /**
+     * 防抖函数 是将多次事件合成一次事件来执行，实现的关键是当存在计时器时需要将该计时器清除
+     */
+    const debounce=(fn,delay=500)=>{
+        let timer=null;
+        return(...args)=>{
+            if (timer) clearTimeout(timer);
+            timer=setTimeout(()=>{
+                fn.apply(null,args);
+            },delay);
+        }
+    };
+    const record=()=>{
+        console.info(`第${i++}次被触发了。。。`);
+    };
+    window.addEventListener('scroll',debounce(record,500));
+
+    /**
+     * 实现promise.all
+     * 注意点：1。非thenable的resolve掉 2。收集结果
+     */
+    const promise_all=(params)=>{
+        let res=[];
+        return new Promise((resolve,reject)=>{
+            if(params.length<0) return resolve([]);
+            for(let i=0;i<params.length;i++){
+                Promise.resolve(params[i]).then((data)=>{
+                    res.push(data);
+                }).catch((err)=>reject(err));
+            }
+            if (res.length===params.length){
+                resolve(res);
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
