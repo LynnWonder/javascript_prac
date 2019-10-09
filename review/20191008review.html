@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>20191008review</title>
+</head>
+<body>
+<script>
+    /**
+     * 实现数组的扁平化
+     */
+    let arr=[1,[2,3],[4,[5,[6]]]];
+    const flat1=arr=>{
+        // console.info(arr.toString().split(','));
+        // join不加参数 或者加","
+        // console.info(arr.join().split(',').map(item=>Number(item)));
+        console.info(arr.flat(Infinity));
+    };
+    let arr0=[1,2,3,[4]];
+    flat1(arr);
+    flat1(arr0);
+    const flat2=arr=>{
+        let res=[];
+        arr.forEach(item=>{
+            if (Array.isArray(item)){
+                res=res.concat(flat2(item));
+            }else{
+                res=res.concat([item]);
+            }
+        });
+        return res;
+    };
+    console.info(flat2(arr));
+    /**
+     * 练习贪心算法，股票买卖问题
+     *    [7,1,5,3,6,4]输出7
+     *    贪心算法的关键是找出贪心策略 总是低入 遇到高的就出 然后接着低入 高出
+     */
+    const maxProfit=arr=>{
+        let res=0;
+        for (let i=0;i<arr.length-1;i++){
+            for (let j=i+1;j<arr.length;j++){
+                if (arr[j]>arr[i]){
+                    res+=arr[j]-arr[i];
+                    i=j;
+                    console.info('i',i);
+                }else{
+                    break;
+                }
+            }
+        }
+        console.info(res);
+    };
+    let arr3=[7,1,5,3,6,4];
+    maxProfit(arr3);
+
+    /**
+     * 买卖股票的最佳时机 3 leetcode-123
+     * 最多只能交易两次
+     * 初步思路如下：很抱歉没有解决这个问题
+     */
+
+    const maxProfit1=arr=>{
+        let res=[0];
+        for (let i=0;i<arr.length;i++){
+            let res0=0;
+            for (let j=i+1;j<arr.length;j++){
+                if (arr[j]>=arr[i]){
+                    res0+=arr[j]-arr[i];
+                    i=j;
+                }
+                if(arr[j]<arr[i]){
+                    if (j>1){
+                        res.push(res0);
+                    }
+                    break;
+                }
+                if (j===arr.length-1) res.push(res0);
+                // if ((arr[j]<arr[i]&&j>1)||j===arr.length-1){
+                //     res.push(res0);
+                //     break;
+                // }
+            }
+        }
+        return res;
+        // if (res.length>=2){
+        //     res.sort((a,b)=>b-a);
+        //     return res[0]+res[1];
+        // }else{
+        //     return 0;
+        // }
+    };
+    let arr4=[3,3,5,0,0,3,1,4];
+    let arr5=[1,2,3,4,5];
+    let arr6=[2,1,4];
+    let arr7=[1,2,4,2,5,7,2,4,9,0];
+    console.info(maxProfit1(arr4));
+    console.info(maxProfit1(arr5));
+    console.info(maxProfit1(arr6));
+    console.info(maxProfit1(arr7));
+    /**
+     * Best Time to Buy and Sell Stock III
+     * 买卖股票的最佳时机 III
+     */
+
+    /**
+     * @param {number[]} prices
+     * @return {number}
+     */
+    //todo
+    var maxProfit2 = function (prices) {
+        var len = prices.length
+            , sell = []
+            , buy = []
+            , item
+            , i;
+
+        if (!len)
+            return 0;
+
+        for (i = 0; i < len; i++) {
+            sell[i] = [],
+                buy[i] = [],
+                item = prices[i];
+
+            if (!i) {
+                sell[i][0] = 0;
+                sell[i][1] = 0;
+                sell[i][2] = 0;
+                buy[i][0] = -item;
+                buy[i][1] = -item;
+                buy[i][2] = -item;
+            } else {
+                sell[i][0] = sell[i - 1][0];
+                sell[i][1] = Math.max(sell[i - 1][1], buy[i - 1][1] + item);
+                sell[i][2] = Math.max(sell[i - 1][2], buy[i - 1][2] + item);
+                buy[i][0] = buy[i - 1][0];
+                buy[i][1] = Math.max(buy[i - 1][1], sell[i - 1][0] - item);
+                buy[i][2] = Math.max(buy[i - 1][2], sell[i - 1][1] - item);
+            }
+        }
+
+        return sell[len - 1][2];
+    };
+</script>
+</body>
+</html>
