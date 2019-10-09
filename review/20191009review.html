@@ -89,6 +89,51 @@
     let list1=new Linklist([1,2,3,4,5]);
     console.info(findCircle1(list.head)); //true
     console.info(findCircle1(list1.head)); //false
+    /**
+     * 双栈排序
+     * 实现对一个栈进行排序，栈区别于数组，它是后进先出  并且每次只能访问一个栈顶元素即最后一个元素
+     */
+    class Stack{
+        constructor(arr){
+            this.data=arr;
+        }
+        peek(){
+            return this.data[this.data.length-1];
+        }
+        pop(){
+            return this.data.pop();
+        }
+        push(ele){
+            this.data.push(ele);
+        }
+        size(){
+            return this.data.length;
+        }
+    }
+    let arr3=[7,4,6,5];
+    let stack=new Stack(arr3);
+    console.info(stack);
+    console.info(stack.peek());
+    /**
+     * 因为我们只能读取栈顶元素，所以采取另一个辅助栈:
+     * 向其压入栈顶 并将栈顶和愿栈栈顶对比
+     *
+     * @param sta
+     */
+    const stackSort=sta=>{
+        let temp=new Stack([]);
+        while(sta.size()>0){
+            let peek=sta.pop(); //
+            // 如果辅助栈的栈顶大于原栈的原栈顶，那么把辅助栈的栈顶压回原栈
+            // 此时原栈的栈顶变成辅助栈的原栈顶，跳出循环后将原栈的原栈顶压入辅助栈，循环进行比较
+            while(temp.size()>0&&temp.peek()<peek){//
+                sta.push(temp.pop());//
+            }
+            temp.push(peek); //
+        }
+        console.info(temp);
+    };
+    stackSort(stack);
 </script>
 </body>
 </html>
