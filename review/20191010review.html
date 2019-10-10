@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>20191010review</title>
+</head>
+<body>
+<script>
+    /**
+     * 实现一个双栈排序
+     * 为了节省时间，下面直接用数组进行模拟的
+     * 借助辅助栈，对比原栈顶和此时的辅助栈栈顶 如果辅助栈栈顶内容比原栈顶高就压回原栈，因此最后辅助栈的内容是升序
+     */
+    const stackSort=sta=>{
+        if (sta.length<1) return sta;
+        let temp=[];
+        while(sta.length>0){
+            let peek=sta.pop();
+            while(temp&&temp[temp.length-1]>peek){
+                sta.push(temp.pop());
+            }
+            temp.push(peek);
+        }
+        return temp;
+    };
+    let sta=[7,4,6,5];
+    console.info(stackSort(sta));
+</script>
+</body>
+</html>
