@@ -58,6 +58,13 @@
         }
         return arr;
     };
+    /**
+     * 这段代码有其巧妙之处：
+     * 通过在循环内部不断的向辅助栈压入数据，
+     * 加入一开始就压入原栈的栈顶，其实是一种重复。
+     * @param stack
+     * @returns {Stack|*}
+     */
     const sortStack1=(stack)=>{
         let res=new Stack();
         if (stack.size()<=0){
