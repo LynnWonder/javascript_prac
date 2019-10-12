@@ -16,29 +16,57 @@
      * @param ih
      */
     // 我真的求求自己不要再犯傻逼错误 fuck brain
+    // 如下所示 进入了死循环
+    /**
+     * 现在想一下思路出现了问题，不应该是先让超出比例小的进行缩放，应该让超出比例大的缩放，而一开始的想法也是南辕北辙
+     * 最终根本没必要使用循环来操作
+     * @param pw
+     * @param ph
+     * @param iw
+     * @param ih
+     */
     function scanImage(pw, ph, iw, ih) {
         let width=iw,height=ih,top,left;
-        while(width>pw||height>ph)
-        {
-            //console.info('1',width,height);
-            if (height>ph&&width/pw>height/ph){
-                width=pw;
-                height=ih*width/iw;
-            }
-            if (width>pw&&height/ph>width/pw){
-                height=ph;
-                width=iw*height/ih;
-            }
-            // if(height>=ph){
-            //     height=ph;
-            //     width=iw*height/ih;
-            //     //console.info(width);
-            // }
-            // if(width>=pw){
-            //     width=pw;
-            //     height=ih*width/iw;
-            //     // pw*ih/iw;
-            // }
+        // while(width>pw||height>ph)
+        // {
+        //     //console.info('1',width,height);
+        //     if (height>=ph&&width/pw>=height/ph){
+        //         console.info('1==>',width,height);
+        //         height=ph;
+        //         width=iw*height/ih;
+        //     }
+        //     // 陷入死循环的做法
+        //     // if (width>=pw&&height/ph>=width/pw){
+        //     //     console.info('2==>',width,height);
+        //     //     width=pw;
+        //     //     height=ih*width/iw;
+        //     // }
+        //     if (width>pw){
+        //         // console.info('2==>',width,height);
+        //         width=pw;
+        //         height=ih*width/iw;
+        //     }
+        //     // 常规解法
+        //     // if(height>=ph){
+        //     //     height=ph;
+        //     //     width=iw*height/ih;
+        //     //     //console.info(width);
+        //     // }
+        //     // if(width>=pw){
+        //     //     width=pw;
+        //     //     height=ih*width/iw;
+        //     //     // pw*ih/iw;
+        //     // }
+        // }
+        if(width>=pw){
+            width=pw;
+            height=ih*width/iw;
+            // pw*ih/iw;
+        }
+        if(height>=ph){
+            height=ph;
+            width=iw*height/ih;
+            //console.info(width);
         }
         top=pw/2-width/2;
         left=ph/2-height/2;
