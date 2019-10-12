@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片拉伸压缩</title>
+</head>
+<body>
+<script>
+    /**
+     * 给定一个容器，使得图片在容器中垂直+水平居中。假设容器的position:relative; 图片的 position:absolute;。给出scanImage方法的实现，返回图片左上角的坐标和图片计算后的宽高。要求
+     1、返回的图片宽高不能大于图片的原始宽高；
+     2、要求图片最大程度在容器中完整的展现
+     * @param pw
+     * @param ph
+     * @param iw
+     * @param ih
+     */
+    // 我真的求求自己不要再犯傻逼错误 fuck brain
+    function scanImage(pw, ph, iw, ih) {
+        let width=iw,height=ih,top,left;
+        while(width>pw||height>ph)
+        {
+            //console.info('1',width,height);
+            if (height>ph&&width/pw>height/ph){
+                width=pw;
+                height=ih*width/iw;
+            }
+            if (width>pw&&height/ph>width/pw){
+                height=ph;
+                width=iw*height/ih;
+            }
+            // if(height>=ph){
+            //     height=ph;
+            //     width=iw*height/ih;
+            //     //console.info(width);
+            // }
+            // if(width>=pw){
+            //     width=pw;
+            //     height=ih*width/iw;
+            //     // pw*ih/iw;
+            // }
+        }
+        top=pw/2-width/2;
+        left=ph/2-height/2;
+        console.info( top, left, width, height);
+    }
+
+    scanImage(200, 200, 300, 400);
+    scanImage(200,200,300,500);
+    scanImage(200, 200, 100, 50);
+</script>
+</body>
+</html>
