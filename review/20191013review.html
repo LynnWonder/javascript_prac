@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>20191013review</title>
+    <style>
+        /*实现左侧固定宽度 右侧自适应*/
+        /* 方法1 使用float元素*/
+        /*.left{*/
+        /*    float: left;*/
+        /*    width:200px;*/
+        /*    height:100px;*/
+        /*    background-color: #5544aa;*/
+        /*}*/
+        /*.right{*/
+        /*    height:100px;*/
+        /*    background-color: #ff0b20;*/
+        /*}*/
+    /*    方法2：使用flex*/
+        .container{
+            display: flex;
+        }
+        .left{
+            flex: 0 0 200px;
+            height:100px;
+            background-color: #5544aa;
+        }
+        .right{
+            flex:1;
+            height:100px;
+            background-color: #ff0b20;
+        }
+        .box{
+            position:relative;
+            width:50px;
+            height:50px;
+            background-color: #ff0b20;
+        }
+        body{
+            position:relative;
+            border: solid 2px red;
+            margin:2px;
+        }
+        .bb{
+            /* 圣杯布局的关键：使用外面的容器来限制中间格的宽度*/
+            /*padding-left: 200px;*/
+            /*padding-right: 200px;*/
+            text-align: center;
+        }
+        .m{
+            float: left;
+            width:100%;
+            height:200px;
+            background-color: #ff0b20;
+        }
+        .m-i{
+            margin-left: 200px;
+            margin-right: 200px;
+            height:200px;
+        }
+        .l{
+            /*position: relative;*/
+            /*left:-200px;*/
+            float: left;
+            margin-left: -100%;
+            width:200px;
+            height:200px;
+            background-color: #5544aa;
+        }
+        .r{
+            /*position: relative;*/
+            /*right:-200px;*/
+            float: left;
+            margin-left: -200px;
+            width:200px;
+            height:200px;
+            background-color: #602E2A;
+        }
+        /*竖直方向的三栏布局此处不再赘述，一般来讲可以用flex-direction:column + flex:1实现*/
+    /*    用position：fixed +margin+top +bottom实现*/
+    /*    用position：absolute+top+bottom+height:calc(100%-100px)*/
+    </style>
+</head>
+<body>
+<div class="container">
+<div class="left">left</div>
+<div class="right">right</div>
+</div>
+<div class="box">box</div>
+<br/>
+<br/>
+<div class="bb">
+    <div class="m">
+        <div class='m-i'>middle</div>
+    </div>
+    <div class="l">left</div>
+    <div class="r">right</div>
+</div>
+<script>
+    /**
+     * 区分行内元素和块级元素
+     * 常见的行内元素
+     * a input textarea  img span
+     * 常见的块级元素
+     * div p li address h1 h2 h3
+     * 行内元素和块级元素的区别：
+     * 所有的行内元素只在一行显示，不能设置宽高 （注意置换元素） 且行内元素不能嵌套块级元素 只能嵌套行内元素 文本。竖直方向的padding和margin不起作用
+     * 块级元素都独占一行，能够设置宽高 能够嵌套块级元素 行内元素 文本等
+     * BFC：所谓BFC即所有元素垂直排列  竖直方向的margin会重叠 解决重叠问题的方法是把重叠的两个块变成BFC 不会受浮动元素的影响 计算高度的时候会把浮动元素的高度计算进去
+     * 形成BFC的条件：1。body根元素 2。float元素 3。 display inline-block flex inline-flex等  4。position设置为absolute fixed 5. overflow 除了visible之外的其他元素
+     * 包含auto hidden scroll等
+     */
+    /**
+     * 写一个方块平移动画
+     */
+    /**
+     * 首先用setInterval实现，然后进行优化
+     */
+    let box=document.querySelector('.box');
+    box.style.left="0";
+    console.info(box.offsetLeft);// body没有设置position属性 参考点就是浏览器边框
+    console.info(box.style.left);
+    let animation=(box)=>{
+        let left=Number(box.style.left.slice(0,box.style.left.length-2))+10;
+        box.style.left=`${left}px`;
+    };
+    // let interval=setInterval(()=>{
+    //     animation(box);
+    // },16);
+    //setInterval存在的问题就是会跳过一些间隔 每隔一段时间将回调函数加入任务队列中去，但不意味着每一个这个间隔都执行了
+    /**
+     * 优化1：用setTimeout实现setInterval
+     */
+    let myInterval=(fn,delay)=>{
+        setTimeout(()=>{
+            fn();
+            myInterval(fn,delay);
+        },delay);
+    };
+    let i=0;
+    // myInterval(()=>{
+    //     animation(box);
+    // },16);
+    let rafAnimation=()=>{
+        requestAnimationFrame(()=>{
+            animation(box);
+            rafAnimation();
+        })
+    };
+    // rafAnimation();
+</script>
+</body>
+</html>
