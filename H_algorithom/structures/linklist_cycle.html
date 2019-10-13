@@ -18,7 +18,7 @@
             he.next=new Node(arr.shift());
             he=he.next;
         }
-        this.find=find;
+        LinkList.find=find;
         this.insert=insert;
     }
     function find(ele){
@@ -32,7 +32,7 @@
         return false;
     }
     function insert(ele,item){
-        var cur=this.find(ele);
+        var cur=LinkList.find(ele);
         var node=new Node(item);
         node.next=cur.next;
         cur.next=node;

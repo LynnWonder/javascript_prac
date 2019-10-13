@@ -33,13 +33,13 @@
         }
         function insert(newElement,item){
           var newNode=new Node(newElement);
-          var cur =this.find(item);
+          var cur =LinkList.find(item);
           newNode.next=cur.next;
           cur.next=newNode;
         }
         function deletes(item){
           var previous=this.findPrevious(item);
-          var cur=this.find(item);
+          var cur=LinkList.find(item);
           previous.next=cur.next;
         }
         var my_llist=new LinkedList();

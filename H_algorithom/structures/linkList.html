@@ -37,13 +37,13 @@
         return node;
     }
     function insert(element,item){
-        var node=this.find(element);
+        var node=LinkList.find(element);
         var nNode=new Node(item);
         nNode.next=node.next;
         node.next=nNode;
     }
     function delete0(element){
-        var node=this.find(element);
+        var node=LinkList.find(element);
         var preNode=this.findPre(element);
         preNode.next=node.next;
     }

@@ -3,6 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/H_algorithom/structures/linkList.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/structures/linkList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/H_algorithom/structures/linklist_cycle.html" beforeDir="false" afterPath="$PROJECT_DIR$/H_algorithom/structures/linklist_cycle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/jquery-1.12.3.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/jquery-1.12.3.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/jquery.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/review/20191013review.html" beforeDir="false" afterPath="$PROJECT_DIR$/review/20191013review.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/刷题/链表/testLLlist.html" beforeDir="false" afterPath="$PROJECT_DIR$/刷题/链表/testLLlist.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -117,7 +123,7 @@
       <workItem from="1567854214517" duration="36964000" />
       <workItem from="1568452740135" duration="66770000" />
       <workItem from="1569080997049" duration="82625000" />
-      <workItem from="1570893975847" duration="7611000" />
+      <workItem from="1570893975847" duration="18772000" />
     </task>
     <servers />
   </component>
