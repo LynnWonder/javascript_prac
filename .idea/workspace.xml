@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/H_algorithom/promise_test.html" beforeDir="false" afterPath="$PROJECT_DIR$/interviews/promise_test.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,15 +52,15 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/刷题/test.html" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\tju\笔试题\js" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/interviews" />
       <recent name="$PROJECT_DIR$/interviews/css/三栏布局/t-b" />
       <recent name="$PROJECT_DIR$/interviews/css/三栏布局/r-l" />
       <recent name="$PROJECT_DIR$/interviews/css/同心圆" />
       <recent name="$PROJECT_DIR$/interviews/css/三栏布局" />
-      <recent name="$PROJECT_DIR$/interviews/event-loop" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\tju\笔试题\js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -117,7 +118,7 @@
       <workItem from="1567854214517" duration="36964000" />
       <workItem from="1568452740135" duration="66770000" />
       <workItem from="1569080997049" duration="82625000" />
-      <workItem from="1570893975847" duration="22621000" />
+      <workItem from="1570893975847" duration="24884000" />
     </task>
     <servers />
   </component>
