@@ -178,6 +178,24 @@
         }
         return res;
     };
+    /**
+     * 判断二叉树中是否有一条路径，它的总和为指定的一个数
+     * 其实这个题很容易能够想到通过递归的方式来实现
+     * 边界条件，输入 输出
+     */
+    const findSum=(tree,sum)=>{
+        if(!tree.left&&!tree.right){
+            return tree.val===sum;
+        }
+        let resL=false,resR=false;
+        if (tree.left){
+            resL=findSum(tree.left,sum-tree.val);
+        }
+        if (tree.right){
+            resR=findSum(tree.right,sum-tree.val);
+        }
+        return resL||resR;
+    };
     console.info('递归前序=>',preOrder(tree));
     console.info('非递归前序=>',preOrder0(tree));
     console.info('递归中序=>',midOrder(tree));
@@ -186,6 +204,7 @@
     console.info('非递归后序=>',postOrder0(tree));
     console.info('广度优先遍历=>',BFS(tree));
     console.info('二叉树的深度=>',depth(tree));
+    console.info('是否有一条路径的总和为8：',findSum(tree,12));
 </script>
 </body>
 </html>
