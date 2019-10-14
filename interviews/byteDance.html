@@ -60,6 +60,9 @@
     getValue();
     console.info(getValue);
     console.info('jq------');
+    /**
+     * jq链式调用的精髓
+     */
     var a = {
         b: function (bb) {
             console.log(bb);
@@ -73,8 +76,21 @@
         }
     };
     a.b(1).c(2).d(3);// 1// 2// 3
-
-
+    a.b(1).d(3).c(2);
+    var a0=function (){
+        console.info('a');
+        return {
+            b:function(){
+                console.info('b');
+                return this;
+            },c:function(){
+                console.info('c');
+                return this;
+            }
+        }
+    };
+    a0().b().c();
+    a0().c().b();
     /**
      * 实现下面的函数
      * 实现counter函数，能实现以下功能：
