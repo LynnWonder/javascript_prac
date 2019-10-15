@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>股票问题</title>
+</head>
+<body>
+<script>
+    /**
+     * 如果你最多只允许完成一笔交易（即买入和卖出一支股票），设计一个算法来计算你所能获取的最大利润。
+     * leetcode-121题
+     * [7,1,5,3,6,4]
+     */
+    const maxProfit = (arr)=>{
+        let res=0;
+        // 遍历，可以思考到选择排序的思想，从一次遍历中找到最大或者最小的元素
+        for(let i=0;i<arr.length-1;i++){
+            for(let j=i+1;j<arr.length;j++){
+                if (arr[j]-arr[i]>res)
+                    res=arr[j]-arr[i];
+            }
+        }
+        return res;
+    };
+    let arr0=[7,1,5,3,6,4];
+    let arr1=[7,6,4,3,1];
+    console.info(maxProfit(arr0));
+    console.info(maxProfit(arr1));
+    /**
+     * 这个问题可以转化为动态规划问题，
+     * 首先查找最后一步是什么？应该是比较最大值和某两个值的差，所以我们明明可以遍历一次
+     * 状态转移方程：Max=Math.max(Max,arr[arr.length-1]-min); Min=Math.min(Min,arr[arr.length-2]);
+     * 最优子结构 Max Min
+     * 边界条件：
+     * Max=0;Min=arr[0]
+     */
+    const maxProfit0=arr=>{
+        if (arr.length<1) return 0;
+        let max=0;
+        let min=arr[0];
+        for (let i=1;i<arr.length;i++){
+            if (arr[i]>arr[i-1]){
+                max=Math.max(max,arr[i]-min);
+            }else{
+                min=Math.min(min,arr[i]);
+            }
+        }
+        return max;
+    };
+    console.info(maxProfit0(arr0));
+    console.info(maxProfit0(arr1));
+</script>
+</body>
+</html>
