@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/H_algorithom/再次二叉树.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/H_algorithom/再次练习二叉树.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -118,7 +117,7 @@
       <workItem from="1567854214517" duration="36964000" />
       <workItem from="1568452740135" duration="66770000" />
       <workItem from="1569080997049" duration="82625000" />
-      <workItem from="1570893975847" duration="27641000" />
+      <workItem from="1570893975847" duration="30352000" />
     </task>
     <servers />
   </component>
