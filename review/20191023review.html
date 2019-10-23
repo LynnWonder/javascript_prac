@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>20191023review</title>
+</head>
+<body>
+<script>
+    /**
+     * 首先按自己的印象实现一个堆排序,
+     * 堆排序的关键是构建大根堆
+     */
+    const buildHeap=(arr,i)=>{
+        if (i>arr.length) return;
+        let left=i*2+1;
+        let right=i*2+2;
+        let maxIdx=i;
+        if (arr[left]>arr[maxIdx]){
+            maxIdx=left;
+        }
+        if (arr[right]>arr[maxIdx]){
+            maxIdx=right;
+        }
+        if (maxIdx!==i){
+            swap(i,maxIdx,arr);
+        }
+        buildHeap(arr,left);
+        buildHeap(arr,right);
+    };
+    /**
+     * 实现交换两个元素的辅助数组
+     * @param i
+     * @param j
+     * @param arr
+     */
+    const swap=(i,j,arr)=>{
+        let temp=arr[i];
+        arr[i]=arr[j];
+        arr[j]=temp;
+    };
+
+    /**
+     * 实现堆排序,如何找出最后一个拥有叶子节点的根节点
+     * 出错点1：寻找最后一个拥有叶子结点的根节点这一步拥有困难，思路出现错误，**不应该是求对数
+     * 出错点2：构建完一次大根堆之后怎么处理，这部分不是用的递归，而是从新从头开始构建大根堆
+     */
+    const heapSort=arr=>{
+        let res = [];
+        if (arr.length<1) return res;
+        //应该是从最后一个拥有叶子节点
+        for (let i = Math.floor(arr.length / 2) - 1; i >= 0; i--) {
+            buildHeap(arr, i);
+        }
+        for (let i=0;i<arr.length;i++){
+            swap(0, arr.length - 1, arr);
+            res.push(arr.pop());
+            buildHeap(arr,0);
+            i--;
+        }
+        return res;
+    };
+    let arr0=[7,4,6,5,1,3,9];
+    let arr1=[1,2,3,4,5,6,2,2];
+    console.info(heapSort(arr0));
+    console.info(heapSort(arr1));
+
+</script>
+</body>
+</html>
