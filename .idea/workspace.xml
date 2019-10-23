@@ -3,6 +3,45 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FIB.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chained.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/debounce_throttle.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/event_loop.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/localStorage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mianshiti.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/original-ajax.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-promise.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test029-ajax.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test065-sington.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test066-webStorage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testCallapply.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testFetch.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testHTML5.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testHammer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testHammer0.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testHammer1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testHasOwnProoerty.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testHeap.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testNull.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testPattern.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testPinch.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testRAF.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testThis.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testlianxi.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testshallowEqual.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testttt.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test函数与原型.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test继承.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test闭包.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test高阶函数.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/刷题/算法/堆.html" beforeDir="false" afterPath="$PROJECT_DIR$/刷题/算法/堆.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/整理/test001.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/整理/test001.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/整理/test002.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/整理/test002.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/整理/test003.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/整理/test004.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/柠檬水练习.html" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -117,7 +156,7 @@
       <workItem from="1567854214517" duration="36964000" />
       <workItem from="1568452740135" duration="66770000" />
       <workItem from="1569080997049" duration="82625000" />
-      <workItem from="1570893975847" duration="38829000" />
+      <workItem from="1570893975847" duration="39485000" />
     </task>
     <servers />
   </component>
