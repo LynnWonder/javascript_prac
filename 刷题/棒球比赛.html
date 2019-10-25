@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>棒球比赛</title>
+</head>
+<body>
+<script>
+    /**
+     * ["5","2","C","D","+"]
+     */
+    const calPoints = (ops)=>{
+        let res=[];
+        for(let i=0;i<ops.length;i++){
+            switch(ops[i]){
+                case 'C':
+                    if (res.length===0) return;
+                    res.pop();
+                    break;
+                case 'D':
+                    if (res.length-1<0) return;
+                    res.push(res[res.length-1]*2);
+                    break;
+                case '+':
+                    if (res.length-2<0) return;
+                    res.push(res[res.length-1]+res[res.length-2]);
+                    break;
+                default:
+                    res.push(Number(ops[i]));
+            }
+        }
+        return res.reduce((res0,item)=>res0+item,0);
+    };
+    console.info(calPoints(["5","2","C","D","+"]));
+    console.info(calPoints(["5","-2","4","C","D","9","+","+"]));
+
+</script>
+</body>
+</html>
