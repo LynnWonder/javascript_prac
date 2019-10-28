@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>钢条切割问题</title>
+</head>
+<body>
+<script>
+    /**
+     *问题描述，给定一个数组，表示的是出售长度为i的钢条的价格。如p = [1, 5, 8, 9, 10, 17, 17, 20, 24, 30]
+     * 表示的是长度为1的钢条为1美元，长度为2的钢条为5美元，以此类推。
+     * 现在有一个钢条长度为n，那么如何切割钢条能够使得收益最高，切割的时候不消耗费用。来源于算法导论15.1。
+     */
+    /**
+     * 问题分析：
+     * 这是一个典型的dp问题，它具有自己的状态 有最优子结构，无后效性 子问题重叠
+     * 即长度为i的钢条的的最大收益应该是Math.max(pn,r(1)+r(n-1),r(2)+r(n-2)...)
+     * 转化成一个求分成两段后的最大值和直接一段值比较的问题
+     * 最优子结构是：r(1)+r(n-1)
+     * 边界条件是r(1)=1 r(2)=5 r(3)=8
+     * 最优子结构 p(n-1) (l-l(n-1))*r
+     */
+    /**
+     * 我们会发现时间复杂度是2^(n-1)-1
+     */
+    const biggestProfit=(len,p)=>{
+        let res=0;
+        if (len<1) return res;
+        if (len===1) return p[0];
+        if (len<=p.length){
+            res=p[len-1];
+        }
+        for (let i=1;i<=Math.floor(len/2);i++){
+            if (biggestProfit(len-i,p)+biggestProfit(i,p)>res){
+                res=biggestProfit(len-i,p)+biggestProfit(i,p);
+                // console.info(biggestProfit(len-i,p),biggestProfit(i,p));
+            }
+        }
+        return res;
+    };
+
+    /**
+     * 用dp来做优化，用空间换取时间的减少
+     * 时间复杂度 n^2
+     */
+    const big=(len,p)=>{
+        let res=[0],s=[0],sRes=[];
+        let temp;
+        for (let i=1;i<=len;i++){
+            temp=-(Infinity);
+            for (let j=1;j<=i;j++){
+                // 思考这里：将问题分解成了p[j-1]+res[i-j]
+                // 那么其实是将钢条分成两端 一段不再切割 一段切割后求最大值
+                // 那么会想一段不切割的话这种方式并不一定得到最优解啊，但是因为for循环遍历了所有的可能，(因此双重for循环是必要的一层检测)
+                // 所以总是能找到最优解的
+                //temp=Math.max(temp,p[j-1]+res[i-j]);
+                if (p[j-1]+res[i-j]>temp) {
+                    temp = p[j - 1] + res[i - j];
+                    s[i]=j;
+                }
+            }
+            res[i]=temp;
+        }
+        let len0=len;
+        while(len0>0){
+            sRes.push(s[len0]);
+            len0=len0-sRes[sRes.length-1];
+        }
+        return `max:${res[len]},组合为：${sRes}`;
+    };
+    p = [1, 5, 8, 9, 10, 17, 17, 20, 24, 30];
+    console.info(biggestProfit(3,p));
+    console.info(biggestProfit(4,p));
+    console.info(biggestProfit(5,p));
+    console.info(biggestProfit(6,p));
+    console.info(biggestProfit(10,p));
+    console.info(big(2,p));
+    console.info(big(5,p));
+    console.info(big(7,p));
+    console.info(big(10,p));
+
+</script>
+</body>
+</html>
