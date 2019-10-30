@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>leetcode-622</title>
+</head>
+<body>
+<script>
+    /**
+     * 设计实现一个循环队列
+     *
+     */
+    var MyCircularQueue = function(k) {
+        this.len=k;
+        this.data=[];
+    };
+
+    /**
+     * Insert an element into the circular queue. Return true if the operation is successful.
+     * @param {number} value
+     * @return {boolean}
+     */
+    MyCircularQueue.prototype.enQueue = function(value){
+        if(this.data.length<this.len){
+            this.data.push(value);
+            return true;
+        }
+        return false;
+    };
+
+    /**
+     * Delete an element from the circular queue. Return true if the operation is successful.
+     * @return {boolean}
+     */
+    MyCircularQueue.prototype.deQueue = function() {
+        if (this.data.length>=1){
+            this.data.shift();
+            return true;
+        }
+        return false;
+    };
+
+    /**
+     * Get the front item from the queue.
+     * @return {number}
+     */
+    MyCircularQueue.prototype.Front = function() {
+        if (this.data.length<1){
+            return -1;
+        }
+        return this.data[0];
+    };
+
+    /**
+     * Get the last item from the queue.
+     * @return {number}
+     */
+    MyCircularQueue.prototype.Rear = function() {
+        if (this.data.length<1){
+            return -1;
+        }
+        return this.data[this.data.length-1];
+    };
+
+    /**
+     * Checks whether the circular queue is empty or not.
+     * @return {boolean}
+     */
+    MyCircularQueue.prototype.isEmpty = function() {
+        return this.data.length < 1;
+    };
+
+    /**
+     * Checks whether the circular queue is full or not.
+     * @return {boolean}
+     */
+    MyCircularQueue.prototype.isFull = function() {
+        return this.data.length===this.len;
+    };
+
+    let circularQueue = new MyCircularQueue(3); // 设置长度为 3
+
+    // console.info(circularQueue.enQueue(1));  // 返回 true
+    //
+    // console.info(circularQueue.enQueue(2));  // 返回 true
+    //
+    // console.info(circularQueue.enQueue(3));  // 返回 true
+    //
+    // console.info(circularQueue.enQueue(4));  // 返回 false，队列已满
+    //
+    // console.info(circularQueue.Rear());  // 返回 3
+    //
+    // console.info(circularQueue.isFull());  // 返回 true
+    //
+    // console.info(circularQueue.deQueue());  // 返回 true
+    //
+    // console.info(circularQueue.enQueue(4));  // 返回 true
+    //
+    // console.info(circularQueue.Rear());  // 返回 4
+
+    /**
+     * 下面是基于leetcode这个题的本意对上述代码的优化
+     * 其实这个题并没有太多涉及算法的内容，
+     * 更多的是考察一个类怎么更好的去构建，
+     * 但是我的代码的缺陷在于太多的依赖数组的API
+     * 应该用队首队尾指针的方式去判断，
+     * 这是一种很好的解决问题的思路，
+     * 同理参考链表排序
+     */
+    class MyCircularQueue0 {
+        /**
+         * 数据结构 - 循环队列
+         * @param { Number } k 队列的长度
+         */
+        constructor (k) {
+            this.k = k
+            this.head = -1 // 头部指针
+            this.tail = -1 // 尾部指针
+            this.size = 0 // 队列长度
+            this.data = new Array(k)
+        }
+        /**
+         * 从队首获取元素, 如果队列为空, 返回-1
+         */
+        Front () {
+            return this.size === 0 ? -1 : this.data[this.head]
+        }
+        /**
+         * 从队尾获取元素, 如果队列为空, 返回-1
+         */
+        Rear () {
+            return this.size === 0 ? -1 : this.data[this.tail]
+        }
+        /**
+         * 向循环队列中插入一个元素, 成功返回真
+         * @param { Any } val 插入的值
+         */
+        enQueue (val) {
+            if (this.size === this.k) return false // 队列已满
+            if (this.tail === this.head && this.tail === -1) this.head++
+            this.tail = this.tail === this.k - 1 ? 0 : this.tail + 1
+            this.size++
+            this.data[this.tail] = val
+            return true
+        }
+        /**
+         * 从循环队列中删除一个元素, 成功返回真
+         */
+        deQueue () {
+            if (this.size === 0) return false
+            delete this.data[this.head]
+            this.head++
+            this.size--
+            if (this.size === 0) {
+                this.head = -1
+                this.tail = -1
+            }
+            if (this.head === this.k && this.size !== 0) {
+                this.head = 0
+            }
+            return true
+        }
+        /**
+         * 检查队列是否为空
+         */
+        isEmpty () {
+            return this.size === 0
+        }
+        /**
+         * 检查循环队列是否已满
+         */
+        isFull () {
+            return this.size === this.k
+        }
+    }
+
+    class MyCircularQueue1 {
+        constructor (k) {
+            // 用来保存数据长度为k的数据结构
+            this.list = Array(k);
+            // 队首指针
+            this.front = 0;
+            // 队尾的指针
+            this.rear = 0;
+            // 队列的长度
+            this.max = k
+        }
+        enQueue (num) {
+            if (this.isFull()) {
+                return false
+            } else {
+                this.list[this.rear] = num;
+                this.rear = (this.rear + 1) % this.max;
+                return true
+            }
+        }
+        deQueue () {
+            if (this.isEmpty()) return false;
+            delete(this.list[this.front]);
+            this.front = (this.front + 1) % this.max
+            return true
+        }
+        isEmpty () {
+            return this.front === this.rear && !this.list[this.front]
+        }
+        isFull () {
+            return this.front === this.rear && !!this.list[this.front]
+        }
+        Front () {
+            return this.list[this.front]
+        }
+        Rear () {
+            if (this.isEmpty()) return -1;
+            let rear = this.rear - 1;
+            // 如果是满的状态那么去取最后一个值的时候：因为rear已经是0了就需要进行一个三目运算符操作
+            return this.list[rear < 0 ? this.max - 1 : rear]
+        }
+    }
+
+
+    let circularQueue1 = new MyCircularQueue1(2); // 设置长度为 3
+
+    console.info(circularQueue1.enQueue(1));  // 返回 true
+
+    console.info(circularQueue1.enQueue(2));  // 返回 true
+
+    console.info(circularQueue1.enQueue(3));  // 返回 true
+
+    console.info(circularQueue1.enQueue(4));  // 返回 false，队列已满
+
+    console.info(circularQueue1.Rear());  // 返回 3
+
+    console.info(circularQueue1.isFull());  // 返回 true
+
+    console.info(circularQueue1.deQueue());  // 返回 true
+
+    console.info(circularQueue1.enQueue(4));  // 返回 true
+
+    console.info(circularQueue1.Rear());  // 返回 4
+
+</script>
+</body>
+</html>
