@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>20191030review</title>
+</head>
+<body>
+<script>
+    // 设计完成一个循环队列
+    // 注意到会有空空间的存在，所以建议用前后指针来实现
+    class MyCircularQueue{
+        constructor(k){
+            this.len=k;
+            this.data=new Array(k);
+            this.start=0;
+            this.end=0;
+        }
+        enQueue(value){
+            if (this.isFull()) return false;
+            this.data[this.end]=value;
+            this.end=(this.end+1)%this.len;
+            return true;
+        }
+        deQueue(){
+            if (this.isEmpty()) return false;
+            delete(this.data[this.start]);
+            this.start=(this.start+1)%this.len;
+            return true;
+        }
+        Front(){
+            if (this.isEmpty()) return -1;
+            return this.data[this.start];
+        }
+        Rear(){
+            if (this.isEmpty()) return -1;
+            return this.data[this.end-1<0?this.len-1:this.end-1];
+        }
+        isEmpty(){
+            return this.start===this.end&&!this.data[0];
+        }
+        isFull(){
+            return this.start===this.end&&!!this.data[this.len-1];
+        }
+    }
+</script>
+</body>
+</html>
