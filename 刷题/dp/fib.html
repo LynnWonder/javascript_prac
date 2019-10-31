@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fib数列</title>
+</head>
+<body>
+<script>
+    /**
+     * 前段时间已经写过关于一个铺地砖问题的答案，实际上就是斐波那契数列
+     * 而dp的关键是什么：有状态 有状态转移方程 有重叠的子问题 有边界
+     * 下面就写一下fib数列，同时通过一个中间数组保存每一个子问题的值，避免重复计算
+     */
+    const fib = n => {
+        let res = [0, 1, 1];
+        if (n === 1 || n === 2) return res[n];
+        for (let i = 3; i <= n; i++) {
+            res.push(res[i - 1] + res[i - 2]);
+        }
+        console.info('fib===>',res);
+        return res[n];
+    };
+    console.info(fib(4));
+    console.info(fib(5));
+</script>
+</body>
+</html>
