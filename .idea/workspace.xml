@@ -74,7 +74,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.任务调度器.html">
+  <component name="RunManager" selected="JavaScript Debug.验证二叉搜索树.html">
     <configuration type="JavascriptDebugType" editBeforeRun="true" engineId="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" useFirstLineBreakpoints="true">
       <method v="2" />
     </configuration>
@@ -84,8 +84,12 @@
     <configuration name="任务调度器.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/javascript_prac/刷题/任务调度器.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
+    <configuration name="验证二叉搜索树.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/javascript_prac/刷题/验证二叉搜索树.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.验证二叉搜索树.html" />
         <item itemvalue="JavaScript Debug.任务调度器.html" />
         <item itemvalue="JavaScript Debug.20191009review.html" />
       </list>
@@ -122,7 +126,7 @@
       <workItem from="1568452740135" duration="66770000" />
       <workItem from="1569080997049" duration="82625000" />
       <workItem from="1570893975847" duration="85738000" />
-      <workItem from="1572520648882" duration="5208000" />
+      <workItem from="1572520648882" duration="12224000" />
     </task>
     <servers />
   </component>
