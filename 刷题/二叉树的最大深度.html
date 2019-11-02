@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>二叉树的最大深度-leetcode-104</title>
+</head>
+<body>
+<script>
+    const maxDepth = (root)=>{
+        let temp=[];
+        root&&temp.push(root);
+        let i=0;
+        while(temp.length>0){
+            i++;
+            let temp0=[];
+            temp.forEach(item=>{
+                if (item.left){
+                    temp0.push(item.left);
+                }
+                if(item.right){
+                    temp0.push(item.right);
+                }
+            });
+            temp=temp0;
+        }
+        return i;
+    };
+</script>
+</body>
+</html>
