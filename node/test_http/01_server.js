@@ -4,9 +4,9 @@ let server=http.createServer();
 server.on('request',(req,res)=>{
     // req is read-only object
     // res 是只写对象，调函数
-    console.info(req.headers);
-    console.info(req.url);
-    console.info(req.method);
+    // console.info(req.headers);
+    // console.info(req.url);
+    // console.info(req.method);
     req.on('data',(data)=>{
         // 查看请求的数据
         console.info(data.toString());
