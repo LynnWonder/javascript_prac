@@ -10,28 +10,22 @@
         this.val = val;
         this.left = this.right = null;
     }
+    /**
+     * 这种递归方式太难了。根本没办法想到，先验证左边是否通过然后验证右边
+     */
     const isValidBST = (root)=>{
-        // 先把边界条件处理好
-        if(!root) return true;
-        const test=(tree,pivot)=>{
-            let left=false,right=false;
-            if(tree.left){
-                if(tree.left.val<tree.val&&tree.left.val<pivot)
-                     left=test(tree.left,tree.val);
-            }else{
-                left=true;
-            }
-            if (tree.right){
-                if (tree.right.val>tree.val&&tree.right.val>pivot){
-                    right=test(tree.right,tree.val);
+        let lst=-Number.MAX_SAFE_INTEGER;
+        let isValidBST0=root=>{
+            if(root===null) return true;
+            if (isValidBST0(root.left)){
+                if(lst<root.val){
+                    lst=root.val;
+                    return isValidBST0(root.right);
                 }
-            }else{
-                right=true;
             }
-            console.info(left,right);
-            return left&&right;
+            return false;
         };
-        return test(root,root.val);
+        return isValidBST0(root);
     };
     const buildTree=(arr,i)=>{
         if (i>=arr.length) return;
@@ -53,6 +47,7 @@
     let tree3=buildTree(arr3,0);
     let tree4=buildTree(arr4,0);
     // console.info(isValidBST(tree0));
+    console.info(tree0);
     // console.info(tree1);
     // console.info(tree1);
     // console.info(tree3);
@@ -60,7 +55,7 @@
     // console.info(isValidBST(tree1));
     // console.info(isValidBST(tree2));
     // console.info(isValidBST(tree3));
-    // console.info(isValidBST(tree4));
+    console.info(isValidBST(tree0));
     /**
      * 出错原因：没理解清楚题意
      * @param tree

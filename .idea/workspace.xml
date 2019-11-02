@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/test_http/01_server.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/test_http/01_server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/刷题/验证二叉搜索树.html" beforeDir="false" afterPath="$PROJECT_DIR$/刷题/验证二叉搜索树.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -127,7 +127,7 @@
       <workItem from="1568452740135" duration="66770000" />
       <workItem from="1569080997049" duration="82625000" />
       <workItem from="1570893975847" duration="85738000" />
-      <workItem from="1572520648882" duration="20381000" />
+      <workItem from="1572520648882" duration="22317000" />
     </task>
     <servers />
   </component>
