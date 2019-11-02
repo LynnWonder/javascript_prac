@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<div>
+    <button class="btn">click</button>
+    <div class="text"></div>
+</div>
+<script>
+    let btn=document.querySelector('.btn');
+    let txt=document.querySelector('.text');
+    btn.addEventListener('click',()=>{
+        let xhr=new XMLHttpRequest();
+        xhr.onreadystatechange=function(){
+            // 鉴于是即时发送信息，所以需要不去校验连接的状态码
+            // 0 xhr开始初始化 1 开始发送请求 2 发送请求完毕 3 开始响应 4  响应完毕
+            // 不会进入到4 的状态所以也就不会打印response的内容
+            // if (xhr.readyState===4)
+            {
+                if (xhr.status===200)
+                {
+                    // if (!!xhr.responseText)
+                    txt.textContent=xhr.responseText;
+                    console.info(xhr.responseText);
+                }
+            }
+        };
+        xhr.open('GET','/test',true);
+        xhr.send();
+    })
+</script>
+</body>
+</html>
