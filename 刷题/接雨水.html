@@ -8,7 +8,9 @@
 <script>
     /**
      * 主体思路是寻找左右都比中间值大或等于的点，且左右值不同 因此去寻找左边最大的，右边最大的 ，选其中小的作为基准，
+     * 其中左右最大的选取基准都是相邻最大，如果出现了比当前小的就立即停止（因此就会出现重新遍历的情况）
      * 第一遍填满一遍空缺，但会存在填满空缺后 如何和之前的数组不一样，需要再遍历一次。
+     * 这个方法个人感觉是很容易理解的一种方式：
      * @param height
      */
     const trap = (arr)=>{
@@ -19,7 +21,7 @@
             if(arr[i-1]>=arr[i]&&arr[i+1]>=arr[i]){
                 let left=findLeft(arr,i);
                 let right=findRight(arr,i);
-                // console.info(left,right);
+                console.info(left,right);
                 let min=Math.min(arr[left],arr[right]);
                 for(let j=left;j<=right;j++){
                     if(min-arr[j]>0){
@@ -60,8 +62,8 @@
         }
         return max;
     };
-    // console.info(trap([0,1,0,2,1,0,1,3,2,1,2,1]));
-    console.info(trap([0, 1, 1, 2, 2, 2, 2, 3, 2, 2, 2, 1]));
+    console.info(trap([0,1,0,2,1,0,1,3,2,1,2,1]));
+    // console.info(trap([0, 1, 1, 2, 2, 2, 2, 3, 2, 2, 2, 1]));
     // console.info(trap([5,2,1,2,1,5]));
     // console.info(trap([5, 2, 2, 2, 2, 5]));
 </script>
