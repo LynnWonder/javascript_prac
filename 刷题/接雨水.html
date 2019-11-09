@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>接雨水-leetcode-42</title>
+</head>
+<body>
+<script>
+    /**
+     * 主体思路是寻找左右都比中间值大或等于的点，且左右值不同 因此去寻找左边最大的，右边最大的 ，选其中小的作为基准，
+     * 第一遍填满一遍空缺，但会存在填满空缺后 如何和之前的数组不一样，需要再遍历一次。
+     * @param height
+     */
+    const trap = (arr)=>{
+        let temp=arr.join(',');
+        let len=arr.length;
+        let res=0;
+        for (let i=1;i<len-1;i++){
+            if(arr[i-1]>=arr[i]&&arr[i+1]>=arr[i]){
+                let left=findLeft(arr,i);
+                let right=findRight(arr,i);
+                // console.info(left,right);
+                let min=Math.min(arr[left],arr[right]);
+                for(let j=left;j<=right;j++){
+                    if(min-arr[j]>0){
+                        res+=min-arr[j];
+                        arr[j]=min;
+                    }
+                }
+                i=right-1;
+            }
+        }
+        if(arr.join(',')!==temp){
+            return res+trap(arr);
+        }else{
+            return res;
+        }
+    };
+    const findLeft=(arr,i)=>{
+        let max=i;
+        while(i>0){
+            if (arr[i-1]>arr[max]){
+                max=i-1;
+                i--;
+            }else{
+                break;
+            }
+        }
+        return max;
+    };
+    const findRight=(arr,i)=>{
+        let max=i;
+        while(i<arr.length-1){
+            if(arr[i+1]>=arr[max]){
+                max=i+1;
+                i++
+            }else{
+                break;
+            }
+        }
+        return max;
+    };
+    // console.info(trap([0,1,0,2,1,0,1,3,2,1,2,1]));
+    console.info(trap([0, 1, 1, 2, 2, 2, 2, 3, 2, 2, 2, 1]));
+    // console.info(trap([5,2,1,2,1,5]));
+    // console.info(trap([5, 2, 2, 2, 2, 5]));
+</script>
+</body>
+</html>
