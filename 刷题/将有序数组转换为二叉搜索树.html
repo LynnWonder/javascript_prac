@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>将有序数组转换为二叉搜索树-leetcode-108</title>
+</head>
+<body>
+<script>
+    function TreeNode(val) {
+         this.val = val;
+         this.left = this.right = null;
+    }
+
+    /**
+     * 有输入，有输出，有边界，但这个答案无法通过所有测试用例
+     * @param nums
+     * @returns {TreeNode}
+     */
+    const sortedArrayToBST = (nums)=>{
+        const buildTree=(arr,i)=>{
+            if(i>arr.length-1) return null;
+            let node=new TreeNode(arr[i]);
+            let left=i*2+1;
+            let right=i*2+2;
+            node.left=buildTree(arr,left);
+            node.right=buildTree(arr,right);
+            return node;
+        };
+        if (nums.length<=0) return null;
+        let pivot=Math.floor(nums.length/2);
+        let node=new TreeNode(nums[pivot]);
+        node.left=buildTree(nums.slice(0,pivot),0);
+        node.right=buildTree(nums.slice(pivot+1),0);
+        return node;
+    };
+    // console.info(sortedArrayToBST([-10,-3,0,5,9]));
+    // console.info(sortedArrayToBST([1,2,3,4,5]));
+    var sortedArrayToBST1 = function (nums) {
+        return dfs(0, nums.length - 1);
+        function dfs(start, end) {
+            if (start > end)
+                return null;
+            var mid = (start + end) >> 1;
+            console.info(mid);
+            var node = new TreeNode(nums[mid]);
+            node.left = dfs(start, mid - 1);
+            node.right = dfs(mid + 1, end);
+            return node;
+        }
+    };
+    // console.info(sortedArrayToBST1([-10,-3,0,5,9]));
+    /**
+     * 计算一下时间复杂度：T(n)=2*T(n/2)+f(n)
+     * 显然 a=2 b=2 c=0 logba=1>c符合master theorem case1 得出结论时间复杂度为O(n)
+     * 空间复杂度 O(logn)
+     * @param arr
+     * @returns {null|TreeNode}
+     */
+    const sortedArrayToBST2=arr=>{
+        const buildTree=(arr)=>{
+            if(arr.length<=0) return null;
+            let pivot=Math.floor(arr.length/2);
+            let node=new TreeNode(arr[pivot]);
+            node.left=buildTree(arr.slice(0,pivot));
+            node.right=buildTree(arr.slice(pivot+1));
+            return node;
+        };
+        return buildTree(arr);
+    };
+    console.info(sortedArrayToBST2([-10,-3,0,5,9]));
+</script>
+</body>
+</html>
