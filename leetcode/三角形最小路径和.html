@@ -53,20 +53,38 @@
      * 边界条件：竟然无法找寻，因为是从最初的点开始累加，向下寻找，怎么确定边界呢？
      * key2: 既然是向下累加，那么就可以将结果数组=参数，逐步吞噬原数组
      * key3: 怎么遍历，向下累加显然应该从底部向上遍历
+     * 自底向上解法
+     * 就地修改法，并没有使用额外的空间，所以时间复杂度为O(1)
      *
      */
     const minimumTotal0=arr=>{
-        let res=arr;
         for(let i=arr.length-2;i>=0;i--){
             for(let j=0;j<arr[i].length;j++){
-                res[i][j]=Math.min(res[i+1][j],res[i+1][j+1])+res[i][j];
+                arr[i][j]=Math.min(arr[i+1][j],arr[i+1][j+1])+arr[i][j];
             }
         }
-        return res[0][0];
+        return arr[0][0];
     };
-    console.info(minimumTotal0(arr));
-    console.info(minimumTotal0(arr0));
-    console.info(minimumTotal0(arr1));
+    // console.info(minimumTotal0(arr));
+    // console.info(minimumTotal0(arr0));
+    // console.info(minimumTotal0(arr1));
+    /**
+     * 另一种自底向上的做法是不必缓存每一个二维数组的数据
+     * 通过不停的更新数组中的数据进行换代累加
+     * @param arr
+     */
+    const minimumTotal1=arr=>{
+        let res=new Array(arr.length+1).fill(0);
+        for(let i=arr.length-1;i>=0;i--){
+            for(let j=0;j<arr[i].length;j++){
+                res[j]=Math.min(res[j+1],res[j])+arr[i][j];
+                console.info(res);
+            }
+        }
+        console.info('res==>',res);
+        return res[0];
+    };
+    console.info(minimumTotal1(arr));
 </script>
 </body>
 </html>
