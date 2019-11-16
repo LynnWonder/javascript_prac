@@ -272,7 +272,6 @@
 
   /**
    * @ Dsec: utilities
-   * @ Author: lizhiyang1
    * @ Date: 2019/2/28
    */
 
@@ -298,7 +297,6 @@
 
   /**
    * @ Dsec: 一个简单的队列
-   * @ Author: lizhiyang1
    * @ Date: 2019/7/10
    */
 
@@ -370,7 +368,6 @@
 
   /**
    * @ Dsec: 小程序埋点统计
-   * @ Author: lizhiyang1
    * @ Date: 2019/3/31
    */
 
@@ -436,7 +433,6 @@
 
   /**
    * @ Dsec: utilities
-   * @ Author: lizhiyang1
    * @ Date: 2019/2/28
    */
 
@@ -461,7 +457,6 @@
 
   /**
    * @ Dsec: 腾讯云分析
-   * @ Author: lizhiyang1
    * @ Date: 2019/2/28
    */
 
@@ -506,7 +501,6 @@
 
   /**
    * @ Dsec: 金科BDC
-   * @ Author: lizhiyang1
    * @ Date: 2019/2/28
    */
 
@@ -553,7 +547,6 @@
 
   /**
    * @ Dsec: 金融奇点
-   * @ Author: lizhiyang1
    * @ Date: 2019/3/2
    * @ Document: https://cf.jd.com/pages/viewpage.action?pageId=143941206
    */
@@ -598,7 +591,6 @@
 
   /**
    * @ Dsec: 埋点统计
-   * @ Author: lizhiyang1
    * @ Date: 2019/2/27
    */
 
