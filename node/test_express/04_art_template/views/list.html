@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+<body>
+<div>
+    this is a list!
+    <hr/>
+        imports.num:{{num}}
+    <br/>
+        imports.reverse:{{reverse('abcd')}}
+    <hr/>
+    <ul>
+        {{each heros}}
+           <li>{{$value.name}}</li>
+        {{/each}}
+    </ul>
+
+</div>
+</body>
+</html>

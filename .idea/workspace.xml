@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/test_http/02_server.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/test_http/02_server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/三角形最小路径和.html" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/三角形最小路径和.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,14 +53,15 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/node/test_http/my_server" />
       <recent name="E:\tju\笔试题\js" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/leetcode/algorithm" />
+      <recent name="$PROJECT_DIR$/leetcode" />
+      <recent name="$PROJECT_DIR$/node/test_express" />
       <recent name="$PROJECT_DIR$/interviews" />
       <recent name="$PROJECT_DIR$/interviews/css/三栏布局/t-b" />
-      <recent name="$PROJECT_DIR$/interviews/css/三栏布局/r-l" />
-      <recent name="$PROJECT_DIR$/interviews/css/同心圆" />
-      <recent name="$PROJECT_DIR$/interviews/css/三栏布局" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -75,7 +76,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.验证二叉搜索树.html">
+  <component name="RunManager" selected="JavaScript Debug.20191009review.html">
     <configuration type="JavascriptDebugType" editBeforeRun="true" engineId="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" useFirstLineBreakpoints="true">
       <method v="2" />
     </configuration>
@@ -90,7 +91,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.验证二叉搜索树.html" />
         <item itemvalue="JavaScript Debug.任务调度器.html" />
         <item itemvalue="JavaScript Debug.20191009review.html" />
       </list>
@@ -128,6 +128,9 @@
       <workItem from="1569080997049" duration="82625000" />
       <workItem from="1570893975847" duration="85738000" />
       <workItem from="1572520648882" duration="35512000" />
+      <workItem from="1573749178403" duration="4490000" />
+      <workItem from="1573812564605" duration="6411000" />
+      <workItem from="1573870096315" duration="6275000" />
     </task>
     <servers />
   </component>
@@ -148,6 +151,15 @@
     </option>
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/node/test_express/05_static_upload_file_error/app.js</url>
+          <line>18</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="JavascriptDebugType">
         <watch expression="temp" language="HTML" />
