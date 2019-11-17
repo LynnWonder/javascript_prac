@@ -43,7 +43,7 @@ export const calculateTime = (keyboard, word) => {
   let count = indexList[0]
 
   for (let i = 0; i < indexList.length - 1; i += 1) {
-    count += indexList[i + 1] - indexList[i]
+    count += Math.abs(indexList[i + 1] - indexList[i])
   }
 
   return count
