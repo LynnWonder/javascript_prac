@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>猜数字-LCP1</title>
+</head>
+<body>
+<script>
+    const game = (guess, answer)=>{
+        let res=0;
+        for(let i=0;i<3;i++){
+            if (guess[i]===answer[i]){
+                res++;
+            }
+        }
+        return res;
+    };
+</script>
+</body>
+</html>
