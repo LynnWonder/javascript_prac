@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>不同路径3-leetcode-980</title>
+</head>
+<body>
+<script>
+    /**
+     * 太牛逼了这写法。
+     * 让我们尝试遍历每一个 0 方格，并在走过的方格里留下一个障碍。回溯的时候，我们要删除那些自己留下的障碍
+     * 时间复杂度：O(4^(R*C))
+     * 空间复杂度：O(R*C)
+     */
+    const uniquePathsIII=(grid)=>{
+        let R = grid.length;
+        let C = grid[0].length;
+        // sr sc 记录起始点位置
+        // tr tc 记录结束点位置
+        // 设置todo记录是否每个能走的格子都被走过了
+        let todo = 0,sr = 0, sc = 0,tr=0,tc=0;
+        for (let r = 0; r < R; ++r){
+            for (let c = 0; c < C; ++c) {
+                if (grid[r][c] !== -1) {
+                    todo++;
+                }
+                if (grid[r][c] === 1) {
+                    sr = r;
+                    sc = c;
+                } else if (grid[r][c] === 2) {
+                    tr = r;
+                    tc = c;
+                }
+            }
+        }
+
+        ans = 0;
+        dfs(sr, sc,tr,tc, todo,grid);
+        return ans;
+    };
+    /**
+     * dfs 深度优先遍历
+     * @param r
+     * @param c
+     * @param tr
+     * @param tc
+     * @param todo
+     * @param grid
+     */
+    const dfs=(r,c,tr,tc,todo,grid)=>{
+        let R = grid.length;
+        let C = grid[0].length;
+        // dr,dc对应的正是当前点可移动的四个方向 上 左 下 右 顺时针方向
+        let dr=[0,-1,0,1],dc=[1,0,-1,0];
+        todo--;
+        if (todo < 0) return;
+        // 终止条件
+        if (r === tr && c === tc) {
+            if (todo === 0) ans++;
+            return;
+        }
+        // 给起始点设置为3，为什么设置为3，意味着走过的格子不重复走
+        grid[r][c] = 3;
+        for (let k = 0; k < 4; k++) {
+            let nr = r + dr[k];
+            let nc = c + dc[k];
+            if (0 <= nr && nr < R && 0 <= nc && nc < C) {
+                if (grid[nr][nc] % 2 === 0){
+                    dfs(nr, nc,tr,tc, todo,grid);
+                }
+            }
+        }
+        // 恢复原本可以行走的点的值 便于回溯
+        grid[r][c] = 0;
+    };
+    let grid=[[1,0,0,0],[0,0,0,0],[0,0,2,-1]];
+    console.info(uniquePathsIII(grid));
+    /**
+     * 官方题解：用dp优化重复的步骤
+     */
+
+</script>
+</body>
+</html>
