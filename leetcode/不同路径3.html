@@ -12,66 +12,54 @@
      * 时间复杂度：O(4^(R*C))
      * 空间复杂度：O(R*C)
      */
-    const uniquePathsIII=(grid)=>{
-        let R = grid.length;
-        let C = grid[0].length;
-        // sr sc 记录起始点位置
-        // tr tc 记录结束点位置
-        // 设置todo记录是否每个能走的格子都被走过了
-        let todo = 0,sr = 0, sc = 0,tr=0,tc=0;
-        for (let r = 0; r < R; ++r){
-            for (let c = 0; c < C; ++c) {
-                if (grid[r][c] !== -1) {
-                    todo++;
-                }
-                if (grid[r][c] === 1) {
-                    sr = r;
-                    sc = c;
-                } else if (grid[r][c] === 2) {
-                    tr = r;
-                    tc = c;
-                }
-            }
-        }
-
-        ans = 0;
-        dfs(sr, sc,tr,tc, todo,grid);
-        return ans;
-    };
     /**
-     * dfs 深度优先遍历
-     * @param r
-     * @param c
-     * @param tr
-     * @param tc
-     * @param todo
-     * @param grid
+     * 要求避过障碍物走完所有可以行驶的网格
+     * 统计可以行驶的路径总数
+     * 采用dfs深度优先搜索，递归确定每个方格上下左右四个方向是否可以行走，而此时不是像另外两个不同路径问题用dp来解决，而是另外用边界条件来判断是否可以终止
+     * 边界条件，len走完，且起点即为终点===>终止条件
+     * 在编写js代码时由于没有写类，建议len作为变量加进dfs的参数
      */
-    const dfs=(r,c,tr,tc,todo,grid)=>{
-        let R = grid.length;
-        let C = grid[0].length;
-        // dr,dc对应的正是当前点可移动的四个方向 上 左 下 右 顺时针方向
-        let dr=[0,-1,0,1],dc=[1,0,-1,0];
-        todo--;
-        if (todo < 0) return;
-        // 终止条件
-        if (r === tr && c === tc) {
-            if (todo === 0) ans++;
-            return;
-        }
-        // 给起始点设置为3，为什么设置为3，意味着走过的格子不重复走
-        grid[r][c] = 3;
-        for (let k = 0; k < 4; k++) {
-            let nr = r + dr[k];
-            let nc = c + dc[k];
-            if (0 <= nr && nr < R && 0 <= nc && nc < C) {
-                if (grid[nr][nc] % 2 === 0){
-                    dfs(nr, nc,tr,tc, todo,grid);
+    const uniquePathsIII=arr=>{
+        let sr=0,sc=0,er=0,ec=0,len=2,ans=0;
+        let length0=arr.length,length1=arr[0].length;
+        for(let i=0;i<length0;i++){
+            for(let j=0;j<length1;j++){
+                if (arr[i][j]===1){
+                    sr=i;
+                    sc=j;
+                }else if(arr[i][j]===2){
+                    er=i;
+                    ec=j;
+                }else if (arr[i][j]===0){
+                    len++;
                 }
             }
         }
-        // 恢复原本可以行走的点的值 便于回溯
-        grid[r][c] = 0;
+        const dfs=(sr,sc,er,ec,arr,len)=>{
+            len--;
+            let dr=[0,-1,0,1];
+            let dc=[1,0,-1,0];
+            if(len<0) return;
+            if(sr===er&&sc===ec){
+                if(len===0){
+                    ans++;
+                }
+                return;
+            }
+            // 已经作为过起点的值不再次列为必经路径之一
+            arr[sr][sc]=3;
+            for(let k=0;k<4;k++){
+                let nr=sr+dr[k],nc=sc+dc[k];
+                if (nr<arr.length&&nc<arr[0].length&&nr>=0&&nc>=0){
+                    if(arr[nr][nc]%2===0){
+                        dfs(nr,nc,er,ec,arr,len);
+                    }
+                }
+            }
+            arr[sr][sc]=0;
+        };
+        dfs(sr,sc,er,ec,arr,len);
+        return ans;
     };
     let grid=[[1,0,0,0],[0,0,0,0],[0,0,2,-1]];
     console.info(uniquePathsIII(grid));
