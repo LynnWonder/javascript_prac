@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对链表进行插入排序-leetcode-147</title>
+</head>
+<body>
+<script>
+    /**
+     * 插入排序算法：
+
+     插入排序是迭代的，每次只移动一个元素，直到所有元素可以形成一个有序的输出列表。
+     每次迭代中，插入排序只从输入数据中移除一个待排序的元素，找到它在序列中适当的位置，并将其插入。
+     重复直到所有输入数据插入完为止。
+     */
+    /**
+     * 变向考察插入排序
+     * 两个相同元素的链表不可全等
+     * @param val
+     * @constructor
+     */
+     function ListNode(val) {
+         this.val = val;
+         this.next = null;
+     }
+    const insertionSortList = (head)=>{
+        /**
+         * 交换的指针一直找不对，想法不对，应该用递归来做
+         * 同时参考解析图会发现用这种方式更加简单，若是整体移动链表反而更加麻烦
+         */
+        const swap=(head,node)=>{
+            // console.info(head,node);
+            if(head===null||head.val>node.val){
+                node.next=head;
+                console.info('node===>',node);
+                return node;
+            }
+            head.next=swap(head.next,node);
+            return head;
+        };
+        let temp=head,res=new ListNode();
+        while(temp)
+        {
+            let next=temp.next;
+            // swap会改变temp,temp和head指向同一块内存
+            res=swap(res,temp);
+            temp=next;
+        }
+        return res.next;
+    };
+
+    const convertArrToLL=arr=>{
+        let node=new ListNode(arr[0]);
+        let temp=node;
+        for(let i=1;i<arr.length;i++){
+            temp.next=new ListNode(arr[i]);
+            temp=temp.next;
+        }
+        return node;
+    };
+    let arr0=[4,2,1,3];
+    let arr1=[-1,5,3,4,0];
+    let LL=convertArrToLL(arr0);
+    let LL1=convertArrToLL(arr1);
+    console.info(LL1,LL1.next);
+    // let LL0=change(LL,LL.next);
+    // console.info('LL0==>',LL0,LL.next);
+    // let LL1=change(LL0,LL.next);
+    // console.info('change==>',LL1,LL.next);
+    // console.info(change(LL1,LL.next));
+    console.info(insertionSortList(LL));
+    // console.info(insertionSortList0(LL1));
+</script>
+</body>
+</html>
