@@ -90,6 +90,13 @@
     let temp=list.next;
     // console.info(temp===list.next);
     console.info(sortedListToBST1(list));
+    /**
+     * 寻找链表的中间位置
+     * 利用快慢指针
+     * @param list
+     * @param end
+     * @returns {*}
+     */
     const findMid=(list,end)=>{
         if(list===end||!list) return;
         let fast=list,slow=list;
