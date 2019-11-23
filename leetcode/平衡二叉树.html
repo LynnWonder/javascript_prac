@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>平衡二叉树-leetcode-110</title>
+</head>
+<body>
+<script>
+    function Node(val){
+        this.val=val;
+        this.left=null;
+        this.right=null;
+    }
+    /**
+     * 判断两颗树深度的高度差，本质是求最大深度和最小深度进行对比
+     * 求深度的方式过于繁琐
+     * 并且递归比较
+     */
+    const isBalanced = (root)=>{
+        const dep=tree=>{
+            if(!tree){
+                return 0;
+            }
+            let temp=[],i=0;
+            temp.push(tree);
+            while(temp.length>0){
+                i++;
+                let temp0=[];
+                temp.forEach(item=>{
+                    item.left&&temp0.push(item.left);
+                    item.right&&temp0.push(item.right);
+                });
+                temp=temp0;
+            }
+            return i;
+        };
+        if(!root) return true;
+        if(Math.abs(dep(root.left)-dep(root.right))<=1){
+            return isBalanced(root.left)&&isBalanced(root.right);
+        }else{
+            return false;
+        }
+    };
+    const buildTree=(arr,i)=>{
+        if(i>arr.length-1) return;
+        let node=new Node(arr[i]);
+        node.left=buildTree(arr,i*2+1);
+        node.right=buildTree(arr,i*2+2);
+        return node;
+    };
+    let tree=buildTree([1,2,3,4,5],0);
+    // console.info(isBalanced(tree));
+    console.info(tree);
+    // console.info(dep(tree.left),dep(tree.right));
+    /**
+     * 时间复杂度：T(n)=2T(n/2)+1
+     * a=2,b=2 logba=1>c=0,===>时间复杂度是O(n)
+     * @param tree
+     * @returns {number}
+     */
+    const findMaxDepth=tree=>{
+        if(!tree) return 0;
+        return 1+Math.max(findMaxDepth(tree.left),findMaxDepth(tree.right));
+    };
+    const findMinDepth=tree=>{
+        if(!tree) return 0;
+        return 1+Math.min(findMinDepth(tree.left),findMinDepth(tree.right));
+    };
+    console.info(findMaxDepth(tree));
+    /**
+     * 因此重新修正函数
+     * 它的时间复杂度是什么呢：因此每一轮递归都需要重新调用findDepth，因此时间复杂度为O(n2)
+     */
+    const isBalanced1 = (root)=>{
+        const findMaxDepth=tree=>{
+            if(!tree) return 0;
+            return 1+Math.max(findMaxDepth(tree.left),findMaxDepth(tree.right));
+        };
+        if(!root) return true;
+        if(Math.abs(findMaxDepth(root.left)-findMaxDepth(root.right))<=1){
+            return isBalanced(root.left)&&isBalanced(root.right);
+        }else{
+            return false;
+        }
+    };
+    const isBalanced2= (root)=>{
+        let res=true;
+        const findMaxDepth=tree=>{
+            if(!tree) return 0;
+            let left=findMaxDepth(tree.left);
+            let right=findMaxDepth(tree.right);
+            if(Math.abs(left-right)>1) res=false;
+            return 1+Math.max(left,right);
+        };
+       findMaxDepth(root);
+       return res;
+    };
+    console.info(isBalanced1(tree));
+    console.info(isBalanced2(tree));
+</script>
+</body>
+</html>
