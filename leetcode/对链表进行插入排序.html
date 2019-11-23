@@ -8,16 +8,9 @@
 <script>
     /**
      * 插入排序算法：
-
-     插入排序是迭代的，每次只移动一个元素，直到所有元素可以形成一个有序的输出列表。
-     每次迭代中，插入排序只从输入数据中移除一个待排序的元素，找到它在序列中适当的位置，并将其插入。
-     重复直到所有输入数据插入完为止。
-     */
-    /**
-     * 变向考察插入排序
-     * 两个相同元素的链表不可全等
-     * @param val
-     * @constructor
+     * 插入排序是迭代的，每次只移动一个元素，直到所有元素可以形成一个有序的输出列表。
+     * 每次迭代中，插入排序只从输入数据中移除一个待排序的元素，找到它在序列中适当的位置，并将其插入。
+     * 重复直到所有输入数据插入完为止。
      */
      function ListNode(val) {
          this.val = val;
@@ -62,14 +55,116 @@
     let arr1=[-1,5,3,4,0];
     let LL=convertArrToLL(arr0);
     let LL1=convertArrToLL(arr1);
-    console.info(LL1,LL1.next);
+    // console.info(LL1,LL1.next);
     // let LL0=change(LL,LL.next);
     // console.info('LL0==>',LL0,LL.next);
     // let LL1=change(LL0,LL.next);
     // console.info('change==>',LL1,LL.next);
     // console.info(change(LL1,LL.next));
-    console.info(insertionSortList(LL));
+    // console.info(insertionSortList(LL));
     // console.info(insertionSortList0(LL1));
+    /**
+     * 插入排序:最好的情况下就是顺序的因此时间复杂度为O(n),最坏的情况下时间复杂度是O(n2)
+     * 空间复杂度是O(1)，只借助了temp来暂存数据
+     * 同时不会交换值一样的两个元素的位置，因此是稳定算法
+     */
+    const insertSort=arr=>{
+        for(let i=1;i<arr.length;i++){
+            let temp=arr[i];
+            let j=i;
+            while(j>0&&arr[j-1]>temp){
+                arr[j]=arr[j-1];
+                j--;
+            }
+            arr[j]=temp;
+        }
+        return arr;
+    };
+    let arr2=[4,2,1,3];
+    // console.info(insertSort(arr2));
+
+
+    /**
+     * 思考可以不用递归的方式来解决链表的插入排序吗？
+     * 在原链表上不停的断链重新操作
+     * pivot是基准值，总是寻找基准值的位置 pivot.next=cur.next
+     * 同时找到x x.next>cur.val 因此cur.next=x.next x.next=cur
+     * 此时head已经按我们需要进行了修改，返回即可
+     * @param head  原链表
+     * @param pivot 基准值
+     * @param cur 当前需要被对比的值
+     * @returns {{next}|*}
+     */
+    const swap=(head,pivot,cur)=>{
+        let temp0=head,temp1=head;
+        // 处理第一个元素就比cur.val大的情况:即插入到头部的情况
+        if(temp0.val>cur.val){
+            while(temp1){
+                if(temp1.val===pivot){
+                    break;
+                }
+                temp1=temp1.next;
+            }
+            temp1.next=cur.next;
+            cur.next=temp0;
+            return cur;
+        }
+        //处理内部情况
+        while(temp0.next){
+            let temp2=temp0.next;
+            if(temp0.next.val>cur.val){
+                // 寻找pivot所在的位置
+                while(temp1){
+                    if(temp1.val===pivot){
+                        break;
+                    }
+                    temp1=temp1.next;
+                }
+                // 总是在修改原链表
+                temp1.next=cur.next;
+                cur.next=temp0.next;
+                temp0.next=cur;
+                return head;
+            }
+            temp0=temp2;
+        }
+    };
+    /**
+     * pivot是基准，可以认为是链表中最大的那个元素
+     * @param llist
+     * @returns {{next}|*}
+     */
+    const insertionSortList0=llist=>{
+        if(!llist||!llist.next) return llist;
+        // 指针temp
+        let temp0=llist,temp1=llist.next,pivot=llist.val;
+        while(temp1){
+            // 提前存储下一个值，防止下面操作后temp1的值改变
+            let next=temp1.next;
+            if(temp1.val>=pivot){
+                pivot=temp1.val;
+            }else{
+                temp0=swap(temp0,pivot,temp1);
+            }
+            temp1=next;
+        }
+        return temp0;
+    };
+    let arr3=[4,2,1,3];
+    let list0=convertArrToLL(arr3);
+    let list1=convertArrToLL([2,4,1,3]);
+    let list2=convertArrToLL([4,2,1,3]);
+    let list3=convertArrToLL([1,2,4,3]);
+    let list4=convertArrToLL([-1,5,3,4,0]);
+    let list5=convertArrToLL([-1,3,5,4,0]);
+    let list6=convertArrToLL([-1,3,4,5,0]);
+    // console.info(list0);
+    // console.info(swap(list1,list2.val,list2.next.next));
+    // console.info(swap(list3,list2.val,list2.next.next.next));
+    console.info(insertionSortList0(list0));
+    console.info(insertionSortList0(list4));
+    // console.info(swap(list4,5,list4.next.next));
+    // console.info(swap(list6,5,list4.next.next.next.next));
 </script>
 </body>
 </html>
