@@ -236,6 +236,13 @@
         return 1+Math.min(resL,resR);
     };
     /**
+     * 寻找最大深度的另一种方式，时间复杂度O(n)
+     */
+    const findMaxDepth=tree=>{
+        if(!tree) return 0;
+        return 1+Math.max(findMaxDepth(tree.left),findMaxDepth(tree.right));
+    };
+    /**
      * 判断二叉树中是否有一条路径，它的总和为指定的一个数
      * 其实这个题很容易能够想到通过递归的方式来实现
      * 边界条件，输入 输出
