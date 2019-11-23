@@ -46,7 +46,62 @@
         return node;
     };
     let arr=[-10,-3,0,5,9];
-    console.info(buildTree(arr));
+    // console.info(buildTree(arr));
+    /**
+     * 当然上述做法只是一种偷懒的做法，下面来正常做一下用链表应该怎么实现上述的操作
+     * 如果不改变思路，那么应该也是先寻找链表的中心，利用快慢指针寻找链表的中间位置
+     * （还记得快慢指针也可以用来检测链表中是否有环吗
+     */
+    const sortedListToBST1=list=>{
+        const findMid=(list,end)=>{
+            if(list===end||!list) return;
+            let fast=list,slow=list;
+            while(fast!==end&&fast.next!==end){
+                fast=fast.next.next;
+                slow=slow.next;
+            }
+            return slow;
+        };
+        const buildTree=(list,end)=>{
+            if(list===end) return null;
+            let mid=findMid(list,end);
+            let node=new TreeNode(mid.val);
+            node.left=buildTree(list,mid);
+            node.right=buildTree(mid.next,end);
+            return node;
+        };
+        return buildTree(list,null);
+    };
+    function LListNode(val){
+        this.val=val;
+        this.next=null;
+    }
+    const convertLListToArr=arr=>{
+        let node=new LListNode(arr[0]);
+        let temp=node;
+        for(let i=1;i<arr.length;i++){
+            temp.next=new LListNode(arr[i]);
+            temp=temp.next;
+        }
+        return node;
+    };
+    let list=convertLListToArr([-10,-3,0,5,9]);
+    // console.info(list);
+    let temp=list.next;
+    // console.info(temp===list.next);
+    console.info(sortedListToBST1(list));
+    const findMid=(list,end)=>{
+        if(list===end||!list) return;
+        let fast=list,slow=list;
+        while(fast!==end&&fast.next!==end){
+            fast=fast.next.next;
+            slow=slow.next;
+        }
+        return slow;
+    };
+    let mid=findMid(list,null);
+    console.info(findMid(list,mid));
+    console.info(findMid(mid.next,null));
 </script>
 </body>
 </html>
