@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>有序链表转换二叉搜索树-leetcode-109</title>
+</head>
+<body>
+<script>
+    function TreeNode(val){
+        this.val=val;
+        this.left=null;
+        this.right=null;
+    }
+    /**
+     * 给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。
+
+     本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。
+     [-10, -3, 0, 5, 9]===>[0, -3, 9, -10, null, 5]
+     */
+    /**
+     * 其实这个问题就是问题108的变种
+     * 我们可以将链表转变成数组来进行操作
+     */
+    const sortedListToBST = (head)=>{
+        let temp0=head,temp1=[];
+        while(temp0){
+            temp1.push(temp0.val);
+            temp0=temp0.next;
+        }
+        const buildTree=arr=>{
+            if(arr.length<=0) return null;
+            let pivot=Math.floor(arr.length/2);
+            let node=new TreeNode(arr[pivot]);
+            node.left=buildTree(arr.slice(0,pivot));
+            node.right=buildTree(arr.slice(pivot+1));
+            return node;
+        };
+        return buildTree(temp1);
+    };
+    const buildTree=arr=>{
+        if(arr.length<=0) return null;
+        let pivot=Math.floor(arr.length/2);
+        let node=new TreeNode(arr[pivot]);
+        node.left=buildTree(arr.slice(0,pivot));
+        node.rignt=buildTree(arr.slice(pivot+1));
+        return node;
+    };
+    let arr=[-10,-3,0,5,9];
+    console.info(buildTree(arr));
+</script>
+</body>
+</html>
