@@ -101,7 +101,8 @@
     };
     mergeTwoLists1(list1,list2);
     /**
-     * 下面是对上面这段代码的优化，实际上我们总是在给res0向后追加
+     * 下面是对上面这段代码的优化，实际上我们总是在给res0向后追加，
+     * 思路的本质是迭代
      */
     const mergeTwoLists2=(l1,l2)=>{
         let res=new ListNode(),res0=res;
