@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>最长回文子串-leetcode-5</title>
+</head>
+<body>
+<script>
+    /**
+     * 时间复杂度为O(N*N*N)，空间复杂度为O(1)
+     * 时间复杂度过高，无法通过leetcode测试
+     */
+    const longestPalindrome = s=>{
+        /**
+         * 检查是否为回文子串
+         * @param s
+         * @returns {boolean}
+         */
+        let res='';
+        const testStr=s=>{
+            let pivot=Math.floor(s.length/2);
+            let idx=s.length%2!==0?pivot+1:pivot;
+            return s.slice(0,pivot)===s.slice(idx).split('').reverse().join('')
+        };
+        for(let i=0;i<s.length;i++){
+            for(let j=i+1;j<s.length+1;j++){
+                if (testStr(s.slice(i,j))){
+                    if(j-i>res.length){
+                        res=s.slice(i,j);
+                    }
+                }
+            }
+        }
+        return res;
+    };
+    console.info(longestPalindrome('cbbd'));
+    console.info(longestPalindrome('babad'));
+    /**
+     * dp
+     * 因为暴力求解的方式无法通过所有测试用例
+     * 利用动态规划用空间换取时间的减少，去暂存那些已经是回文串的字符串
+     * P[s][e]=P[s+1][e-1]&&s.charAt(s)===s.chatAt(e)
+     */
+    const longestPalindrome1=s=>{
+       let length=s.length;
+       let P=new Array(length),res="";
+        /**
+         * js 语法需要预设数组的内容
+         */
+       for(let prev=0;prev<length;prev++){
+           P[prev]=new Array(length);
+       }
+       for(let len=1;len<=length;len++){
+           for(let start=0;start<length;start++){
+               let end=start+len-1;
+               if(end>=length) break;
+               // 长度为 1 和 2 的单独判断下
+               P[start][end] = (len === 1 || len === 2 || P[start + 1][end - 1]) && s.charAt(start) === s.charAt(end);
+               if (P[start][end] && len > res.length) {
+                   res = s.substring(start, end + 1);
+               }
+           }
+       }
+       return res;
+    };
+    console.info(longestPalindrome1('babad'));
+</script>
+</body>
+</html>
