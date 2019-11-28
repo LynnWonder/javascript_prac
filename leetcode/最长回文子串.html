@@ -40,6 +40,7 @@
      * 因为暴力求解的方式无法通过所有测试用例
      * 利用动态规划用空间换取时间的减少，去暂存那些已经是回文串的字符串
      * P[s][e]=P[s+1][e-1]&&s.charAt(s)===s.chatAt(e)
+     * 显然最终时间复杂度变成了O(n2) 空间复杂度也是O(n2)
      */
     const longestPalindrome1=s=>{
        let length=s.length;
@@ -57,13 +58,46 @@
                // 长度为 1 和 2 的单独判断下
                P[start][end] = (len === 1 || len === 2 || P[start + 1][end - 1]) && s.charAt(start) === s.charAt(end);
                if (P[start][end] && len > res.length) {
-                   res = s.substring(start, end + 1);
+                   res = s.slice(start, end + 1);
                }
            }
        }
        return res;
     };
     console.info(longestPalindrome1('babad'));
+    /**
+     * 第三种方法是采用从中间向两边进行扩散的方式来确定字符串是否为回文串
+     * 关键点在于奇数个数的子串和偶数个数的子串都要去验证避免出现遗漏的现象
+     * 时间复杂度O(n2) 空间复杂度O(1)
+     * @param str
+     */
+    const longestPalindrome2=str=>{
+        const expandAroundCenter=(s,left,right)=>{
+            let L=left,R=right;
+            while(L>=0&&R<s.length&&s.charAt(L)===s.charAt(R)){
+                L--;
+                R++;
+            }
+            // 注意此处的R L已经是加过，减过的数了
+            return R-L-1;
+        };
+        if(!str||str.length<1) return "";
+        let start=0,end=0;
+        for(let i=0;i<str.length;i++){
+            // 判断奇数子串问题
+            let len1=expandAroundCenter(str,i,i);
+            // 判断偶数子串问题
+            let len2=expandAroundCenter(str,i,i+1);
+            let len=Math.max(len1,len2);
+            if(len>end-start){
+        start = i - Math.floor((len - 1) / 2);
+        end = i + Math.floor(len / 2);
+            }
+        }
+        return str.substring(start,end+1);
+    };
+    console.info(longestPalindrome2('babad'));
+    console.info(longestPalindrome2("cbbd"));
 </script>
 </body>
 </html>
