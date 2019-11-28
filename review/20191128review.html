@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>20191128review</title>
+</head>
+<body>
+<script>
+    /**
+     * 寻找最长回文子串,使用dp
+     * 利用二维数组保存内容，
+     * temp[start,end]=temp[start+1,end-1]&&s[start]===s[end]
+     * 以上为状态转移方程，同时边界情况是所有长度为1和长度为2的字符串子串。
+     */
+    const maxStr=s=>{
+        let temp=new Array(s.length),max='';
+        for(let i=0;i<s.length;i++){
+            temp[i]=new Array(s.length);
+        }
+        for(let len=1;len<=s.length;len++){
+            for(let start=0;start<s.length;start++){
+                let end=start+len-1;
+                if(end>=s.length) break;
+                temp[start][end]=(len===1||len===2||temp[start+1][end-1])&&(s[start]===s[end]);
+                if(len>max.length&&temp[start][end]){
+                    max=s.slice(start,end+1);
+                }
+            }
+        }
+        return max;
+    };
+    console.info(maxStr('cabbac'));
+</script>
+</body>
+</html>
