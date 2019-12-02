@@ -98,6 +98,61 @@
     };
     console.info(longestPalindrome2('babad'));
     console.info(longestPalindrome2("cbbd"));
+    /**
+     * Manchester算法
+     * @param str
+     */
+    const longestPalindrome3=str=>{
+        const preProcess=s=>{
+            let res='^';
+            if(s.length===0){
+                return '^$';
+            }
+            for(let i=0;i<s.length;i++){
+                res+='#'+s.charAt(i);
+            }
+            return res+'#&';
+        };
+        let str0=preProcess(str);
+        // 用P数组暂存新字符串下以某个字符为中心的回文串的长度
+        // P[i]是新字符串中以str0[i]为中心的回文子串的半径
+        // 2*P[i]-1为回文子串的长度L，我们又知道(L-1)/2为原字符串的回文子串长度即
+        // P[i]
+        let P=new Array(str0.length);
+        // R是回文串的右边边界点
+        let C=0,R=0;
+        // 标记到第二位和倒数第二位
+        for(let i=1;i<str0.length-1;i++){
+            // 求i关于C的对称点
+            let i_mirror=2*C-i;
+            if(R>i){
+                P[i] = Math.min(R - i, P[i_mirror]);// 防止超出 R
+            }else{
+                P[i]=0;// 等于 R 的情况
+            }
+            while (str0.charAt(i + 1 + P[i]) === str0.charAt(i - 1 - P[i])) {
+                P[i]++;
+            }
+            // 判断是否需要更新 R
+            if (i + P[i] > R) {
+                C = i;
+                R = i + P[i];
+            }
+        }
+        // 找出P的最大值
+        let maxLen=0;
+        let centerIdx=0;
+        for(let i=0;i<str0.length-1;i++){
+            if(P[i]>maxLen){
+                maxLen=P[i];
+                centerIdx=i;
+            }
+        }
+        let start=(centerIdx-maxLen)/2;
+        console.info(P);
+        return str.substring(start,start+maxLen);
+    };
+    console.info(longestPalindrome3('baabc'));
 </script>
 </body>
 </html>
