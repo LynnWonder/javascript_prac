@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>寻找两个中位数组的中位数-leetcode-4</title>
+</head>
+<body>
+<script>
+    let arr=[1,3];
+    arr.splice(1,0,2);
+    console.info(arr);
+    /**
+     * 在不考虑时间复杂度的情况下
+     * 整体思路类似于拼接两个有序的链表
+     * 以nums2为基准往里面添加数据
+     * 时间复杂度最大为 O(m+n),需要将两个数组中每个数据都遍历一遍
+     * @param nums1
+     * @param nums2
+     */
+    const findMedianSortedArrays = (nums1, nums2)=>{
+        let j=0;
+        for(let i=0;i<nums1.length;i++){
+            while(j<nums2.length){
+                if (nums2[j]>=nums1[i]){
+                    nums2.splice(j,0,nums1[i]);
+                    j++;
+                    break;
+                }else if(j===nums2.length-1){
+                    nums2.push(nums1[i]);
+                    j++;
+                    break;
+                }else{
+                    j++;
+                }
+            }
+        }
+        if(nums2.length===0) nums2=nums1;
+        let len=nums2.length;
+        console.info(nums2);
+        return len%2===0?(nums2[len/2]+nums2[len/2-1])/2:nums2[Math.floor(len/2)];
+    };
+    let arr1=[1,3];
+    let arr2=[2];
+    console.info(findMedianSortedArrays(arr1,arr2));
+    /**
+     * 但是考虑到时间复杂度问题：
+     * 要求算法的时间复杂度为 O(log(m + n))。
+     * 时间复杂度：O\big(\log\big(\text{min}(m,n)\big)\big)O(log(min(m,n)))，
+     首先，查找的区间是 [0, m][0,m]。
+     而该区间的长度在每次循环之后都会减少为原来的一半。
+     所以，我们只需要执行 \log(m)log(m) 次循环。由于我们在每次循环中进行常量次数的操作，所以时间复杂度为O(log(min(m,n)))。
+     由于 m≤n，所以时间复杂度是O(log(min(m,n)))
+
+     空间复杂度：O(1)O(1)，
+     我们只需要恒定的内存来存储 9 个局部变量， 所以空间复杂度为 O(1)
+
+     */
+    const findMedianSortedArrays1=(A,B)=>{
+        let m=A.length,n=B.length;
+        // 确保A是短数组，B是长数组
+        if(m>n){
+            let temp=A,temp1=m;
+            A=B;
+            B=temp;
+            m=n;
+            n=temp1;
+        }
+        let iMin=0,iMax=m,halfLen=Math.floor((m+n+1)/2);
+        // 为了确保j不是负数 m+n+1>2m  因此halfLen>m
+        while(iMin<=iMax){
+            let i=Math.floor((iMin+iMax)/2);
+            let j=halfLen-i;
+            console.info('i,j=>',i,j);
+            if (i < iMax && B[j-1] > A[i]){
+                iMin = i + 1; // i is too small
+            }
+            else if (i > iMin && A[i-1] > B[j]) {
+                iMax = i - 1; // i is too big
+            }
+            else { // i is perfect
+                let maxLeft = 0;
+                if (i === 0) { maxLeft = B[j-1]; }
+                else if (j === 0) { maxLeft = A[i-1]; }
+                else { maxLeft = Math.max(A[i-1], B[j-1]); }
+                console.info(A[i-1],B[j-1]);
+                if ( (m + n) % 2 === 1 ) { return maxLeft; }
+
+                let minRight = 0;
+                if (i === m) { minRight = B[j]; }
+                else if (j === n) { minRight = A[i]; }
+                else { minRight = Math.min(B[j], A[i]); }
+
+                return (maxLeft + minRight) / 2.0;
+            }
+        }
+        return 0.0;
+    };
+    let arr3=[1,2,3,5];
+    let arr4=[2,3,4];
+    console.info(findMedianSortedArrays1(arr3,arr4));
+</script>
+</body>
+</html>
