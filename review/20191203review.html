@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>20191203reivew</title>
+</head>
+<body>
+<script>
+    /**
+     * 解决最长回文子串问题，采用Manchester算法
+     * key1:将原字符串进行变形，插入#，此时字符串变成了绝对奇数个
+     * key2:定义辅助数组P[]保存以当前字符为中心的回文串的半径长度
+     * key3:定义中心C，最右边界R，P[i]=R-i,P[i]取决于R-i和与i对称的点的位置的P[x]大小
+     * 2*P[i]+1 是新串中以nStr[i]为中心的回文子串的长度L，同时(L-1)/2是原串中回文子串的长度即为P[i]
+     *
+     */
+    const process=str=>{
+        let res='^';
+        if(str.length===0) return '^$';
+        for(let i=0;i<str.length;i++){
+            res+=`#${str[i]}`;
+        }
+        return res+'#$';
+    };
+    const longestPalindrome=str=>{
+        let nStr=process(str);
+        let C=0,R=0,P=new Array(nStr.length);
+        for(let i=0;i<nStr.length;i++){
+            let i_mirror=2*C-i;
+            if(R>i){
+                P[i]=Math.min(R-i,P[i_mirror]);
+            }else{
+                P[i]=0;
+            }
+            //console.info(nStr[i+1+P[i]],nStr[i-1-P[i]]);
+            while(nStr[i+1+P[i]]===nStr[i-1-P[i]]){
+                P[i]++;
+            }
+            /**
+             * update R C
+             */
+            if(i+P[i]>R){
+                C=i;
+                R=i+P[i];
+            }
+        }
+        let maxLen=0,id=0;
+        for(let i=0;i<P.length;i++){
+            if (P[i]>maxLen){
+                maxLen=P[i];
+                id=i;
+            }
+        }
+       // console.info(P);
+        let start=Math.floor((id-maxLen)/2);
+        return str.slice(start,start+maxLen);
+    };
+    console.info(process('baabc'));
+    console.info(longestPalindrome(''));
+</script>
+</body>
+</html>
