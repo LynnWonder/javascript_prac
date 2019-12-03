@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回溯算法-素数环问题</title>
+</head>
+<body>
+<script>
+    /**
+     * 问题描述：输入正整数n，把整数1，2，3，…n组成一个环，使得相邻两个整数之和均为素数。输出时从整数1开始逆时针排列。同一个环应恰好输出一次。N<=16。
+
+     输入样例：6
+
+     输出样例：
+
+     1 4 3 2 5 6
+     1 6 5 2 3 4
+     素数就是质数，因数只有1和它自己。
+     */
+    /**
+     * 判断一个数是不是素数，只需要折半判断即可
+     * @param num
+     * @returns {boolean}
+     */
+    const testPrime=num=>{
+        let mid=Math.floor(Math.sqrt(num));
+        for(let i=2;i<=mid;i++){
+            if(num%i===0){
+                return false;
+            }
+        }
+        return true;
+    };
+    /**
+     * 判断当前加进去的数字是否满足条件
+     * 1. 是否与之前重复
+     * 2. 相邻之和是否为素数
+     * 3. 第一个和最后一个相加是否为素数
+     * @param a
+     * @param k
+     * @param n
+     * @returns {boolean}
+     */
+    const check=(a,k,n)=>{
+        let flag = false ;
+        for (let i =0;i<k;i++)          //检查是否重复
+        if (a[i] === a[k])
+            return  false;
+
+        flag = testPrime(a[k]+a[k-1]);  //检验与相邻之和是否是素数
+        if (flag ===1&&k ===n-1)          //如果是最后一个，需要检查与开始值得和
+            flag = testPrime(a[k]+a[0]);
+        return flag;
+    };
+    /**
+     * 1：如果填入一个数是成立的，我们就继续填写下一个位置，如果这个数不成立，我们就换下一个数填写，相当于我们剪掉了这个数的树枝，去寻找下一个；
+     * 2：填写最后一个数时，应该考虑其应该和第一个数之和是素数；
+     * @param n
+     */
+    const primeRing=n=>{
+        if(n===1) return [1];
+        let res=[];
+        // initialize arr
+        let arr=new Array(n).fill(0);
+        let k=1;
+        arr[0]=1;
+        while(k>=1)
+        {
+            arr[k]=arr[k]+1;
+            while(arr[k]<n){
+                if(check(arr,k,n)){
+                    break;
+                }else{
+                    // 否则叠加到下一位
+                    arr[k]=arr[k]+1;
+                }
+            }
+            if(arr[k]<=n&&k===n-1){
+                console.info(arr);
+                let temp=JSON.parse(JSON.stringify(arr));
+                res.push(temp);
+            }
+            if(arr[k]<=n&&k<n-1&&check(arr,k,n)){
+                k+=1;
+            }else{
+                arr[k--]=0;//剪枝回溯
+            }
+        }
+        return res;
+    };
+    console.info(primeRing(6));
+</script>
+</body>
+</html>
