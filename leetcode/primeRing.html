@@ -55,6 +55,7 @@
     /**
      * 1：如果填入一个数是成立的，我们就继续填写下一个位置，如果这个数不成立，我们就换下一个数填写，相当于我们剪掉了这个数的树枝，去寻找下一个；
      * 2：填写最后一个数时，应该考虑其应该和第一个数之和是素数；
+     * 使用迭代法实现
      * @param n
      */
     const primeRing=n=>{
@@ -71,7 +72,7 @@
                 if(check(arr,k,n)){
                     break;
                 }else{
-                    // 否则叠加到下一位
+                    // 否则进行叠加
                     arr[k]=arr[k]+1;
                 }
             }
@@ -88,7 +89,62 @@
         }
         return res;
     };
-    console.info(primeRing(6));
+    // console.info(primeRing(6));
+    /**
+     * 回溯法通常使用递归来实现，
+     * vis用来保存每一个1-n的元素是否在一个解向量中用过
+     */
+    const primeRing1=n=>{
+        let arr=[],vis=[],res0=[];
+        arr[0] = 1;
+        vis[0]=true;
+        for(let i = 1; i <n;i++){
+            vis[i] = false;
+        }
+        /**
+         * check0的难点在于检测的永远是idx指针前面的数是否和k重复以及k和idx-1所在位置的数的和是否为素数
+         * 这也是能够回溯的关键
+         */
+        const check0=(arr,k,idx)=>{
+            let flag;
+            for(let i=0;i<idx;i++){
+                if(arr[i]===k) return false;
+            }
+            flag=testPrime(arr[idx-1]+k);
+            return flag;
+        };
+        /**
+         *  vis[i-1] = false;是不满足条件回溯的过程
+         * @param cur
+         */
+        const dfs=cur=>{
+            if(cur >= n&&testPrime(arr[n]+arr[0])){
+               let temp=JSON.parse(JSON.stringify(arr));
+               res0.push(temp);
+                // console.info(arr);
+               // console.info(res0);
+            }else{
+                for(let i = 1; i <= n; i++){
+                    // //尝试放置每个数i
+                    // if(!vis[i-1] && testPrime(i+arr[cur-1])){//如果这个数没有被使用，并且与前一个数的和是质数
+                    //     vis[i-1] = true;//标明这个数被使用
+                    //     arr[cur] = i;//将这个数加入队列
+                    //     // console.info(arr);
+                    //     dfs(cur+1);//求下一个数
+                    //     vis[i-1] = false;//取消这个数
+                    // }
+                    //
+                    if(check0(arr,i,cur)){//如果这个数没有被使用，并且与前一个数的和是质数
+                        arr[cur] = i;//将这个数加入队列
+                        dfs(cur+1);//求下一个数
+                    }
+                }
+            }
+        };
+        dfs(1);
+        return res0;
+    };
+    console.info(primeRing1(6));
 </script>
 </body>
 </html>
