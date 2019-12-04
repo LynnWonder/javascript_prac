@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>括号生成-leetcode-22</title>
+</head>
+<body>
+<script>
+    /**
+     * 首先看这个问题是不是符合回溯法解题
+     * 解由向量组成
+     * 需要搜索一组解
+     */
+    const generateParenthesis=num=>{
+        // l r分别表示左右括号的数量
+        let str=[],l=0,r=0,res=[];
+        const dfs=(k)=>{
+            if (k===num*2){
+                res.push(str.join(''));
+            }else{
+                if(l<num){
+                    str[k]='(';
+                    l++;
+                    dfs(k+1);
+                    // 回溯的关键语句
+                    --l;
+                }
+                // 填充右括号 amazing marvelous
+                if(r<num&&l>r){
+                    console.info('k==>',k);
+                    str[k]=')';
+                    r++;
+                    dfs(k+1);
+                    --r;
+                }
+                console.info('str==>',str);
+            }
+        };
+        dfs(0);
+        return res;
+    };
+    console.info(generateParenthesis(3));
+</script>
+</body>
+</html>
