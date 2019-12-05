@@ -10,6 +10,7 @@
      * 首先看这个问题是不是符合回溯法解题
      * 解由向量组成
      * 需要搜索一组解
+     * 通过对运行过程的断点调试可以发现总是走完一个阶段然后--r --l实现回溯，所以回溯的关键是--l
      */
     const generateParenthesis=num=>{
         // l r分别表示左右括号的数量
@@ -19,6 +20,7 @@
                 res.push(str.join(''));
             }else{
                 if(l<num){
+                    console.info('lllk=>',k,str);
                     str[k]='(';
                     l++;
                     dfs(k+1);
@@ -27,7 +29,7 @@
                 }
                 // 填充右括号 amazing marvelous
                 if(r<num&&l>r){
-                    console.info('k==>',k);
+                    console.info('rrrk=>',k);
                     str[k]=')';
                     r++;
                     dfs(k+1);
