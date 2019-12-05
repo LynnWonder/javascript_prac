@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>移除链表元素-leetcode-203</title>
+</head>
+<body>
+<script>
+    function ListNode(val) {
+        this.val = val;
+        this.next = null;
+    }
+
+    /**
+     * 删除链表中等于给定值 val 的所有节点
+     * 主要是断链操作,同时处理头和尾部
+     * @param head
+     * @param val
+     */
+    const removeElements = (head, val)=>{
+        if(!head) return head;
+        if(head.val===val) return removeElements(head.next,val);
+        let temp=head;
+        while(temp){
+            if(temp.next.val===val){
+                let temp0=temp.next.next;
+                temp.next=temp0;
+                temp=temp0;
+            }else{
+                temp=temp.next;
+            }
+        }
+    };
+</script>
+</body>
+</html>
