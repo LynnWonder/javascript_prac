@@ -68,8 +68,54 @@
         let start=Math.floor((index-maxLen+1)/2-1);
         return str.slice(start,start+maxLen);
     };
-    console.info(manchester('cbaabc'));
+    console.info(longestPalindrome('cbaabc'));
 
+    /**
+     * 了解了子集树之后来解决一下素数环问题
+     * 要求组成素数环且第一个元素总是1
+     */
+    const primeRing=n=>{
+        let res=new Array(n).fill(0);
+        res[0]=1;
+        const testPrime=num=>{
+            let temp=Math.sqrt(num);
+            for(let i=2;i<=temp;i++){
+                if(num%i===0){
+                    return false;
+                }
+            }
+            return true;
+        };
+        const check=(arr,idx,val)=>{
+            let flag;
+            // 不用forEach 避免无法跳出循环出现错误
+           for(let i=0;i<idx;i++){
+               if(arr[i]===val){
+                   return false;
+               }
+           }
+            flag=testPrime(arr[idx-1]+val);
+            if(idx===n-1){
+                flag=flag&&testPrime(arr[0],val);
+            }
+            return flag;
+        };
+        const dfs=k=>{
+            if(k>n-1){
+                console.info(res);
+            }else{
+                for(let i=1;i<=n;i++){
+                    if(check(res,k,i)){
+                        res[k]=i;
+                        dfs(k+1);
+                        res[k]=0;
+                    }
+                }
+            }
+        };
+        dfs(1);
+    };
+    primeRing(6);
 </script>
 </body>
 </html>
