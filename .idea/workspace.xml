@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/test_express/06_student_list/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/test_express/06_student_list/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/test_express/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/test_express/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/test_express/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/test_express/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/最长回文子串.html" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/最长回文子串.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,17 +53,17 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/刷题/test.html" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/node/test_express/06_student_list/public" />
+      <recent name="$PROJECT_DIR$/node/test_http/my_server" />
+      <recent name="E:\tju\笔试题\js" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/leetcode" />
       <recent name="$PROJECT_DIR$/leetcode/algorithm" />
       <recent name="$PROJECT_DIR$/node/test_express" />
       <recent name="$PROJECT_DIR$/interviews" />
       <recent name="$PROJECT_DIR$/interviews/css/三栏布局/t-b" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/node/test_express/06_student_list/public" />
-      <recent name="$PROJECT_DIR$/node/test_http/my_server" />
-      <recent name="E:\tju\笔试题\js" />
     </key>
   </component>
   <component name="RunDashboard">

@@ -110,46 +110,62 @@
      * 2*P[i]+1 是新串中以nStr[i]为中心的回文子串的长度L，同时(L-1)/2是原串中回文子串的长度即为P[i]
      * 思考时间复杂度：虽然有while循环，但是事实上每个节点都只访问了一次 O(n)
      */
-    const process=str=>{
+    /**
+     * 预处理字符串
+     * @param s
+     * @returns {string}
+     */
+    const process=s=>{
+        if(s.length===0) return '^$';
         let res='^';
-        if(str.length===0) return '^$';
-        for(let i=0;i<str.length;i++){
-            res+=`#${str[i]}`;
+        for(let i=0;i<s.length;i++){
+            res+=`#${s[i]}`;
         }
         return res+'#$';
     };
+    /**
+     * 借用dp思想，求数组P[i]的值取决于P[i_mirror]和R-C的最小值
+     * @param str
+     */
     const longestPalindrome3=str=>{
-        let nStr=process(str);
-        let C=0,R=0,P=new Array(nStr.length);
-        for(let i=0;i<nStr.length;i++){
-            let i_mirror=2*C-i;
+        // 中心C，右边界R，P是新字符串下的每个字符对应的回文子串的半径
+        // 左右边界是两个指针
+        let C=0,R=0,str0=process(str);
+        let P=new Array(str0.length).fill(0);
+        for(let i=1;i<str0.length;i++){
+            let i_mirror=C*2-i;
             if(R>i){
-                // 防止超过R
+                // 在右边界之内就可以如此判断P[i]大小
+                // 取两者之中较小的值的原因是：R-i通常会比较大，用P[i_mirror]限制住
                 P[i]=Math.min(R-i,P[i_mirror]);
             }else{
+                // 不在之前判断过的回文串范围内则重新进行判断
                 P[i]=0;
             }
-            //console.info(nStr[i+1+P[i]],nStr[i-1-P[i]]);
-            while(nStr[i+1+P[i]]===nStr[i-1-P[i]]){
+            // 重新向外扩展
+            // 之所以预处理字符串时加上两个起始终止字符主要为了避免这边进入死循环
+            while(str0[i+P[i]+1]===str0[i-1-P[i]]){
                 P[i]++;
             }
-            /**
-             * update R C
-             */
+            // 更新R和C的大小
+            // 只在新的边界大于旧的右边界时进行更新，这样就可以沿用C和R的值
             if(i+P[i]>R){
                 C=i;
-                R=i+P[i];
+                R=P[i]+i;
             }
         }
-        let maxLen=0,id=0;
-        for(let i=0;i<P.length;i++){
-            if (P[i]>maxLen){
-                maxLen=P[i];
-                id=i;
+        let maxLen=0,index=0;
+        P.forEach((item,idx)=>{
+            if(item>maxLen){
+                maxLen=item;
+                index=idx;
             }
-        }
-        // console.info(P);
-        let start=Math.floor((id-maxLen)/2);
+        });
+        console.info(P);
+        // 最长回文子串对应的在新字符串下的索引起始：index-maxLen+1
+        // 因此在旧字符串中的索引是：(index-maxLen+1)/2-1
+        // 也可以简化为(index-maxLen)/2
+        let start=Math.floor((index-maxLen+1)/2-1);
         return str.slice(start,start+maxLen);
     };
     console.info(longestPalindrome3('baabc'));
