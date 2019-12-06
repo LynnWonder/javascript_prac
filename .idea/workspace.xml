@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/test_express/06_student_list/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/test_express/06_student_list/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/test_express/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/test_express/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/test_express/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/test_express/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,23 +47,25 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="8.11.1" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/node/test_express/06_student_list/public" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/刷题/test.html" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/node/test_http/my_server" />
-      <recent name="E:\tju\笔试题\js" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/leetcode/algorithm" />
       <recent name="$PROJECT_DIR$/leetcode" />
+      <recent name="$PROJECT_DIR$/leetcode/algorithm" />
       <recent name="$PROJECT_DIR$/node/test_express" />
       <recent name="$PROJECT_DIR$/interviews" />
       <recent name="$PROJECT_DIR$/interviews/css/三栏布局/t-b" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/node/test_express/06_student_list/public" />
+      <recent name="$PROJECT_DIR$/node/test_http/my_server" />
+      <recent name="E:\tju\笔试题\js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -75,7 +80,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.20191009review.html">
+  <component name="RunManager" selected="JavaScript Debug.generate-parentheses.html">
     <configuration type="JavascriptDebugType" editBeforeRun="true" engineId="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" useFirstLineBreakpoints="true">
       <method v="2" />
     </configuration>
@@ -88,10 +93,14 @@
     <configuration name="验证二叉搜索树.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/javascript_prac/刷题/验证二叉搜索树.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
+    <configuration name="generate-parentheses.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63341/javascript_prac/leetcode/generate-parentheses.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.任务调度器.html" />
+        <item itemvalue="JavaScript Debug.generate-parentheses.html" />
         <item itemvalue="JavaScript Debug.20191009review.html" />
+        <item itemvalue="JavaScript Debug.任务调度器.html" />
       </list>
     </recent_temporary>
   </component>
@@ -151,15 +160,6 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/node/test_express/05_static_upload_file_error/app.js</url>
-          <line>18</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="JavascriptDebugType">
         <watch expression="temp" language="HTML" />

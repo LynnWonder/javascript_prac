@@ -1,5 +1,7 @@
 let express=require('express');
 let path=require('path');
+// A Node.js module for parsing form data, especially file uploads
+// 解析表单数据的node模块
 let formidable=require('formidable');
 let app=express();
 let router=express.Router();
