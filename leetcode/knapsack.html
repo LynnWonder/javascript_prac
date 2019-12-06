@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>背包问题</title>
+</head>
+<body>
+<script>
+    /**
+     * 问题描述：背包重量最大是16，现有n个物品 重量分别为10，8，5，价值分别为5，4，1
+     * 求此背包在不超重的情况下，最多能装多少价值的物品
+     * 逐个分析问题，首先问题的解空间是一个子集树，只有装进去和不装进去两种情况
+     * 扩展规则是装进去或者不装进去，重量累加
+     * 约束条件是总重量不超重
+     */
+    const knapsack=(tWeight,n,obj)=>{
+        let curWeight=0,curVal=0,maxVal=0,compose=new Array(n).fill(0)
+            ,max=[];
+        let w=Object.keys(obj),v=[];
+        w.forEach(item=>{
+            v.push(obj[item]);
+        });
+        console.info(w,v);
+        const dfs=t=>{
+            if(t>n-1&&curWeight<=tWeight){
+                console.info('==>',compose,curVal);
+                // 控制输出条件
+                if(curVal>maxVal){
+                    maxVal=curVal;
+                    max=JSON.parse(JSON.stringify(compose));
+                }
+            }else{
+                for(let i=0;i<=1;i++){
+                    if(i===0){
+                        // 不放入背包
+                        dfs(t+1);
+                    }else{
+                        // 放入背包
+                        if(curWeight+Number(w[t])<=tWeight){
+                            curWeight+=Number(w[t]);
+                            curVal+=v[t];
+                            compose[t]=w[t];
+                            dfs(t+1);
+                            // 回溯
+                            compose[t]=0;
+                            curWeight-=Number(w[t]);
+                            curVal-=v[t];
+                        }
+                    }
+                }
+            }
+        };
+        dfs(0);
+        console.info('result==>',max,maxVal);
+        return maxVal;
+    };
+    console.info(knapsack(16,3,{10:5,8:4,5:1}));
+</script>
+</body>
+</html>
