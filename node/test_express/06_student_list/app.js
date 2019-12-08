@@ -3,11 +3,19 @@ let path=require('path');
 // A Node.js module for parsing form data, especially file uploads
 // 解析表单数据的node模块
 let formidable=require('formidable');
+// prepare for data persistence
+const db=require('./dbTools');
+let https=require('https');
+let fs=require('fs');
 let app=express();
 let router=express.Router();
-
-let heros=[];
-
+// let heros=[];
+// 以下是配置https
+// const options = {
+//     key: fs.readFileSync('1530632509237.key'),
+//     cert: fs.readFileSync('1530632509237.pem')
+// };
+// let server=https.createServer(options,app);
 app.engine('.html',require('express-art-template'));
 app.set('view options', {
     debug: process.env.NODE_ENV !== 'production'
@@ -15,8 +23,13 @@ app.set('view options', {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 router.get('/',(req,res,next)=>{
-    // es6简写
-    res.render('index',{heros});
+    // // es6简写
+    // res.render('index',{heros});
+    // 从数据库读取数据
+    db.find('heros',{},function(err,result){
+        if(err) next(err);
+        res.render('index',{heros:result});
+    })
 })
     .post('/add',(req,res,next)=>{
         let form = new formidable.IncomingForm();
@@ -39,12 +52,19 @@ router.get('/',(req,res,next)=>{
             // console.info(path.basename(files.avatar.path,'.jpg'));
             let filename=path.parse(files.avatar.path).base;
             let img='imgs/'+filename;
-            heros.push({
-                name:nickname,
-                img
+            // heros.push({
+            //     name:nickname,
+            //     img
+            // });
+            // data ==>database
+            db.insert('heros',{name:nickname,img},function(err,result){
+                if(err){
+                    next(err);
+                }
+                console.info(result);
+                // 同步提交，浏览器等待页面显示
+                res.redirect('/');
             });
-            // 同步提交，浏览器等待页面显示
-            res.redirect('/');
         });
     })
     //最后一条路由中
@@ -54,6 +74,7 @@ router.get('/',(req,res,next)=>{
 // 处理静态资源：图片
 app.use(express.static('./public'));
 app.use(router);
+// 改成https之后，使用server而不是app
 app.listen(8880,()=>{
     console.info('server is on 8880');
 });
