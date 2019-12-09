@@ -13,6 +13,7 @@
      * 2。扩展原则是什么？一开始认为只有两种取值0 和 1 这种方式行不通，不妨换一种思路，用十进制表示，然后恢复为二进制
      * 3。约束函数是什么？相邻的两个元素的不同位数有且只有一位
      * 本人的一点看法是：用回溯法并不好，本质上也没有去回溯，只是暴力的求解了所有可能的情况，从测试用例上看也并不倾向于这种解法(或许我的思路有误)，因此leetcode将本题归档为回溯问题并不妥
+     * 增加了限制条件：时间复杂度过高，不推荐使用
      * @param n
      */
     const grayCode = n=>{
@@ -45,11 +46,15 @@
                     dif++;
                 }
             }
-            return dif === 1;
+            if(res[Math.pow(2,n)-1-idx]){
+                return deToB(res[Math.pow(2,n)-1-idx]).slice(1).join('')===bNum.slice(1).join('')&&dif===1;
+            }else{
+                return dif === 1;
+            }
         };
         const dfs = (k) => {
             if (k >= Math.pow(2, n)) {
-                 result.push(JSON.parse(JSON.stringify(res)));
+                 return;
             } else {
                 for (let i = 1; i < Math.pow(2, n); i++) {
                     if(check(i,k)){
@@ -60,9 +65,9 @@
             }
         };
         dfs(1);
-        return result;
+        return res;
     };
-    console.info(grayCode(2));
+    console.info(grayCode(10));
     /**
      * 用dp来做：利用动态规划思想同时结合观察对称现象可以得到
      * 状态转移方程：F(n)=[0-F(n-1),1-(^)F(n-1)]   ......(^暂且表示为对称)
@@ -89,7 +94,7 @@
             return res;
         });
     };
-    console.info(grayCode1(4));
+    console.info(grayCode1(10));
 </script>
 </body>
 </html>
