@@ -48,26 +48,28 @@
             }
             if(res[Math.pow(2,n)-1-idx]){
                 return deToB(res[Math.pow(2,n)-1-idx]).slice(1).join('')===bNum.slice(1).join('')&&dif===1;
-            }else{
+            }else {
                 return dif === 1;
             }
         };
         const dfs = (k) => {
             if (k >= Math.pow(2, n)) {
-                 return;
+                 result.push(JSON.parse(JSON.stringify(res)));
             } else {
                 for (let i = 1; i < Math.pow(2, n); i++) {
                     if(check(i,k)){
                         res[k] = i;
                         dfs(k + 1);
+                        // 回不回溯意义不大
+                        res[k]=1;
                     }
                 }
             }
         };
         dfs(1);
-        return res;
+        return result;
     };
-    console.info(grayCode(10));
+    console.info(grayCode(4));
     /**
      * 用dp来做：利用动态规划思想同时结合观察对称现象可以得到
      * 状态转移方程：F(n)=[0-F(n-1),1-(^)F(n-1)]   ......(^暂且表示为对称)
