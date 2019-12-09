@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>格雷编码-leetcode-89</title>
+</head>
+<body>
+<script>
+    /**
+     * 求格雷编码首先将编码类型求出来，然后再转换成具体对应的十进制数字
+     * 第一种方法是用回溯法，因为该问题满足问题的解可以用向量表示，需要搜索一组解的条件
+     * 1。解空间是什么？ 解空间应该是一个子集树
+     * 2。扩展原则是什么？一开始认为只有两种取值0 和 1 这种方式行不通，不妨换一种思路，用十进制表示，然后恢复为二进制
+     * 3。约束函数是什么？相邻的两个元素的不同位数有且只有一位
+     * 本人的一点看法是：用回溯法并不好，本质上也没有去回溯，只是暴力的求解了所有可能的情况，从测试用例上看也并不倾向于这种解法(或许我的思路有误)，因此leetcode将本题归档为回溯问题并不妥
+     * @param n
+     */
+    const grayCode = n=>{
+        let res=new Array(Math.pow(2,n)),result=[];
+        res[0]=0;
+        /**
+         * 将十进制数转换为二进制
+         */
+        const deToB=num=>{
+            let temp=new Array(n).fill(0);
+            let i=n-1;
+            while(num>0){
+                temp[i]=(num%2);
+                num=Math.floor(num/2);
+                i--;
+            }
+            return temp;
+        };
+        /**
+         * 检查数字是否重复，是否和上一个只差一位
+         */
+        const check=(num,idx)=>{
+            let dif=0,bNum=deToB(num);
+            for(let i=0;i<idx;i++){
+                if(num===res[i]) return false;
+            }
+            if(num===res[idx-1]) return false;
+            for(let i=0;i<n;i++){
+                if (bNum[i]!==deToB(res[idx-1])[i]){
+                    dif++;
+                }
+            }
+            return dif === 1;
+        };
+        const dfs = (k) => {
+            if (k >= Math.pow(2, n)) {
+                 result.push(JSON.parse(JSON.stringify(res)));
+            } else {
+                for (let i = 1; i < Math.pow(2, n); i++) {
+                    if(check(i,k)){
+                        res[k] = i;
+                        dfs(k + 1);
+                    }
+                }
+            }
+        };
+        dfs(1);
+        return result;
+    };
+    console.info(grayCode(2));
+    /**
+     * 用dp来做：利用动态规划思想同时结合观察对称现象可以得到
+     * 状态转移方程：F(n)=[0-F(n-1),1-(^)F(n-1)]   ......(^暂且表示为对称)
+     * 最优子结构：略
+     * 边界条件： F(0)=[0] F(1)=[0,1];
+     * 时间复杂度：0(2^(n))
+     * 空间复杂度：0(1)
+     * @param n
+     */
+    const grayCode1=n=>{
+        if(n===0) return [0];
+        if(n===1) return [0,1];
+        let res=[];
+        res[0]=[0];
+        res[1]=[0,1];
+        for(let i=2;i<=n;i++){
+            res[i]=res[i-1].map(item=>`0${item.toString()}`).concat(res[i-1].reverse().map(item=>`1${item.toString()}`))
+        }
+        return res[n].map(item=>{
+            let res=0;
+            for(let i=0;i<item.length;i++){
+                res+=Math.pow(2,item.length-i-1)*Number(item[i]);
+            }
+            return res;
+        });
+    };
+    console.info(grayCode1(4));
+</script>
+</body>
+</html>
