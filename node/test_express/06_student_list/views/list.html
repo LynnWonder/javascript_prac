@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+<body>
+英雄列表(all):
+<ul>
+    {{each heros}}
+    <li>
+        {{$value.name}}
+        <img src="{{$value.img}}">
+    </li>
+    {{/each}}
+</ul>
+英雄列表(near):
+<ul>
+    {{each nears}}
+    <li>
+        {{$value.name}}
+        <img src="{{$value.img}}">
+        距离我{{$value.dist.calculated}}米
+    </li>
+    {{/each}}
+</ul>
+</body>
+</html>

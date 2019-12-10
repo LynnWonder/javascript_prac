@@ -6,21 +6,13 @@
 </head>
 <body>
 <div>
-    学生列表:
-    <ul>
-        {{each heros}}
-        <li>
-            {{$value.name}}
-            <img src="{{$value.img}}">
-        </li>
-        {{/each}}
-    </ul>
-<!-- 同步上传表单一定要加上enctype-->
-<form action="/add" method="post" enctype="multipart/form-data">
-    name:<input type="text" name="nickname"/>
-    avatar:<input type="file" name="avatar"/>
-    <button>add</button>
-</form>
+    <!-- 同步表单上传文件的时候，表单，一定要加上enctype="multipart/form-data" -->
+    <form action="/add" method="post" enctype="multipart/form-data" >
+        网名:<input type="text" name="nickname"/>
+        头像:<input type="file" name="avatar"/>
+        位置:<input type="text" name="location"/>
+        <button>添加</button>
+    </form>
 </div>
 </body>
 </html>

@@ -26,11 +26,42 @@ router.get('/',(req,res,next)=>{
     // // es6简写
     // res.render('index',{heros});
     // 从数据库读取数据
-    db.find('heros',{},function(err,result){
-        if(err) next(err);
-        res.render('index',{heros:result});
-    })
+    // db.find('heros',{},function(err,result){
+    //     if(err) next(err);
+    //     res.render('index',{heros:result});
+    // })
+    // 添加位置信息后，进入首页首先渲染index页面
+    res.render('index');
 })
+    .get('/list',(req,res,next)=>{
+        console.info(req.headers.cookie);
+
+        //todo 从cookie中获取数据
+        console.info('cookie==>',req.headers.cookie);
+        let location = req.headers.cookie.split('location=');
+        if(!location) return res.send('没有注册');
+        location = location[1];
+        let lon = location.split(',')[1];
+        let lat = location.split(',')[0];
+        let heros=[];
+        console.log(lon,lat);
+
+        db.find('heros_geo',{},function(err,result){
+            if(err) next(err);
+            heros=result;
+        });
+        // 计算附近的人的基准是存入cookie的信息
+        db.nearMe('heros_geo',{lon:parseFloat(lon),lat:parseFloat(lat)},function(err,nears) {
+            if(err) next(err);
+            console.log(heros);
+            res.render('list',{
+                heros,
+                nears, // ES6属性简写，key和value是同名的
+            });
+        });
+
+
+    })
     .post('/add',(req,res,next)=>{
         let form = new formidable.IncomingForm();
         // change upload dir
@@ -57,13 +88,23 @@ router.get('/',(req,res,next)=>{
             //     img
             // });
             // data ==>database
-            db.insert('heros',{name:nickname,img},function(err,result){
+            // todo 获取用户信息中的location信息
+            let location=fields.location;
+            let lon=location.split(',')[1];
+            let lat=location.split(',')[0];
+            // 将位置信息存入到数据库中
+            db.insert('heros_geo',{name:nickname,img,near:{
+                type:"Point",
+                    coordinates:[parseFloat(lon),parseFloat(lat)]
+                }},function(err,result){
                 if(err){
                     next(err);
                 }
                 console.info(result);
+                // 为什么要将信息存入cookie一份呢？
+                res.setHeader('set-cookie','location='+location);
                 // 同步提交，浏览器等待页面显示
-                res.redirect('/');
+                res.redirect('/list');
             });
         });
     })

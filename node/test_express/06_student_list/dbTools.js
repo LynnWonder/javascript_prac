@@ -8,6 +8,23 @@ const url = 'mongodb://localhost:27017';
 const dbName = 'test01';
 
 let obj={};
+
+function _init(cname){
+    // db.test.createIndex({"sp":"2dsphere"});
+    _connect(function(client){
+        const col = client.db(dbName).collection(cname);
+        // node处理数据均为异步形式
+        col.createIndex({"near":"2dsphere"},function(err){
+            if(err) throw err;
+            console.info('created index...');
+            client.close();
+        });
+    })
+}
+
+
+// 数据初始化，初始化集合写入新的
+_init('heros_geo');
 // curd都需要拿连接
 function _connect(callback){
     MongoClient.connect(url, function(err, client) {
@@ -66,7 +83,29 @@ obj.remove=function (cname,filter,fn){
         })
     })
 };
-
+// 获取离我最近
+obj.nearMe=function(cname,data,fn){
+    _connect(function(client) {
+        const col = client.db(dbName).collection(cname);
+        col.aggregate({
+            $geoNear: {
+                // lon  lat
+                near: { type: "Point", coordinates:[data.lon,data.lat]},
+                // 要嵌入数据中的字段dist.calculated
+                distanceField: "dist.calculated",
+                spherical:true,
+                maxDistance: 40000
+            }
+        },function(err,cursor){
+            if(err) throw err;
+            cursor.toArray(function(err,docs){
+                fn(err,docs);
+                // 及时关闭连接
+                client.close();
+            })
+        })
+    });
+};
 
 module.exports=obj;
 // // 调用更新
