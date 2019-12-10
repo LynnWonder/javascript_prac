@@ -14,6 +14,14 @@
      * 解空间自然就是子集树
      * 扩展规则是n个皇后可以放在任意位置
      * 约束条件是：该位置无皇后，行方向没有，列方向没有，斜方向也没有皇后
+     * 但是时间复杂度过高，无法AC
+     * 修改回溯法之后：用k参数代表所在行，
+     * 时间复杂度：\mathcal{O}(N!)O(N!). 放置第 1 个皇后有 N 种可能的方法，放置两个皇后的方法不超过 N (N - 2) ，放置 3 个皇后的方法不超过 N(N - 2)(N - 4) ，以此类推。总体上，时间复杂度为 \mathcal{O}(N!)O(N!) .
+     * 空间复杂度：\mathcal{O}(N)O(N) . 需要保存对角线和行的信息。
+     作者：LeetCode
+     链接：https://leetcode-cn.com/problems/n-queens/solution/nhuang-hou-by-leetcode/
+     来源：力扣（LeetCode）
+     著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
      * @param n
      */
     const solveNQueens =n=>{
@@ -22,7 +30,7 @@
             res[i]=new Array(n).fill('.');
         }
         const feasible=(res0,i,j)=>{
-            // todo 位置不合理
+            // todo 位置不合理，已经限制过，不再处理
             // todo 已经有皇后了
             if(res0[i][j]==='Q'){
                 return false;
@@ -45,56 +53,56 @@
                 }
             }
             // 右上角
-            // s=i;t=j;
-            // while(s<n&&t>=0){
-            //     if(res0[s][t]==='Q'){
-            //         return false;
-            //     }else{
-            //         s++;
-            //         t--;
-            //     }
-            // }
+            s=i;t=j;
+            while(s<n&&t>=0){
+                if(res0[s][t]==='Q'){
+                    return false;
+                }else{
+                    s++;
+                    t--;
+                }
+            }
             // // 左下角
-            // s=i;t=j;
-            // while(s>=0&&t<n){
-            //     if(res0[s][t]==='Q'){
-            //         return false;
-            //     }else{
-            //         s--;
-            //         t++;
-            //     }
-            // }
+            s=i;t=j;
+            while(s>=0&&t<n){
+                if(res0[s][t]==='Q'){
+                    return false;
+                }else{
+                    s--;
+                    t++;
+                }
+            }
             // // 右下角
-            // s=i;t=j;
-            // while(s<n&&t<n){
-            //     if(res0[s][t]==='Q'){
-            //         return false;
-            //     }else{
-            //         s++;
-            //         t++;
-            //     }
-            // }
+            s=i;t=j;
+            while(s<n&&t<n){
+                if(res0[s][t]==='Q'){
+                    return false;
+                }else{
+                    s++;
+                    t++;
+                }
+            }
             return true;
         };
 
         const dfs=k=>{
-            if(k>n){
+            if(k>n-1){
                 res0.push(JSON.stringify(res));
             }else{
-                // 怎么去考虑第k个皇后的摆放位置呢，显然需要双层循环
-                for(let i=0;i<n;i++){
+                // 怎么去考虑第k个皇后的摆放位置呢，显然需要双层循环,时间复杂度过高，无法AC
+                // 但其实我们的k可以拿来充当k,试探每一个k行的每一列
+                // for(let i=0;i<n;i++){
                     for(let j=0;j<n;j++){
-                        if(feasible(res,i,j)){
-                            res[i][j]='Q';
+                        if(feasible(res,k,j)){
+                            res[k][j]='Q';
                             dfs(k+1);
-                            res[i][j]='.';
+                            res[k][j]='.';
                         }
                     }
-                }
+                // }
             }
         };
-        dfs(1);
-        res0=[...new Set(res0)];
+        dfs(0);
         for(let i=0;i<res0.length;i++){
             res0[i]=JSON.parse(res0[i]);
             for(let j=0;j<res0[i].length;j++){
@@ -103,7 +111,48 @@
         }
         return res0;
     };
-    console.info(solveNQueens(8));
+    console.info(solveNQueens(4));
+    /**
+     * 采用arr保存第i行第arr[i]列有皇后，很巧妙的方法
+     * @param n
+     * @returns {[]}
+     */
+    const solveNQueens1=n=>{
+        let arr=new Array(n),res0=[],res=new Array(n);
+        const check=(row,col)=>{
+            for(let i=0;i<row;i++){
+                // 同一行肯定不会有的 主要检查同一列，以及斜对角，检查斜对角的方式真的很妙啊
+                if(col===arr[i]||Math.abs(row-i)===Math.abs(col-arr[i])){
+                    return false;
+                }
+            }
+            return true;
+        };
+        const dfs=k=>{
+            if(k>n-1){
+                arr.forEach((item,idx)=>{
+                    res[idx]=new Array(n).fill('.');
+                    res[idx][item]='Q';
+                    res[idx]=res[idx].join('');
+                });
+                res0.push(JSON.parse(JSON.stringify(res)));
+            }else{
+                // 试探每一个k行的每一列
+                // for(let i=0;i<n;i++){
+                for(let j=0;j<n;j++){
+                    if(check(k,j)){
+                        arr[k]=j;
+                        dfs(k+1);
+                        // 此处不必另外加回溯语句是因为每次遍历都给arr[k]重新赋值了而不必再更改赋初始值
+                    }
+                }
+                // }
+            }
+        };
+        dfs(0);
+        return res0;
+    };
+    console.info(solveNQueens1(8));
 </script>
 </body>
 </html>
