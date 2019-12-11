@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>20191211review</title>
+</head>
+<body>
+<script>
+    function Node(ele){
+        this.val=ele;
+        this.left=null;
+        this.right=null;
+    }
+    const buildTree=(arr,i)=>{
+        if (i>arr.length-1) return;
+        let node=new Node(arr[i]);
+        node.left=buildTree(arr,i*2+1);
+        node.right=buildTree(arr,i*2+2);
+        return node;
+    };
+    let arr0=[1,2,3,4,5,6];
+    let arr1=[1,2,3,4,5,6,7,8];
+    let tree0=buildTree(arr1,0);
+    console.info(tree0);
+    /**
+     * 计算二叉树的最大深度，实际是借助利用二叉树的层次遍历叠加的，空间复杂度较高
+     */
+    const maxDepth=tree=>{
+        let res=[];
+        tree&&res.push(tree);
+        let i=0;
+        while(res.length>0){
+            i++;
+            let temp=[];
+            res.forEach(item=>{
+                if(item.left){
+                    temp.push(item.left);
+                }
+                if(item.right){
+                    temp.push(item.right);
+                }
+            });
+            res=temp;
+        }
+        return i;
+    };
+    console.info(maxDepth(tree0));
+    /**
+     * 第二种计算方式利用递归的方式
+     */
+    const maxDepth1=tree=>{
+        if(!tree){
+            return 0;
+        }else{
+            return 1+Math.max(maxDepth1(tree.left),maxDepth1(tree.right));
+        }
+    };
+    console.info(maxDepth1(tree0));
+    /**
+     * 计算二叉树的最小深度 以下方法无法ac 因为如果是单链(形成类似链表结构)是算链长度的
+     */
+    // const minDepth=tree=>{
+    //     if(!tree){
+    //         return 0;
+    //     }else{
+    //         return 1+Math.min(minDepth(tree.left),minDepth(tree.right));
+    //     }
+    // };
+    // console.info(minDepth(tree0));
+    /**
+     * 改进版计算二叉树的最小深度
+     */
+    const minDepth=tree=>{
+        if(!tree) return 0;
+        if(!tree.left&&!tree.right) return 1;
+        let resL=minDepth(tree.left);
+        let resR=minDepth(tree.right);
+        if(!tree.left&&tree.right) return 1+resR;
+        if(!tree.right&&tree.left) return 1+resL;
+        return 1+Math.min(resL,resR);
+    };
+    console.info(minDepth(tree0));
+</script>
+</body>
+</html>
