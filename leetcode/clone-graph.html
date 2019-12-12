@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>克隆图-leetcode-133</title>
+</head>
+<body>
+<script>
+    /**
+     * 给定无向连通图中一个节点的引用，返回该图的深拷贝（克隆）。图中的每个节点都包含它的值 val（Int） 和其邻居的列表（list[Node]）。
+     * 输入：
+     {"$id":"1","neighbors":[{"$id":"2","neighbors":[{"$ref":"1"},{"$id":"3","neighbors":[{"$ref":"2"},{"$id":"4","neighbors":[{"$ref":"3"},{"$ref":"1"}],"val":4}],"val":3}],"val":2},{"$ref":"4"}],"val":1}
+     */
+    let xx={
+        "$id":"1",
+        "neighbors":[
+            {"$id":"2","neighbors":[{"$ref":"1"},{"$id":"3","neighbors":[{"$ref":"2"},{"$id":"4","neighbors":[{"$ref":"3"},{"$ref":"1"}],"val":4}],"val":3}],"val":2},
+            {"$ref":"4"}
+            ]
+        ,"val":1};
+    function Node(val,neighbors) {
+        this.val = val;
+        this.neighbors = neighbors;
+    }
+
+    /**
+     * 使用bfs，借助map实现对图的深拷贝
+     * @param node
+     * @returns {undefined|Node}
+     */
+    const cloneGraph = (node)=>{
+        let temp=[],res=new Map();
+        let clone=new Node(node.val,[]);
+        res.set(node,clone);
+        node&&temp.push(node);
+        while(temp.length>0){
+            let tempNode=temp.shift();
+            for(let i of tempNode.neighbors){
+                let px=new Node(i.val,[]);
+                if (!res.has(i)){
+                    temp.push(i);
+                    res.set(i,px);
+                }
+                res.get(tempNode).neighbors.push(res.get(i));
+            }
+        }
+        return clone;
+    };
+    /**
+     * 也可以借助DFS实现对图的深拷贝，无论DFS还是BFS，都会对图中的内容进行一次遍历
+     */
+    const cloneGraph1=node=>{
+        let res=new Map();
+        const dfs=node0=>{
+            if(!node) return;
+            if(res.has(node0)){
+                return res.get(node0);
+            }
+            let clone=new Node(node0.val,[]);
+            res.set(node0,clone);
+            for(let nei of node0.neighbors){
+                clone.neighbors.push(dfs(nei));
+            }
+            return clone;
+        };
+        return dfs(node);
+    }
+</script>
+</body>
+</html>
