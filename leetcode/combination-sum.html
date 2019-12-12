@@ -21,11 +21,11 @@
      ]
      */
     /**
-     * 看一下测试用例的结果就会了解到解是一个子集树，需要搜索一组解
-     * 解空间是子集树 取值范围是在候选数中选择
+     * 看一下测试用例的结果就会了解到解是一个子集树，需要搜索一组解===>用回溯法解决
+     * 解空间： 子集树 取值范围是在候选数中选择
      * 扩展规则：遍历整个候选数组
      * 限制条件：和小于等于目标值
-     *
+     * 可以发现出现了一个问题：组合有重复的，最后还要进行一次降重，显然效率不高，针对这个问题要接下来进行优化。
      * @param candidates
      * @param target
      */
@@ -60,7 +60,38 @@
         dfs(0);
         return [...new Set(res)].map(item=>JSON.parse(item));
     };
-    console.info(combinationSum([2,3,5],8));
+    // console.info(combinationSum([2,3,5],8));
+    // console.info(combinationSum([2,3,6,7],7));
+    /**
+     * 下面进行代码优化
+     */
+    const combinationSum1 = (candidates, target)=>{
+        let res=[],res0=[];
+        /**
+         * @param k   注意点： 截取前k个值，才是我们需要的答案，这也是解同类回溯法问题的一个注意点；
+         * @param idx 优化点1：为了避免出现重复的组合，每次记录idx即每次开始列入参考值的位置起始；
+         * @param tgt 优化点2：每次计算sum值都需要遍历，不如每次记录大小,加入参数tgt
+         * 此时
+         */
+        const dfs=(k,idx,tgt)=> {
+            if(tgt===0){
+                res.push(JSON.parse(JSON.stringify(res0.slice(0,k))));
+                // console.info(JSON.stringify(res0.slice(0,k)));
+            }else{
+                // res0中的每个值都是candinates中的值
+                for(let i=idx;i<candidates.length;i++){
+                    if(tgt-candidates[i]>=0){
+                        res0[k]=candidates[i];
+                        dfs(k+1,i,tgt-candidates[i]);
+                    }
+                }
+            }
+        };
+        dfs(0,0,target);
+        return res;
+    };
+    // combinationSum1([2,3,5],8)
+    console.info(combinationSum1([2,3,5],8));
     console.info(combinationSum([2,3,6,7],7));
 </script>
 </body>
