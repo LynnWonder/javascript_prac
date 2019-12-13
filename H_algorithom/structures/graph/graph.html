@@ -117,17 +117,23 @@
 
     let g = new Graph(7);
     console.info(g);
+    // g.addEdge(0,1);
+    // g.addEdge(0,2);
+    // g.addEdge(1,3);
+    // g.addEdge(3,4);
+    // g.addEdge(2,5);
+    // g.addEdge(5,6);
+    // g.addEdge(6,4);
     g.addEdge(0,1);
-    g.addEdge(0,2);
-    g.addEdge(1,3);
-    g.addEdge(3,4);
-    g.addEdge(2,5);
-    g.addEdge(5,6);
-    g.addEdge(6,4);
+    g.addEdge(0,4);
+    g.addEdge(1,2);
+    g.addEdge(2,3);
+    g.addEdge(4,5);
+    g.addEdge(5,3);
     g.showGraph();
     // g.dfs(0);
     g.bfs(0);
-    g.pathTo(4);
+    // g.pathTo(4);
     const findMinPath=(graph,start,end)=>{
         // 首先进行层次遍历
         let temp=[],edgeTo=[],marked=[];
@@ -153,7 +159,7 @@
         console.info(edgeTo);
         return res;
     };
-    console.info(findMinPath(g,0,4));
+    // console.info(findMinPath(g,0,4));
     // console.info(g.adj);
 </script>
 </body>
