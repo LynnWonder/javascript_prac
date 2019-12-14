@@ -161,6 +161,74 @@
     };
     // console.info(findMinPath(g,0,4));
     // console.info(g.adj);
+
+    let g0 = new Graph(6);
+    g0.addEdge(1, 2);
+    g0.addEdge(2, 5);
+    g0.addEdge(1, 3);
+    g0.addEdge(1, 4);
+    g0.addEdge(0, 1);
+    /**
+     * 拓扑排序针对的一定是有向图，所以添加边的方式会跟无向图有所区别
+     * @param arr
+     * @param num
+     */
+    const topoSort=(arr,num)=>{
+        // save the vertex
+        let adj=new Array(num),queue=[],inDegree=new Array(num).fill(0),res=[];
+        // 记录遍历的顶点数
+        let count=0;
+        // initialize
+        for(let i=0;i<num;i++){
+            adj[i]=[];
+        }
+        // 统计顶点的入度,即有多少个边指向这个顶点
+        // 更新邻接表
+        for(let i=0;i<arr.length;i++){
+            inDegree[arr[i][1]]+=1;
+            adj[arr[i][0]].push(arr[i][1]);
+        }
+        // 统计入度为0的顶点
+        // 即从AOV(active on vertex network)上找出没有前驱的顶点并输出它
+        // 从AOV网中删除这个顶点，并且删去从该顶点发出的所有有向的边(入度-1)
+        for(let i=0;i<num;i++){
+            if(inDegree[i]===0){
+                queue.push(i);
+            }
+        }
+        while(queue.length>0){
+            // 用队列的shift还是栈的pop区别不大，因为永远都是只有一个元素
+            let top=queue.shift();
+            res.push(top);
+            count++;
+            for(let i=0;i<adj[top].length;i++){
+                inDegree[adj[top][i]]-=1;
+                if(inDegree[adj[top][i]]===0){
+                    queue.push(adj[top][i]);
+                }
+            }
+        }
+        console.info(res);
+        return count===num;
+    };
+    let arr=[
+        [0,1],
+        [1,2],
+        [1,0]
+    ];
+    let arr1=[
+        [0,1],
+        [1,2],
+    ];
+    let arr2=[
+        [0,1],
+        [1,3],
+        [1,4],
+        [1,2],
+        [2,5]
+    ];
+    // console.info(topoSort(arr));
+    console.info(topoSort(arr2,6));
 </script>
 </body>
 </html>
