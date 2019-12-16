@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>最小高度树-leetcode-310</title>
+</head>
+<body>
+<script>
+    /**
+     * 对于一个具有树特征的无向图，我们可选择任何一个节点作为根。图因此可以成为树，在所有可能的树中，
+     * 具有最小高度的树被称为最小高度树。给出这样的一个图，写出一个函数找到所有的最小高度树并返回他们的根节点。
+     格式
+     该图包含 n 个节点，标记为 0 到 n - 1。给定数字 n 和一个无向边 edges 列表（每一个边都是一对标签）。
+     你可以假设没有重复的边会出现在 edges 中。由于所有的边都是无向边， [0, 1]和 [1, 0] 是相同的，因此不会同时出现在 edges 里。
+     */
+    /**
+     * 寻找最小高度树并且返回根节点
+     * 初步思路：题目要求是找到所有的最小高度树并返回根节点,初步考虑是从头和从底部都遍历一次，找到可能的最小高度树===>经过验证不能通过测试用例
+     *
+     * @param n
+     * @param edges
+     */
+    const findMinHeightTrees = (n, edges)=>{
+        if(edges.length<=0) return [0];
+        let adj=new Array(n),res=[];
+        for(let i=0;i<n;i++){
+            adj[i]=[];
+        }
+        for(let i=0;i<edges.length;i++){
+            adj[edges[i][0]].push(edges[i][1]);
+            adj[edges[i][1]].push(edges[i][0]);
+        }
+        // console.info(adj);
+        const concatArr=(arr1,arr2)=>{
+            // arr1 是从0遍历来的一定比arr2小
+            for(let i=0;i<arr1.length;i++){
+                if(arr1[i]<arr2[i]){
+                    arr1.shift();
+                    i--;
+                }
+            }
+            return arr1;
+        };
+        const bfs=(start,adj0)=>{
+            let temp=[],res0=[],map=new Map(),res1=[];
+            start!==undefined&&temp.push(start);
+            while(temp.length>0){
+                // console.info('temp==>',JSON.stringify(temp));
+                let tempV=temp.shift();
+                // res0.push(tempV);
+                map.set(tempV,true);
+                for(let i=0;i<adj0[tempV].length;i++){
+                    if(!map.has(adj0[tempV][i])&&temp.length===0){
+                        res1.push(tempV);
+                    }
+                    if(!map.has(adj0[tempV][i])){
+                        map.set(adj0[tempV][i],true);
+                        temp.push(adj0[tempV][i]);
+                    }
+                }
+            }
+            return res1;
+        };
+        let res0=bfs(0,adj).sort((a,b)=>a-b);
+        let res1=bfs(n-1,adj).sort((a,b)=>a-b);
+        console.info(res0,res1);
+        if(res0.length===1&&res1.length===1){
+            return res0.concat(res1);
+        }else{
+            return concatArr(res0,res1);
+        }
+    };
+    // console.info(findMinHeightTrees(6,[[0, 3], [1, 3], [2, 3], [4, 3], [5, 4]]));
+    // console.info(findMinHeightTrees(4,[[1, 0], [1, 2], [1, 3]]));
+    // console.info(findMinHeightTrees(2,[[0,1]]));
+    // console.info(findMinHeightTrees(6,[[0,1],[0,2],[0,3],[3,4],[4,5]]));
+    /**
+     * 改进后寻找图的最小高度树的根节点方法：
+     * 借用拓扑排序中度的概念，最小高度树的根节点肯定不会是一个入度为1的节点，即邻接表长度为1
+     * 依次删除这些叶子节点的邻接点的邻接表中的它本身，如果邻接表中节点的度也是1，那么就放回中间数组
+     * 最终题解为1个或者两个，即为1个根节点或者2个根节点
+     * 总体来讲，这种方法不容易想到
+     * @param n
+     * @param edges
+     * @returns {[]|number[]}
+     */
+    const findMinHeightTrees1=(n, edges)=>{
+        if(edges.length<=0) return [0];
+        let adj=new Array(n),leaves=[];
+        for(let i=0;i<n;i++){
+            adj[i]=[];
+        }
+        for(let i=0;i<edges.length;i++){
+            adj[edges[i][0]].push(edges[i][1]);
+            adj[edges[i][1]].push(edges[i][0]);
+        }
+        // find leaves
+        for(let i=0;i<n;i++){
+            if (adj[i].length===1){
+                leaves.push(i);
+            }
+        }
+        // console.info(leaves);
+        while(n>2){
+            n-=leaves.length;
+            let next=[];
+            for(let i=0;i<leaves.length;i++){
+                // 叶子节点的相邻节点
+                temp=adj[leaves[i]].pop();
+                // 邻接点中删除这个叶子节点
+                for(let j=0;j<adj[temp].length;j++){
+                    if(adj[temp][j]===leaves[i]){
+                        adj[temp].splice(j,1);
+                        break;
+                    }
+                }
+                if (adj[temp].length===1){
+                    next.push(temp);
+                }
+            }
+            leaves=next;
+        }
+       return leaves;
+    };
+</script>
+</body>
+</html>
