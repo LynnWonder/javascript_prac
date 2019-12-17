@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>weakMap weakSet</title>
+</head>
+<body>
+<script>
+    let obj={};
+    const map=new WeakMap();
+    map.set(obj,{key:'some_value'});
+    console.info(map.get(obj));
+    // 只剩下引用的时候，对象作为主键可以用来进行垃圾回收
+    obj=undefined; // now obj and the associated data in the map will be cleaned up in the next gc cycle
+    console.info(map);
+
+
+    let obj1={key:'val1'};
+    let obj2={key:'val2'};
+    const set=new WeakSet([obj1,obj2]);
+    console.info(set.has(obj1));
+    // 只剩下引用的时候被垃圾回收
+    obj1=undefined; // now obj1 will be removed from the set
+    console.info(set.has(obj1));
+</script>
+</body>
+</html>
