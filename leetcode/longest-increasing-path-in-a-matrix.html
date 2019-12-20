@@ -13,7 +13,14 @@
      [9,9,4],
      [6,6,8],
      [2,1,1]
-     ]
+     ]*/
+
+
+    /*
+     * 每个单元格可以看作图 G 中的一个定点。
+     * 若两相邻细胞的值满足 a < b，则存在有向边 (a, b)。问题转化成：
+     * 求有向图的最长路径长度问题
+
      首先这道题是归类到拓扑排序条目下，但是目前想不到和拓扑排序相关的内容。
      首先递增的路径可以是多个的，相当于求一组解，因此可以考虑回溯法
      */
@@ -218,19 +225,84 @@
         console.info(ans);
         return ans;
     };
-    longestIncreasingPath2([
-        [9,9,4],
-        [6,6,8],
-        [2,1,1]
-    ]);
+
+    /**
+     * 我们注意到某个点的最长递增路径总是跟相邻的点有关系，子问题重叠，因此自然而然的就会想到动态规划
+     * 因此最优子结构 L(i,j)=1+Math.max(L(i-1,j),L(i,j+1),L(i+1,j),L(i,j-1))
+     * 并且需要判断相邻节点是否是增加关系，但是有一个问题是无法确定边界点的L长度，
+     * 而这种依赖其他顶点的现象又称为拓扑排序，将此题转化成拓扑排序
+     * 时间复杂度 : O(mn)。
+     * 拓扑排序的时间复杂度为 O(V+E) = O(mn) O(V+E)=O(mn)。
+     * V 是顶点总数，E 是边总数。
+     * 本问题中，O(V) = O(mn)，O(E) = O(4V) = O(mn)。
+     * 空间复杂度 : O(mn) 我们需要存储出度和每层的叶子
+     * @param matrix
+     */
+    const longestIncreasingPath4 =matrix=>{
+        if(matrix.length<1) return matrix.length;
+        let leaves=[],m=matrix.length,n=matrix[0].length,
+            dir=[[-1,0],[0,1],[1,0],[0,-1]],ans=0;
+        const check=(i,j)=>{
+            return i <= matrix.length - 1 && i >= 0 && j <= matrix[0].length - 1 && j >= 0;
+        };
+        // initialize degree
+        let degree=[];
+        for(let i=0;i<m;i++){
+            degree[i]=(new Array(n)).fill(0);
+        }
+        for(let i=0;i<m;i++){
+            for(let j=0;j<n;j++){
+                for(let k=0;k<dir.length;k++){
+                    if(check(i+dir[k][0],j+dir[k][1])&&matrix[i][j]<matrix[i+dir[k][0]][j+dir[k][1]]){
+                        degree[i][j]++;
+                    }
+                }
+            }
+        }
+        // console.info(degree);
+        // collect which degree is 0，寻找叶子顶点，即不依赖于其他顶点的顶点
+        for(let i=0;i<m;i++){
+            for(let j=0;j<n;j++){
+                if (degree[i][j]===0){
+                    leaves.push([i,j]);
+                }
+            }
+        }
+        console.info(leaves.map(item=>matrix[item[0]][item[1]]));
+        while(leaves.length>0){
+            ans++;
+            let newLeaves=[];
+            for(let i=0;i<leaves.length;i++)
+            {
+                for(let d=0;d<dir.length;d++){
+                    let x=leaves[i][0]+dir[d][0],y=leaves[i][1]+dir[d][1];
+                    // 此时check的却是比当前点小的点即寻找新的叶子的过程
+                    if(check(x,y)&&matrix[leaves[i][0]][leaves[i][1]]>matrix[x][y]){
+                        if(--degree[x][y]===0){
+                            newLeaves.push([x,y]);
+                        }
+                    }
+                }
+            }
+            console.info(newLeaves.map(item=>matrix[item[0]][[item[1]]]));
+            leaves=newLeaves;
+        }
+        // console.info(ans);
+        return ans;
+    };
+    // longestIncreasingPath4([
+    //     [9,9,4],
+    //     [6,6,8],
+    //     [2,1,1]
+    // ]);
     // longestIncreasingPath1([
     //     [3,4,5],
     //     [3,2,6],
     //     [2,2,1]
     // ] );
-    // longestIncreasingPath1([[1,2]]);
+    // longestIncreasingPath4([[1,2]]);
     // longestIncreasingPath1([[1]]);
-    longestIncreasingPath2([[13,6,16,6,16,4],[9,13,5,13,7,11],[11,7,9,17,0,7],[7,8,5,14,11,8],[14,2,8,7,9,5],[1,15,3,11,11,6]]);
+    // longestIncreasingPath4([[13,6,16,6,16,4],[9,13,5,13,7,11],[11,7,9,17,0,7],[7,8,5,14,11,8],[14,2,8,7,9,5],[1,15,3,11,11,6]]);
 
 </script>
 </body>
