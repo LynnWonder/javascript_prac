@@ -10,6 +10,7 @@
      * 这个题剥去题意本身，考虑各种除法，可以认为是一个无向图的问题
      * 首先建立邻接表，对queries里面的数组定义为start和end
      * 对邻接表从起点开始进行dfs，同时注意：dfs时无法返回，只能在合适的条件收集结果
+     * 必须用回溯的原因是起点和终点固定住了，而不是需要遍历所有元素，因此，需要回溯
      */
     const calcEquation = (equations, values, queries)=>{
         // initialize adj
@@ -37,6 +38,7 @@
                 {
                     res0*=adj[st][i][1];
                     dfsGetVal(adj[st][i][0],ed,adj,map);
+                    // 回溯
                     res0/=adj[st][i][1];
                 }
             }
