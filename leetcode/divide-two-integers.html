@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>两数相除-leetcode-29</title>
+</head>
+<body>
+<script>
+    const divide = (dividend, divisor)=>{
+        if(dividend===0) return 0;
+        if(divisor===1) return dividend;
+        if(divisor===-1) {
+            if(-dividend>Math.pow(2,31)-1||-dividend<-Math.pow(2,31)){
+                return Math.pow(2,31)-1;
+            }
+            return -dividend;
+        }
+        let sign=1;
+        // check +-
+        if((dividend<0&&divisor>0)||(dividend>0&&divisor<0)){
+            sign=-1;
+        }
+        dividend=dividend>0?dividend:-dividend;
+        divisor=divisor>0?divisor:-divisor;
+        const div=(a,b)=>{
+            if(a<b) return 0;
+            let count=1,tb=b;
+            while((tb+b)<a){
+                count+=1;
+                tb+=b;
+            }
+            // key: 如果不递归，往往求的值是在count和count+1之间浮动，
+            // 相当于需要把头部代码重新写一遍，因此递归即可
+            return count+div(a-tb,b);
+        };
+        let res=div(dividend,divisor);
+        if(sign>0){
+            return res>Math.pow(2,31)?Math.pow(2,31)-1:res;
+        }else{
+            return -res;
+        }
+    };
+    /**
+     * optimize1:加快步伐
+     * @param dividend
+     * @param divisor
+     * @returns {number|*}
+     */
+    const divide1 = (dividend, divisor)=>{
+        if(dividend===0) return 0;
+        if(divisor===1) return dividend;
+        if(divisor===-1) {
+            if(-dividend>Math.pow(2,31)-1||-dividend<-Math.pow(2,31)){
+                return Math.pow(2,31)-1;
+            }
+            return -dividend;
+        }
+        let sign=1;
+        // check +-
+        if((dividend<0&&divisor>0)||(dividend>0&&divisor<0)){
+            sign=-1;
+        }
+        dividend=dividend>0?dividend:-dividend;
+        divisor=divisor>0?divisor:-divisor;
+        /**
+         * 加快收缩的进程
+         * @param a
+         * @param b
+         * @returns {number|*}
+         */
+        const div=(a,b)=>{
+            if(a<b) return 0;
+            let count=1,tb=b;
+            while((tb+tb)<a){
+                count+=count;
+                tb+=tb;
+            }
+            return count+div(a-tb,b);
+        };
+        let res=div(dividend,divisor);
+        if(sign>0){
+            return res>Math.pow(2,31)?Math.pow(2,31)-1:res;
+        }else{
+            return -res;
+        }
+    };
+    console.info(divide1(11,2));
+</script>
+</body>
+</html>
