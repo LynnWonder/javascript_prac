@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>merry Christmas🎄🎄🎄</title>
+</head>
+<body>
+<script>
+    /**
+     * 给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。
+     请你找出这两个有序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。
+     你可以假设 nums1 和 nums2 不会同时为空。
+     通过观察时间复杂度可以很明确一定是利用二分查找算法完成，但是
+     * @param A
+     * @param B
+     */
+    /**
+     * 先考虑如果不去计较时间复杂度的大小，如何确定中位数呢
+     * 通过以其中最长的数组为基准向数组中插入短数组数据的方式确定排序好的数组，最终确定中位数
+     * 时间复杂度为O(m+n)最差的情况下两个数组都需要遍历一遍
+     * @param A
+     * @param B
+     */
+    const findMedianSortedArrays=(A,B)=>{
+        let sum=A.length+B.length;
+        if (A.length===B.length&&sum===2){
+            return (A[0]+B[0])/2
+        }
+        const sortAB=(a,b)=>{
+            let j=0;
+            for(let i=0;i<b.length;i++){
+                for(let k=j;k<a.length-1;k++){
+                    if (k===0&&a[k]>=b[i]){
+                        a.unshift(b[i]);
+                        j=k;
+                        break;
+                    }else if(a[k]<=b[i]&&a[k+1]>=b[i]){
+                        // console.info('k',k);
+                        a.splice(k+1,0,b[i]);
+                        j=k+1;
+                        break;
+                    }else{
+                        j=k;
+                    }
+                }
+                if(a.length<sum&&j+1===a.length-1&&a[j+1]<=b[i]){
+                    a=a.concat(b.slice(i));
+                    break;
+                }
+            }
+            return a;
+        };
+        if(A.length>=B.length){
+            A=sortAB(A,B);
+        }else{
+            A=sortAB(B,A);
+        }
+        console.info(A);
+        let len=A.length;
+        return len%2===0?(A[len/2]+A[len/2-1])/2:A[Math.floor(len/2)];
+    };
+    /**
+     * 其实上述的代码仍然具有冗余，首先不一定以长数组为基准进行插入，可以用任意一个数组作为基准
+     * 假如以B为基准向B中插入数据
+     */
+    const findMedianSortedArrays0=(A,B)=>{
+        let j=0;
+        for(let i=0;i<A.length;i++){
+            while(j<B.length){
+                if (B[j]>=A[i]){
+                    B.splice(j,0,A[i]);
+                    j++;
+                    break;
+                }else if(j===B.length-1&&B[j]<A[i]){
+                   B.push(A[i]);
+                   j++;
+                   break;
+                }else{
+                    j++;
+                }
+            }
+        }
+        if(B.length===0){
+            B=A;
+        }
+        let len=B.length;
+        return len%2===0?(B[len/2]+B[len/2-1])/2:B[Math.floor(len/2)];
+
+    };
+    /**
+     * 以上的问题解法显然不符合题目要求的时间复杂度，因此有必要通过二分法来解决这个问题
+     * @param A
+     * @param B
+     */
+    const findMedianSortedArrays1=(A,B)=>{
+        // make sure A.length<B.length
+        if(A.length>B.length){
+            let temp=A;
+            A=B;
+            B=temp;
+        }
+        let m=A.length,n=B.length;
+        // start binary-search,build start and end
+        let st = 0,ed=m;
+        while(st<=ed){
+            let i=Math.floor((st+ed)/2);
+            // to avoid m+n is odd
+            let j=Math.floor((m+n+1)/2)-i;
+            // case 1' 只是鉴于st可以等于ed的缘故，判断一下是否i就是st，如果不判断亦可
+            if(i>st&&A[i-1]>B[j]){
+                // binary search directly
+                // i is too big
+                ed=i-1;
+                // case 2'
+            }else if(i<ed&&B[j-1]>A[i]){
+                // i is too small
+                st=i+1;
+            }else{
+                let maxLeft=0;
+                if(i===0){
+                    maxLeft=B[j-1];
+                }else if(j===0){
+                    maxLeft=A[i-1];
+                }else{
+                    maxLeft=Math.max(A[i-1],B[j-1]);
+                }
+
+                let minRight = 0;
+                if (i === m){
+                    minRight = B[j];
+                }else if (j === n) {
+                    minRight = A[i];
+                }else {
+                    minRight = Math.min(B[j], A[i]);
+                }
+                return (m+n)%2===0?(maxLeft+minRight)/2:maxLeft;
+            }
+        }
+
+    };
+    let arr=[1,2,3];
+    // arr.splice(0,0,12);
+    // console.info(arr);
+    console.info(findMedianSortedArrays(arr,[4,5]));
+    console.info(findMedianSortedArrays0(arr,[4,5]));
+    console.info(findMedianSortedArrays1(arr,[4,5]));
+    console.info(findMedianSortedArrays([1,2],[1,2]));
+    console.info(findMedianSortedArrays0([1,2],[1,2]));
+    console.info(findMedianSortedArrays1([1,2],[1,2]));
+    console.info(findMedianSortedArrays([100000],[100001]));
+    console.info(findMedianSortedArrays0([100000],[100001]));
+    console.info(findMedianSortedArrays1([100000],[100001]));
+    console.info(findMedianSortedArrays([3,4],[1,2]));
+    console.info(findMedianSortedArrays0([3,4],[1,2]));
+    console.info(findMedianSortedArrays1([3,4],[1,2]));
+    console.info(findMedianSortedArrays0([2],[]));
+    console.info(findMedianSortedArrays1([2],[]));
+</script>
+</body>
+</html>
