@@ -36,7 +36,7 @@ const searchInsert1=(nums,target)=>{
         }
     }
     // console.info(left,right);
-    return left;
+    return left; // 至此，我们知道了，可以利用left的取值找到待插入的位置
 };
 // console.info(searchInsert([1,3,5,6], 5));
 // console.info(searchInsert1([1,3,5,6], 5));
