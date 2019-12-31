@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1dce8d66-9d85-4a78-8841-db6943400158" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/review/20191224review.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/review/20191225review.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leetcode/median-of-two-sorted-arrays.html" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/median-of-two-sorted-arrays.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +44,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="8.11.1" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/node/test_express/06_student_list/public" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/node/test_koa/07_login_session" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
@@ -56,16 +53,17 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/node/test_koa/07_login_session" />
       <recent name="$PROJECT_DIR$/node/test_express/06_student_list/public" />
       <recent name="$PROJECT_DIR$/node/test_http/my_server" />
       <recent name="E:\tju\笔试题\js" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/node/test_koa/06_static_template" />
       <recent name="$PROJECT_DIR$/leetcode" />
       <recent name="$PROJECT_DIR$/leetcode/algorithm" />
       <recent name="$PROJECT_DIR$/node/test_express" />
       <recent name="$PROJECT_DIR$/interviews" />
-      <recent name="$PROJECT_DIR$/interviews/css/三栏布局/t-b" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -140,6 +138,11 @@
       <workItem from="1573812564605" duration="6411000" />
       <workItem from="1573870096315" duration="13380000" />
       <workItem from="1574085229457" duration="57325000" />
+      <workItem from="1577277512708" duration="356000" />
+      <workItem from="1577277944449" duration="14749000" />
+      <workItem from="1577417723952" duration="596000" />
+      <workItem from="1577418397647" duration="16057000" />
+      <workItem from="1577633774044" duration="19891000" />
     </task>
     <servers />
   </component>
