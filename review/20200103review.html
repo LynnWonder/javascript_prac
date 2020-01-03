@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>20200103review</title>
+</head>
+<body>
+<script>
+    function List(val){
+        this.val=val;
+        this.next=null;
+    }
+    const listInsertSort=head=>{
+        let temp=head,res=null;
+        const swap=(list0,list1)=>{
+            if(list0===null||list0.val>list1.val){
+                list1.next=list0;
+                return list1;
+            }else{
+                list0.next=swap(list0.next,list1);
+                return list0;
+            }
+        };
+        while(temp){
+            // 暂存变量
+            let next=temp.next;
+            res=swap(res,temp);
+            temp=next;
+        }
+        console.info(res);
+        return res;
+    };
+    const convert=arr=>{
+        let head=new List(arr.shift());
+        let temp=head;
+        while(arr.length>0){
+            temp.next=new List(arr.shift());
+            temp=temp.next;
+        }
+        return head;
+    };
+    const insertionSortList0=head=>{
+        let temp=head.next,pivot=head.val,temp0=head;
+        const change=(list0,max,list1)=>{
+            let temp=list0,temp0=list0;
+            if (list0.val>list1.val){
+                while(temp0){
+                    if(temp0.val===max){
+                        break;
+                    }
+                    temp0=temp0.next;
+                }
+                temp0.next=list1.next;
+                list1.next=temp;
+                return list1;
+            }else {
+                while(temp.next){
+                    let temp1=temp.next;
+                    if(temp.next.val>=list1.val){
+                        while(temp0){
+                            if(temp0.val===max){
+                                break;
+                            }
+                            temp0=temp0.next;
+                        }
+                        temp0.next=list1.next;
+                        list1.next=temp.next;
+                        temp.next=list1;
+                        return list0;
+                    }
+                    temp=temp1;
+                }
+            }
+        };
+        while(temp){
+            let next=temp.next;
+            if(temp.val>=pivot){
+                pivot=temp.val;
+            }else{
+                temp0=change(temp0,pivot,temp);
+            }
+            temp=next;
+        }
+        // console.info(head);
+        return temp0;
+    };
+    let list0=convert([4,2,1,3]);
+    // console.info(listInsertSort(convert([-1,5,3,0])));
+    console.info(insertionSortList0(convert([-1,5,3,0])));
+    console.info(insertionSortList0(convert([4,2,0,1])));
+</script>
+</body>
+</html>
