@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对链表进行插入排序-leetcode-147</title>
+</head>
+<body>
+<script>
+    // 对链表进行插入排序 leetcode-147
+    /**
+     * 输入: 4->2->1->3
+     输出: 1->2->3->4
+     */
+    /**
+     * 首先要明确插入排序其实是一个迭代的过程
+     * 其次插入排序是一个总是让一个元素跟前面已经排序好的队列比较的过程
+     * @param arr
+     * @returns {*}
+     */
+    const insertSort=arr=>{
+        for(let i=1;i<arr.length;i++){
+            let j=i,temp=arr[i];
+            // 迭代的过程
+            while(j>0&&temp<arr[j-1]){
+                arr[j]=arr[j-1];
+                j--;
+            }
+            arr[j]=temp;
+        }
+        return arr;
+    };
+    function ListNode(val){
+        this.val=val;
+        this.next=null;
+    }
+    const insertionSortList = head=>{
+        /**
+         * 关键1：合理的进行交换，利用递归的好处在于那些不是在头部插入的链表能很好的保留不需要插入数据的部分，而避免混乱
+         * @param list0
+         * @param list1
+         * @returns {*}
+         */
+        const swap=(list0,list1)=>{
+            if(list0===null||list0.val>list1.val){
+                list1.next=list0;
+                return list1;
+            }
+            list0.next=swap(list0.next,list1);
+            return list0;
+        };
+        let temp0=head,res=null;
+        while(temp0)
+        {
+            let next=temp0.next;
+            // 关键点2：每次使用排序好的链表进行检测
+            res=swap(res,temp0);
+            temp0=next;
+        }
+        return res;
+    };
+    const convertArrToList=arr=>{
+        let head=new ListNode(arr.shift());
+        let idx=head;
+        while(arr.length>0){
+            idx.next=new ListNode(arr.shift());
+            idx=idx.next;
+        }
+        return head;
+    };
+    let list=convertArrToList([4,2,0,1]);
+
+    // console.info(list);
+    // console.info(insertionSortList(list));
+    // console.info(change(0,3,convertArrToList([0,2,4,1]),convertArrToList([1])));
+    // console.info(insertionSortList0(list));
+
+</script>
+</body>
+</html>
