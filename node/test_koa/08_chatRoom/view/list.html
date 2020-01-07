@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+<body>
+<div class="box">
+    {{each msgs}}
+    <ul>
+        <li>{{$value.username}}:
+            {{$value.content}}</li>
+    </ul>
+    {{/each}}
+</div>
+
+Dear {{username}} 您好,请说话: <textarea class="newContent"></textarea> <button class="btn">发送</button>
+<script>
+    document.querySelector('.btn').onclick=function(){
+        var xhr=new XMLHttpRequest();
+        var newContent=document.querySelector('.newContent').value;
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState===4){
+                if(xhr.status===200){
+                    // console.info(xhr.responseText);
+                    // 转化为JSON数组 其实就是列表渲染
+                    var arr = JSON.parse(xhr.responseText);
+                    var html = '<ul>';
+                    for (var i = 0; i < arr.length; i++) {
+                        html += '<li>' + arr[i].username + ':' + arr[i].content +'</li>'
+                    }
+                    html += '</ul>';
+                    document.querySelector('.box').innerHTML = html;
+                }
+            }
+        };
+        xhr.open('post','/send');
+        // 发送post请求的时候必须修改请求消息头部，且在打开网址之后
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+        xhr.send('msg='+newContent);
+    }
+</script>
+</body>
+</html>
