@@ -20,8 +20,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="jsx" />
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="UML Sequence" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -40,11 +41,12 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="DefaultPlantUmlFileTemplate" value="UML Sequence" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="8.11.1" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/node/test_koa/07_login_session" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/node/test_koa" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
@@ -52,18 +54,19 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/刷题/test.html" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/node/test_koa/07_login_session" />
-      <recent name="$PROJECT_DIR$/node/test_express/06_student_list/public" />
-      <recent name="$PROJECT_DIR$/node/test_http/my_server" />
-      <recent name="E:\tju\笔试题\js" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/node/test_koa/08_chatRoom/view" />
       <recent name="$PROJECT_DIR$/node/test_koa/06_static_template" />
       <recent name="$PROJECT_DIR$/leetcode" />
       <recent name="$PROJECT_DIR$/leetcode/algorithm" />
       <recent name="$PROJECT_DIR$/node/test_express" />
-      <recent name="$PROJECT_DIR$/interviews" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/node/test_koa" />
+      <recent name="$PROJECT_DIR$/node/test_koa/08_chatRoom" />
+      <recent name="$PROJECT_DIR$/node/test_koa/07_login_session" />
+      <recent name="$PROJECT_DIR$/node/test_express/06_student_list/public" />
+      <recent name="$PROJECT_DIR$/node/test_http/my_server" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -142,7 +145,8 @@
       <workItem from="1577277944449" duration="14749000" />
       <workItem from="1577417723952" duration="596000" />
       <workItem from="1577418397647" duration="16057000" />
-      <workItem from="1577633774044" duration="42413000" />
+      <workItem from="1577633774044" duration="48471000" />
+      <workItem from="1578151435294" duration="40305000" />
     </task>
     <servers />
   </component>
