@@ -5,6 +5,14 @@
     <title>list</title>
 </head>
 <body>
+当前在线人数: <span id="online"></span>
+<button id="male">男生组</button> <button id="female">女生组</button>
+<hr/>
+组聊: <input type="text" name="" class="groupMsg"> <button class="sendGroupMsg">发起组聊</button>
+<hr/>             <!--选中的option的value会自动赋值给select的value-->
+对 <select id="towho" onchange="privateTo = this.value"></select>
+说: <input type="text" name="" class="privateMsg"> <button class="sendPrivateMsg">发起私聊</button>
+<hr/>
 <div class="box">
     {{each msgs}}
     <ul>
@@ -16,6 +24,8 @@
 
 Dear {{username}} 您好,请说话: <textarea class="newContent"></textarea> <button class="btn">发送</button>
 <script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="list_socket.js"></script>
+<script src="list.js"></script>
 <script>
     var socket = io('http://localhost:3000');
     socket.on('connect', function(){

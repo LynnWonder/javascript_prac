@@ -128,6 +128,8 @@ let store = {
     }
 };
 app
+    // 处理html文件里面的静态资源
+    .use(static(path.resolve('./public')))
     // .use(session(CONFIG, app))
     .use(session({store:store},app))
     // 一定要放在路由之前原因是：需要用它向ctx.request.body上面挂载属性
