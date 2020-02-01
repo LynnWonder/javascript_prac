@@ -10,14 +10,16 @@ function MinHeap(){
 function insert(val){
     this.data.push(val);
     let idx=this.data.length-1;
-    while(idx>=0){
-        let fatherIdx=Math.floor((idx+1)/2)-1;
+    let fatherIdx=Math.floor((idx+1)/2)-1;
+    // 注意核查的是父节点的索引值
+    while(fatherIdx>=0){
         if(this.data[fatherIdx]>this.data[idx]){
             let temp=this.data[idx];
             this.data[idx]=this.data[fatherIdx];
             this.data[fatherIdx]=temp;
         }
         idx=fatherIdx;
+        fatherIdx=Math.floor((idx+1)/2)-1;
     }
 }
 function deleting(){
@@ -30,9 +32,11 @@ function deleting(){
     let idx=0,len=this.data.length;
     while(idx<len){
         let left=idx*2+1,right=idx*2+2;
-        let select=(this.data[left]>this.data[right])?right:left;
-        if(left>=len||right>=len) break;
-        if (this.data[select]<this.data[idx]){
+        let select=left;
+        if(right<len){
+            select=(this.data[left]>this.data[right])?right:left;
+        }
+        if (select<len&&this.data[select]<this.data[idx]){
             let temp=this.data[idx];
             this.data[idx]=this.data[select];
             this.data[select]=temp;

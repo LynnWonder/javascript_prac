@@ -47,7 +47,7 @@ function insert(val){
     var idx=this.data.length-1;
     var fatherIdx=Math.floor((idx-1)/2);
     // 构建大根堆的过程：寻找父节点，如果比父节点大就交换，一直到根节点为止
-    while(fatherIdx>0){
+    while(fatherIdx>=0){
         if(this.data[idx]>this.data[fatherIdx]){
             var temp=this.data[idx];
             this.data[idx]=this.data[fatherIdx];
@@ -71,16 +71,16 @@ function deleting(){
     var val=this.data[idx];
     // 把最后一个元素翻到根节点上，然后开始从根节点向下遍历保证父节点的值总是大于子节点
     this.data[idx]=this.data.pop();
-    var maxIdx=this.data.length-1;
-    while(idx<maxIdx){
+    while(idx<this.data.length){
         var left=2*idx+1;
         var right=2*idx+2;
         var select=left;
         // 首先要查找出左右哪个更大
-        if(right<maxIdx){
+        if(right<this.data.length){
             select=(this.data[left]<this.data[right])?right:left;
         }
-        if(select<maxIdx&&this.data[idx]<this.data[select]){
+        // console.info('===<',this.data[idx],this.data[select]);
+        if(select<this.data.length&&this.data[idx]<this.data[select]){
             var temp=this.data[idx];
             this.data[idx]=this.data[select];
             this.data[select]=temp;
@@ -106,8 +106,12 @@ function print(){
 }
 
 var h=new MaxHeap();
-h.build([7,3,5,4,2,4,3]);
-h.insert(6);
+// h.build([7,3,5,4,2,4,3]);
+// h.insert(6);
 // h.deleting();
 // h.print();
-console.info(h.heapSort());
+h.build([1,2,1]);
+h.print();
+// console.info(h.deleting());
+h.print();
+// console.info(h.heapSort());
