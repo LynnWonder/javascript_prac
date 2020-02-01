@@ -29,9 +29,37 @@ const nthUglyNumber = n=> {
     console.info('arr==>',arr);
     return arr[n-1];
 };
+/**
+ * 将上述方法转换思维之后的代码，
+ * marvelous!!!
+ * @param n
+ * @returns {number}
+ */
+const nthUglyNumber1=n=>{
+    let mul=(new Array(3)).fill(0),
+        uglies=[1],
+        primes=[2,3,5];
+        t=1;
+    while(t<n){
+        uglies[t]=Number.MAX_SAFE_INTEGER;
+        for(let i=0;i<3;i++){
+            if(uglies[t]>primes[i]*uglies[mul[i]]){
+                uglies[t]=primes[i]*uglies[mul[i]];
+            }
+        }
+        for(let i=0;i<3;i++){
+            if(uglies[t]>=primes[i]*uglies[mul[i]]){
+                mul[i]++;
+            }
+        }
+        t++;
+    }
+    console.info(uglies);
+    return uglies[n-1];
+};
 // console.info(nthUglyNumber(10));
 // console.info(nthUglyNumber(16));
 // console.info(nthUglyNumber(17));
 // console.info(nthUglyNumber(18));
-console.info(nthUglyNumber(37));
+console.info(nthUglyNumber1(10));
 
