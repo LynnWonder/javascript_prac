@@ -19,8 +19,11 @@ function buildTree(idx,arr){
 }
 
 // console.info(buildTree(0,[1,2,3,4]));
-
-function Heap() {
+/**
+ * 大根堆构建
+ * @constructor
+ */
+function MaxHeap() {
     this.data = [];
     this.print = print;
     this.build =build;
@@ -53,9 +56,6 @@ function insert(val){
         idx=fatherIdx;
         fatherIdx=Math.floor((idx-1)/2);
     }
-}
-function print(){
-    console.info(this.data);
 }
 
 /**
@@ -93,19 +93,21 @@ function deleting(){
 /**
  * 堆排序
  */
-function heapSort(val){
+function heapSort(){
     let res=[];
     // 我们首先应该已经建立好大根堆
-    this.build(val);
     while(this.data.length>0){
         res.unshift(this.deleting());
     }
     return res;
 }
+function print(){
+    console.info(this.data);
+}
 
-var h=new Heap();
-// h.build([7,3,5,4,2,4,3]);
-// h.insert(6);
+var h=new MaxHeap();
+h.build([7,3,5,4,2,4,3]);
+h.insert(6);
 // h.deleting();
 // h.print();
-console.info(h.heapSort([7,3,5,4,2,4,3]));
+console.info(h.heapSort());

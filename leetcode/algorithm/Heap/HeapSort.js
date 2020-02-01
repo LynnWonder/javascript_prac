@@ -42,5 +42,6 @@ const heapSort=arr=>{
     }
     return res;
 };
-console.info(heapSort([3,7,5,4,2,4,3]));
-console.info(heapSort([7,4,6,5,1,3,9]));
+// console.info(heapSort([3,7,5,4,2,4,3]));
+// console.info(heapSort([7,4,6,5,1,3,9]));
+export default heapSort;
