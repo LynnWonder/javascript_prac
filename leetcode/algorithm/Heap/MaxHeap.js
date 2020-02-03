@@ -104,14 +104,14 @@ function heapSort(){
 function print(){
     console.info(this.data);
 }
-
-var h=new MaxHeap();
-// h.build([7,3,5,4,2,4,3]);
-// h.insert(6);
-// h.deleting();
+export  default  MaxHeap;
+// var h=new MaxHeap();
+// // h.build([7,3,5,4,2,4,3]);
+// // h.insert(6);
+// // h.deleting();
+// // h.print();
+// h.build([1,2,1]);
 // h.print();
-h.build([1,2,1]);
-h.print();
-// console.info(h.deleting());
-h.print();
-// console.info(h.heapSort());
+// // console.info(h.deleting());
+// h.print();
+// // console.info(h.heapSort());
