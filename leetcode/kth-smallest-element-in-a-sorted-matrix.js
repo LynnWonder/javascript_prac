@@ -46,9 +46,38 @@ const kthSmallest1 = (matrix, k)=>{
     }
     return res[k-1];
 };
-// console.info(kthSmallest1([
-//     [ 1,  5,  9],
-//     [10, 11, 13],
-//     [12, 13, 15]
-// ],8));
-console.info(kthSmallest([[1,2],[3,3]],2));
+const kthSmallest2 = (matrix, k)=>{
+    const search=(matrix,tgt)=>{
+        let len=matrix.length;
+        let i=len-1,j=0,res=0;
+        while(i>=0&&j<len){
+            //从最后一行开始检索,检索出小于等于target的数目，这段逻辑其实挺复杂的，不容易想出来
+            if(matrix[i][j]<=tgt){
+                res+=i+1;
+                j++;
+            }else{
+                i--;
+            }
+        }
+        return res;
+    };
+    let left=matrix[0][0],right=matrix[matrix.length-1][matrix[0].length-1];
+    while(left<right){
+        let mid=left+Math.floor((right-left)/2);
+        let cnt=search(matrix,mid);
+        console.info('cnt===>',cnt);
+        if(cnt<k){
+            left=mid+1;
+        }else{
+            right=mid;
+        }
+    }
+    return left;
+};
+console.info(kthSmallest2([
+    [ 1,  5,  9],
+    [10, 11, 13],
+    [12, 13, 15]
+],8));
+// console.info(kthSmallest([[1,2],[3,3]],2));
+// console.info(kthSmallest2([[1,2],[3,3]],2));
