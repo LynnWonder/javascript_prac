@@ -74,7 +74,52 @@ const kthSmallest2 = (matrix, k)=>{
     }
     return left;
 };
-console.info(kthSmallest2([
+/**
+ * 尝试用二分查找法查找出有序矩阵中的第k小的元素
+ * @param matrix
+ * @param k
+ */
+const kthSmallest_b = (matrix, k)=>{
+    const count=(arr,tgt)=>{
+        // let res=0;
+        // for(let i=0;i<arr.length;i++){
+        //     for(let j=0;j<arr[i].length;j++){
+        //         if (arr[i][j]>tgt){
+        //             break;
+        //         }else{
+        //             res++;
+        //         }
+        //     }
+        // }
+        // return res;
+        // opt===>
+        let res=0,right=arr[0].length;
+        for(let i=0;i<arr.length;i++){
+            for(let j=0;j<right;j++){
+                if (arr[i][j]>tgt){
+                    right=j;
+                    break;
+                }else{
+                    res++;
+                }
+            }
+        }
+        return res;
+    };
+    let min=matrix[0][0],max=matrix[matrix.length-1][matrix[0].length-1];
+    while(min<=max){
+        let mid=Math.floor((min+max)/2);
+        let cn=count(matrix,mid);
+        if(cn>=k){
+            // mid is too big
+            max=mid-1;
+        }else{
+            min=mid+1;
+        }
+    }
+    return min;
+};
+console.info(kthSmallest_b([
     [ 1,  5,  9],
     [10, 11, 13],
     [12, 13, 15]
