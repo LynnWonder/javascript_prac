@@ -36,7 +36,7 @@ const partition=(arr,left,right)=>{
         }
     }
     swap(arr,lessThan,pivot);
-    console.info('change',arr.join(', '));
+    // console.info('change',arr.join(', '));
     return lessThan;
 };
 /**
@@ -58,14 +58,95 @@ const topK1=(arr,k,left,right)=>{
     if (left === right) return arr[right];
     let index = partition(arr, left, right);
     // console.info('idx===>',index,arr.join(','),'=>',k);
-    if (index - left + 1 > k)
-        return topK1(arr, k, left, index - 1);
-    else if (index - left + 1 === k)
+    if (right - index + 1 > k)
+        return topK1(arr, k, index+1, right);
+    else if (right - index + 1 === k)
         return arr[index];
     else
-        return topK1(arr, k - index + left - 1, index + 1, right);
+        return topK1(arr, k - right + index - 1, left, index-1);
 };
-
+const count=(arr,start)=>{
+    let count=0;
+    for(let i=0;i<arr.length;i++){
+        if(arr[i]>=start){
+            count++;
+        }
+    }
+    return count;
+};
+const topK2=(arr,k)=>{
+    let low=Number.MAX_SAFE_INTEGER,high=-Number.MAX_SAFE_INTEGER;
+    for(let i=0;i<arr.length;i++){
+        if(arr[i]<low){
+            low=arr[i];
+        }
+        if(arr[i]>high){
+            high=arr[i];
+        }
+    }
+    // count用来计算从大于mid小于high的数字的个数
+    let cn;
+    while(low<=high){
+        let mid=Math.floor((low+high)/2);
+        cn=count(arr,mid);
+        // console.info('===>',{low,high},cn,mid);
+        if(cn>=k){
+            // mid is too small
+            low=mid+1;
+        }else{
+            // mid is too big
+            high=mid-1;
+        }
+    }
+    return high;
+};
+/**
+ * 如何改造成求最小的第k个值呢
+ * @param arr
+ * @param k
+ * @returns {number}
+ */
+const topK3=(arr,k)=>{
+    const count1=(arr,target)=>{
+        let count=0;
+        for(let i=0;i<arr.length;i++){
+            if(arr[i]<=target){
+                count++;
+            }
+        }
+        return count;
+    };
+    let low=Number.MAX_SAFE_INTEGER,high=-Number.MAX_SAFE_INTEGER;
+    for(let i=0;i<arr.length;i++){
+        if(arr[i]<low){
+            low=arr[i];
+        }
+        if(arr[i]>high){
+            high=arr[i];
+        }
+    }
+    // count用来计算从大于mid小于high的数字的个数
+    let cn;
+    while(low<=high){
+        let mid=Math.floor((low+high)/2);
+        cn=count1(arr,mid);
+        // console.info('===>',{low,high},cn,mid);
+        if(cn>=k){
+            // mid is too big
+            high=mid-1;
+        }else{
+            // mid is too small
+            low=mid+1;
+        }
+    }
+    return low;
+};
 let arr=[7,4,6,5,1,3,6,9,10,7];
-console.info(topK1(arr,5,0,arr.length-1));
+let arr1=[3,90,56,20,20,20,20,46,72];
+// console.info(topK1(arr,5,0,arr.length-1));
+// console.info(topK2(arr,5));
+// console.info(topK1(arr1,8,0,arr1.length-1));
+console.info(topK3(arr,3));
+console.info(topK3(arr1,8));
+console.info(arr1.sort((a,b)=>b-a));
 console.info(arr.sort((a,b)=>b-a));
