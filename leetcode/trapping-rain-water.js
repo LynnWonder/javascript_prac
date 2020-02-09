@@ -1,0 +1,85 @@
+//  接雨水 leetcode-42
+// 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，
+// 计算按此排列的柱子，下雨之后能接多少雨水。
+// 输入: [0,1,0,2,1,0,1,3,2,1,2,1]
+// 输出: 6
+/**
+ * 遍历所有元素（除了首尾）查找空缺
+ * findVacancy 查找空缺
+ * getSum 获取空缺处的降雨量总和
+ * 时间复杂度：O(n)
+ */
+const findVacancy=(arr,i)=>{
+    let l=i,r=i,min=i;
+    // find max
+    for(let m=i-1;m>=0;m--){
+        if(arr[m]>=arr[l]){
+            l=m;
+        }else break;
+    }
+    // 关键点在于向后查找
+    // 确定最小元素的位置
+    for(let n=i+1;n<arr.length;n++){
+        if(arr[n]<=arr[min]){
+            min=n;
+        }else{
+            break;
+        }
+    }
+    r=min;
+    // 向后查找是一件很困难的事情，有其对于[5,4,1,2],[5,2,1,2,1,5]这种情况
+    // 因此如果有了比左侧最大值大的情况就应该退出
+    for(let p=min+1;p<arr.length;p++){
+        if(arr[p]>=arr[r]){
+            r=p;
+        }
+        if(arr[p]>=arr[l]) break;
+    }
+    // console.info(min,r);
+    if(min!==i&&min===r) return{l,'r':null};
+    return {l,r};
+};
+const getSum=(arr,obj)=>{
+    let {l,r}=obj,res=0;
+    let min=Math.min(arr[l],arr[r]);
+    // console.info('min==>',min,l,r);
+    for(let i=l;i<=r;i++){
+        if(min-arr[i]>0){
+            res+=min-arr[i];
+        }
+    }
+    return res;
+};
+const trap=height=>{
+    let i=1,res=0;
+    while(i<height.length-1)
+    {
+        // 这里我们判定中间凸出或者递增型的一定不适合去盛雨水
+        let flag=(height[i-1]<height[i]&&height[i+1]<height[i])||(height[i-1]<=height[i]&&height[i+1]>height[i]);
+        if(flag){
+            i++;
+        }else{
+            let temp=findVacancy(height,i);
+            // console.info('temp==>',temp);
+            if(temp.r){
+                res+=getSum(height,temp);
+                i=temp.r;
+            }else{
+                break;
+            }
+        }
+    }
+    return res;
+};
+let arr=[0,1,0,2,1,0,1,3,2,1,2,1];
+let arr1=[5,4,1,2];
+let arr2=[5,2,1,2,1,5];
+let arr3=[0,5,6,4,6,1,0,0,2,7];
+let arr4=[4,3,3,9,3,0,9,2,8,3];
+// console.info(trap(arr));
+// console.info(trap(arr1));
+// console.info(trap(arr2));
+// console.info(trap(arr3));
+console.info(trap(arr4));
+// console.info(findVacancy(arr4,1));
+// console.info(getSum(arr,{l:3,r:7}));
