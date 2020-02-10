@@ -71,6 +71,33 @@ const trap=height=>{
     }
     return res;
 };
+/**
+ * 从左右两边的边界向中间不断进行收缩，收缩的过程中对每个坐标能接的雨水进行求解
+ * 这种就是找短板的方式确定以哪个为基准进行接雨水
+ * @param height
+ */
+const trap1=height=>{
+    let left=0,right=height.length-1;
+    let leftMax=0,rightMax=0,res=0;
+    while(left<right){
+        if(height[left]<=height[right]){
+            if(height[left]>leftMax){
+                leftMax=height[left];
+            }else{
+                res+=leftMax-height[left];
+            }
+            left++;
+        }else{
+            if(height[right]>rightMax){
+                rightMax=height[right];
+            }else{
+                res+=rightMax-height[right];
+            }
+            right--;
+        }
+    }
+    return res;
+};
 let arr=[0,1,0,2,1,0,1,3,2,1,2,1];
 let arr1=[5,4,1,2];
 let arr2=[5,2,1,2,1,5];
