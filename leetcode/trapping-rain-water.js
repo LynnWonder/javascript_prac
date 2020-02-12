@@ -9,6 +9,8 @@
  * getSum 获取空缺处的降雨量总和
  * 时间复杂度：O(n)
  */
+import Heap from './algorithm/Heap/MinHeapObj';
+
 const findVacancy=(arr,i)=>{
     let l=i,r=i,min=i;
     // find max
@@ -98,6 +100,26 @@ const trap1=height=>{
     }
     return res;
 };
+// 在学习了407接雨水2中的官方解题方法：优先队列法之后决定堆42题进行复盘
+const trap2=height=>{
+    let res=0,h=new Heap(),dir=[-1,1],visited=new Map();
+    h.insert({'pos':0,'val':height[0]},'val');
+    h.insert({'pos':height.length-1,'val':height[height.length-1]},'val');
+    visited.set(0,true);
+    visited.set(height.length-1,true);
+    while(h.data.length){
+        let temp=h.deleting('val');
+        for(let i=0;i<dir.length;i++){
+            let newOne=temp.pos+dir[i];
+            if(newOne>=0&&newOne<height.length&&!visited.has(newOne)){
+                res+=Math.max(0,temp.val-height[newOne]);
+                h.insert({'pos':newOne,'val':Math.max(height[newOne],temp.val)},'val');
+                visited.set(newOne,true);
+            }
+        }
+    }
+    return res;
+};
 let arr=[0,1,0,2,1,0,1,3,2,1,2,1];
 let arr1=[5,4,1,2];
 let arr2=[5,2,1,2,1,5];
@@ -107,6 +129,11 @@ let arr4=[4,3,3,9,3,0,9,2,8,3];
 // console.info(trap(arr1));
 // console.info(trap(arr2));
 // console.info(trap(arr3));
-console.info(trap(arr4));
+// console.info(trap(arr4));
+console.info(trap2(arr));
+console.info(trap2(arr1));
+console.info(trap2(arr2));
+console.info(trap2(arr3));
+console.info(trap2(arr4));
 // console.info(findVacancy(arr4,1));
 // console.info(getSum(arr,{l:3,r:7}));
