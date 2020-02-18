@@ -16,6 +16,9 @@ const io = new IO();
 const msgs=[
     {username:'jason',content:'hhh'},
 ];
+const group = {
+    'male':'男生组','female':'女生组'
+};
 // 设置全局变量
 global.mySessionStore={}; // id:{socketid:xxx,username:xxx}
 /**
@@ -31,7 +34,15 @@ function findBySocketId (socketid) {
         }
     }
 }
-
+// 根据socketid找key
+function findKeyBySocketId(socketid) {
+    for(var key in global.mySessionStore ) {
+        let obj = global.mySessionStore[key];
+        if(obj.socketid === socketid) {
+            return key;
+        }
+    }
+}
 io.attach( app );
 // The raw socket.io instance is attached as app._io if you need it
 io.on( 'connection', sock => {
@@ -59,7 +70,68 @@ io.on('login',ctx=>{
         global.mySessionStore[id]={};
     }
     global.mySessionStore[id].socketid=ctx.socket.socket.id;
+    // // 我们在这边测试用户上线和下线
+    // console.info('one person is logged in !');
+    // ctx.socket.on('disconnect',(msg)=>{
+    //     console.info(msg,'==>logged out');
+    // })
+    // 测试当前在线用户，向大家广播在线情况
+    io.broadcast('online',{
+        online:global.mySessionStore
+    });
+
+    ctx.socket.on('disconnect',(context)=>{
+        // 删除掉原本存在的id的用户
+        // 获取到socketid disconnect事件监听中的第一个参数是一个对象
+        // 可以获取到socket.id
+        let socketid = context.socket.socket.id;
+        let key = findKeyBySocketId(socketid);
+        // 删除key后再次向大家广播在线情况
+        // 这边的broadcast都会和html文件中的on监听事件相对应
+        delete global.mySessionStore[key];
+        io.broadcast('online',{
+            online:global.mySessionStore
+        });
+    })
 });
+// 发起私聊
+io.on('sendPrivateMsg',ctx => {
+    console.info(ctx);
+    // socketid,to,msg
+    let {to:toId,msg } = ctx.data;
+    // let toId = ctx.data.to;
+    let fromSocketId = ctx.socket.socket.id;
+    let { username } = findBySocketId(fromSocketId);
+    //  xxx 对你私聊说 ： xxx
+    // koa-socket 是一个socket.io 的语法糖 ,app._io 就是io对象
+    app._io.to(toId).emit('allmessage',`${username}对你说:${msg}`);
+});
+
+
+// 处理加入组
+io.on('jounGroup',ctx => {
+    let groupId = ctx.data;
+    // console.info('socket==>',ctx.socket.socket);
+    // 使用当前socket加入组
+    ctx.socket.socket.join(groupId);
+    console.log('加入' + groupId);
+});
+
+// 组聊天
+io.on('sendGroupMsg',ctx => {
+    let { groupTo,msg } = ctx.data;
+    console.info('msg==>',msg,groupTo);
+    let fromSocketId = ctx.socket.socket.id;
+    let { username } = findBySocketId(fromSocketId);
+
+    app._io.to(groupTo).emit('allmessage',`from ${group[groupTo]}'s ${username} said: ${msg}`);
+});
+
+// 加入socket.io 结束
+
+
+
+
 
 app.keys = ['some secret hurr'];
 render(app, {
@@ -102,14 +174,14 @@ router.get('/', async ctx=>{
         })
 
     })
-    .post('/send',async ctx=>{
-        let username=ctx.session.user.username;
-        let content=ctx.request.body.msg;
-        msgs.push({
-            username,content
-        });
-        ctx.body=msgs;
-    });
+    // .post('/send',async ctx=>{
+    //     let username=ctx.session.user.username;
+    //     let content=ctx.request.body.msg;
+    //     msgs.push({
+    //         username,content
+    //     });
+    //     ctx.body=msgs;
+    // });
 
 // 在服务器内存中存储 {session_id:用户数据}
 // 使用session机制，key即为session_id，增强了安全性，客户端不会带有key-value，只是一个key

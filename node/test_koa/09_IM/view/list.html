@@ -5,51 +5,53 @@
     <title>list</title>
 </head>
 <body>
-当前在线人数: <span id="online"></span>
-<button id="male">男生组</button> <button id="female">女生组</button>
+当前在线人数: <span class="online"></span>
+<button class="male">男生组</button> <button class="female">女生组</button>
 <hr/>
 组聊: <input type="text" name="" class="groupMsg"> <button class="sendGroupMsg">发起组聊</button>
 <hr/>             <!--选中的option的value会自动赋值给select的value-->
-对 <select id="towho" onchange="privateTo = this.value"></select>
+对 <select class="towho" onchange="privateTo = this.value"></select>
 说: <input type="text" name="" class="privateMsg"> <button class="sendPrivateMsg">发起私聊</button>
 <hr/>
 <div class="box">
-    {{each msgs}}
-    <ul>
-        <li>{{$value.username}}:
-            {{$value.content}}</li>
+<!--    不再手动自定义消息列表-->
+<!--    {{each msgs}}-->
+    <ul class="list">
+<!--        <li>{{$value.username}}:-->
+<!--            {{$value.content}}</li>-->
     </ul>
-    {{/each}}
+<!--    {{/each}}-->
 </div>
 
 Dear {{username}} 您好,请说话: <textarea class="newContent"></textarea> <button class="btn">发送</button>
 <script src="/socket.io/socket.io.js"></script>
-<script type="text/javascript" src="list_socket.js"></script>
-<script src="list.js"></script>
 <script>
+    // 给客户端分配了socket和socket-id 尽量放在这边了
     var socket = io('http://localhost:3000');
     socket.on('connect', function(){
         console.info('连接上了');
-        // 此时可以做登录状态，也就是同步前后端的信息
+        // 此时可以做登录状态，也就是同步前后端的信息,这里和app.js里面的io.on('login',()=>{})对应
         socket.emit('login',{
             id:{{id}}
         });
     });
-    socket.on('event', function(data){});
-    socket.on('disconnect', function(){});
-    // test
-    socket.on('msg1', function(data){
-        console.info(data);
-    });
-    socket.on('allmessage',function(data) {
-        console.log(data);
-    });
-    document.querySelector('.btn').onclick=function(){
-        var newContent=document.querySelector('.newContent').value;
-        socket.emit('sendMsg',{
-            newContent,
-        })
-    }
+    // 以下是暂时没用到的无用代码
+    // socket.on('event', function(data){});
+    // socket.on('disconnect', function(){});
+    // // test
+    // socket.on('msg1', function(data){
+    //     console.info(data);
+    // });
+    // socket.on('allmessage',function(data) {
+    //     console.log(data);
+    // });
+    // 已经转移到list.js中
+    // document.querySelector('.btn').onclick=function(){
+    //     var newContent=document.querySelector('.newContent').value;
+    //     socket.emit('sendMsg',{
+    //         newContent,
+    //     })
+    // }
     // document.querySelector('.btn').onclick=function(){
     //     var xhr=new XMLHttpRequest();
     //     var newContent=document.querySelector('.newContent').value;
@@ -74,5 +76,7 @@ Dear {{username}} 您好,请说话: <textarea class="newContent"></textarea> <bu
     //     xhr.send('msg='+newContent);
     // }
 </script>
+<script type="text/javascript" src="list_socket.js"></script>
+<script type="text/javascript" src="list.js"></script>
 </body>
 </html>
