@@ -8,6 +8,7 @@
 // 输出: 3
 // 这个题能想到的就是可以每一个都遍历一遍
 /**
+ * 时间复杂度:O(n2)
  * @param {number[]} gas
  * @param {number[]} cost
  * @return {number}
@@ -34,5 +35,24 @@ const canCompleteCircuit = (gas, cost)=>{
     }
     return -1;
 };
+
+const canCompleteCircuit1=(gas,cost)=>{
+    let n=gas.length;
+    let total_tank=0,cur_tank=0;
+    let starting_station=0;
+    for(let i=0;i<n;i++){
+        total_tank+=gas[i]-cost[i];
+        cur_tank+=gas[i]-cost[i];
+        if(cur_tank<0){
+            starting_station=i+1;
+            cur_tank=0;
+        }
+    }
+    return total_tank>=0?starting_station:-1;
+
+};
+
 console.info(canCompleteCircuit([1,2,3,4,5],[3,4,5,1,2]));
+console.info(canCompleteCircuit1([1,2,3,4,5],[3,4,5,1,2]));
 console.info(canCompleteCircuit([3,3,4],[3,4,4]));
+console.info(canCompleteCircuit1([3,3,4],[3,4,4]));
