@@ -35,7 +35,15 @@ const canCompleteCircuit = (gas, cost)=>{
     }
     return -1;
 };
-
+/**
+ * 根据答案的思路得到的一种方法：
+ * 私以为这种反证的方法很像解数学难题，其中带有极高的技巧性，对于一般的解题者而言恐怕不能一步到位
+ * 时间复杂度:O(N)
+ * 空间复杂度:O(1)
+ * @param gas
+ * @param cost
+ * @returns {number}
+ */
 const canCompleteCircuit1=(gas,cost)=>{
     let n=gas.length;
     let total_tank=0,cur_tank=0;
