@@ -13,6 +13,7 @@
  * @return {number}
  */
 /**
+ * 🌟🌟🌟值得记住的做法
  * 贪心算法，总是计入可以扩充为新区间的元素
  * 也是一种跟从终止点的动态规划
  * @param intervals
@@ -57,6 +58,30 @@ const eraseOverlapIntervals1=intervals=>{
     }
     console.info(dp);
     return intervals.length-dp.pop();
+};
+/** 🌟🌟🌟值得记住的做法
+ * base on start and choose the shorter one
+ * @param intervals
+ * @returns {number}
+ */
+const eraseOverlapIntervals2=intervals=> {
+    if(intervals.length<=1) return 0;
+    intervals.sort((a,b)=>a[0]===b[0]?a[1]-b[1]:a[0]-b[0]);
+    console.info(intervals);
+    let count =0,end=intervals[0][1];
+    for(let i=1;i<intervals.length;i++){
+        // 比如是[1,4] [2,3]这样的情况一定要去选那个最小的右边边界的情况，
+        // 因为我们区间越短，能够衔接的区间数目越大
+        if(intervals[i][0]<end){
+            // count++;
+            // temp=i;
+            count++;
+            end=Math.min(intervals[i][1],end);
+        }else{
+            end=intervals[i][1];
+        }
+    }
+    return count;
 };
 console.info(eraseOverlapIntervals([ [1,2], [2,3], [3,4], [1,3] ]));
 // console.info(eraseOverlapIntervals1([ [1,2], [2,3], [3,4], [1,3] ]));

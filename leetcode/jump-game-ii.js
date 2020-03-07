@@ -43,7 +43,7 @@ const jump = nums=>{
 const jump1=nums=>{
     let end=0,maxPosition=0,steps=0;
     for(let i=0;i<nums.length-1;i++){
-        // 总是能够找到最大的位置
+        // 总是能够找到最大的位置,因此不用去限定到达没到达最后的位置，只需要改变maxPos
         maxPosition=Math.max(maxPosition,nums[i]+i);
         console.info('maxP==>',maxPosition);
         if(i===end){
