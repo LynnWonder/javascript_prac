@@ -37,6 +37,26 @@ const wiggleMaxLength = nums=>{
     // console.info(helper);
     return helper[nums.length-1].num;
 };
+/**
+ * 官方题解中给出的利用贪心算法解决问题的模式
+ * 仔细观察后可以发现主体思路是和我的方法一样的，但是这种写法极大的简洁了整个问题的解决
+ * 同时因为不再使用辅助数组此时它的空间复杂度是O(1)常数
+ * @param nums
+ * @returns {number|*}
+ */
+const wiggleMaxLength1=nums=>{
+    if(nums.length<2) return nums.length;
+    let prediff=nums[1]-nums[0];
+    let count=prediff!==0?2:1;
+    for(let i=2;i<nums.length;i++){
+        let diff=nums[i]-nums[i-1];
+        if((diff>0&&prediff<=0)||(diff<0&&prediff>=0)){
+            count++;
+            prediff=diff;
+        }
+    }
+    return count;
+};
 // console.info(wiggleMaxLength([1,7,4,9,2,5]));
 console.info(wiggleMaxLength([1,7,4,5,5]));
 // console.info(wiggleMaxLength([1,17,5,10,13,15,10,5,16,8]));
