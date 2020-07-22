@@ -1,3 +1,46 @@
+var Car = /** @class */ (function () {
+    function Car() {
+    }
+    Car.prototype.alert = function () {
+        console.log('Car alert');
+    };
+    Car.prototype.lightOn = function () {
+        console.log('Car light on');
+    };
+    Car.prototype.lightOff = function () {
+        console.log('Car light off');
+    };
+    return Car;
+}());
+var myCar = new Car();
+myCar.alert();
+// 实现接口的时候必需里面的内容全部实现
+var Truck = /** @class */ (function () {
+    function Truck() {
+    }
+    Truck.prototype.lightOn = function () {
+        console.info('truck is lighting');
+    };
+    Truck.prototype.alert = function () {
+        console.log('Car alert');
+    };
+    Truck.prototype.lightOff = function () {
+        console.log('Car light off');
+    };
+    return Truck;
+}());
+var myTruck = new Truck();
+myTruck.lightOn();
+// TypeScript 会支持接口继承类了：
+var Point = /** @class */ (function () {
+    function Point(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+    return Point;
+}());
+var point3d = { x: 1, y: 2, z: 3 };
+console.info('point3d===>', point3d);
 // 泛型的概念：
 // 不同于使用 any，它不会丢失信息，传入数值类型并返回数值类型。
 function identity(arg) {
