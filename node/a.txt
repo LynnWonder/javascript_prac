@@ -1,3 +1,0 @@
-this is a test using fs.writeFile
- u r rightthis is a test using fs.writeFile append
- u r right
