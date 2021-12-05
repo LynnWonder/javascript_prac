@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!-- 使用 grid 实现响应式布局：https://www.cnblogs.com/moqiutao/p/8682142.html -->
+<!--必须添加，否则 media query 不生效-->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+    body {
+        margin: 0 20px;
+    }
+    .container {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: 50px 1fr 50px;
+        grid-gap: 5px 10px;
+        justify-content: center;
+        grid-template-areas:
+                "h h h h h h h h h h h h"
+                "m m c c c c c c c c c c"
+                "f f f f f f f f f f f f";
+        text-align: center;
+    }
+    .header {
+        background-color: #ffd413;
+        grid-area: h;
+    }
+    .menu {
+        background-color: blanchedalmond;
+        grid-area: m;
+    }
+    .content {
+        background-color: aquamarine;
+        grid-area: c;
+    }
+    .footer {
+        background-color: #ffd413;
+        grid-area: f;
+    }
+    @media screen and (max-width: 768px) {
+        .container {
+            grid-template-rows: 50px 50px 1fr 50px;
+            grid-template-areas:
+                    "h h h h h h h h h h h h"
+                    "m m m m m m m m m m m m"
+                    "c c c c c c c c c c c c"
+                    "f f f f f f f f f f f f";
+        }
+    }
+</style>
+<body>
+<div class="container">
+    <div class="header">HEADER</div>
+    <div class="menu">MENU</div>
+    <div class="content">
+        <p>CONTENT</p>
+        <p>CONTENT</p>
+        <p>CONTENT</p>
+        <p>CONTENT</p>
+        <p>CONTENT</p>
+        <p>CONTENT</p>
+        <p>CONTENT</p>
+        <p>CONTENT</p>
+        <p>CONTENT</p>
+    </div>
+    <div class="footer">FOOTER</div>
+</div>
+</body>
+</html>
