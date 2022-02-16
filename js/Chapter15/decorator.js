@@ -17,12 +17,12 @@ _test(1);
 
 
 /**
- * 一个实际应用：想要使用 function func 的时候同时传递一个 token，但又不想污染原 test 函数
+ * 一个实际应用：想要使用 function func 的时候同时传递一个 token，但又不想污染原 func 函数
  */
 Function.prototype.beforeDecorator = function(newFn){
     const self = this;
     return function(){
-        // 可以发现这一步和下一步使用相同的 params
+        // keyPoint: 可以发现这一步和下一步使用相同的 params
         newFn.apply(this, arguments);
         return self.apply(this, arguments);
     };
@@ -39,8 +39,8 @@ function func(param1, param2, param3) {
     };
 }
 const testWizToken = func.beforeDecorator(function(param1, param2, param3){
-    console.info('====getToken', getToken());
     param3.token = getToken();
+    // 或者说其他处理逻辑
 });
 
 const res = testWizToken('param1', 'param2', {foo:'bar'});
