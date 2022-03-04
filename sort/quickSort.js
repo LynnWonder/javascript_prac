@@ -46,34 +46,33 @@ function quickSort (arr, low, high){
     return arr
 }
 
-
-function quickSort1(arr, low, high) {
-    if (low >= high) {
+function quickSort1 (arr, low, high){
+    if(low>=high){
         return arr
     }
-
-    function partition(arr, low, high) {
-        let pivot_idx = Math.floor((high + low) / 2)
-        let pivot = arr[pivot_idx]
-        let j = low - 1
-        for (let i = low; i < high; i++) {
-            if (arr[i] <= pivot && i !== pivot_idx) {
-                j++
+    function partition(arr, low, high){
+        // tip 如果我们将 low 作为基准那么一般从右向左进行遍历，为什么不从左向右遍历呢？
+        //   因为此时会主动移动基准造成混乱
+        const pivot = arr[low]
+        let j = high+1
+        for(let i=high;i>low;i--){
+            if (arr[i]>=pivot){
+                j--
                 [arr[i], arr[j]] = [arr[j], arr[i]]
             }
         }
-        // console.info('======>arr', arr)
-        [arr[j + 1], arr[pivot_idx]] = [arr[pivot_idx], arr[j + 1]]
-        return j + 1
+        [arr[j-1], arr[low]] = [arr[low], arr[j-1]]
+        return j-1
     }
-
-    let pivotx = partition(arr, low, high)
-    console.info(arr, pivotx)
-    quickSort1(arr, low, pivotx - 1)
-    quickSort1(arr, pivotx + 1, high)
+    pivot = partition(arr, low, high)
+    quickSort1(arr,low, pivot-1)
+    quickSort1(arr,pivot+1, high)
     return arr
 }
 
-// console.info(quickSort([7,4,6,5,1,3,6], 0, 6))
-console.info(quickSort([7,4,6,3,1,5,6], 0, 6))
-console.info(quickSort([7,6,5,4,3,2,1], 0, 6))
+console.info(quickSort0([19, 1, 9, 6, 9, 7, 6, 5, 18, 15, 19, 14, 4, 0, 18, 8, 7, 12, 6, 12]
+    , 0, 19))
+console.info(quickSort([19, 1, 9, 6, 9, 7, 6, 5, 18, 15, 19, 14, 4, 0, 18, 8, 7, 12, 6, 12]
+    , 0, 19))
+console.info(quickSort1([19, 1, 9, 6, 9, 7, 6, 5, 18, 15, 19, 14, 4, 0, 18, 8, 7, 12, 6, 12]
+    , 0, 19))
