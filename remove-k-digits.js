@@ -38,11 +38,13 @@ const removeKdigits = (num, k)=>{
     }
     // console.info('k===>',k);
     // 同时我们要对于单调递增数列进行处理
-    return k>0?numStack.slice(0,numStack.length-k).join(''):numStack.join('');
+    let res = k>0?numStack.slice(0,numStack.length-k).join(''):numStack.join('')
+    return res.length > 0 ? res : '0';
 };
 // console.info(removeKdigits('1432219',3));
 // console.info(removeKdigits('10200',1));
 // console.info(removeKdigits('10',2));
 // console.info(removeKdigits('10',1));
-console.info(removeKdigits('112',1));
+// console.info(removeKdigits('112',1));
+console.info(removeKdigits('10001',4));
 
