@@ -72,9 +72,10 @@ const removeDuplicateLetters1=s=>{
 };
 let arr=[1,2,3];
 // console.info(arr.findIndex(item=>item===1));
-console.info(removeDuplicateLetters("bcabc"));
-console.info(removeDuplicateLetters1("bcabc"));
-console.info(removeDuplicateLetters("cbacdcbc"));
-console.info(removeDuplicateLetters1("cbacdcbc"));
+// console.info(removeDuplicateLetters("bcabc"));
+// console.info(removeDuplicateLetters1("bcabc"));
+// console.info(removeDuplicateLetters("cbacdcbc"));
+// console.info(removeDuplicateLetters1("cbacdcbc"));
+console.info(removeDuplicateLetters1("rusrbofeggbbkyuyjsrzornpdguwzizqszpbicdquakqws"));
 // console.info(removeDuplicateLetters("cbbbcaa"));
 // console.info(removeDuplicateLetters("bbcaac"));
